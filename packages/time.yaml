@@ -1,0 +1,80 @@
+# --- POCZĄTEK PLIKU TIME ---
+# Wersja v1.00 - Inicjalizacja modułu synchronizacji czasu dla Hackman Flex3L.
+# Plik zawiera komponenty pobierające czas z HA oraz skrypt zapisujący go do rejestrów falownika (162-164).
+
+substitutions:
+  enable_sync_time: false
+
+time:
+  - platform: homeassistant
+    id: esptime
+    on_time:
+      - cron: "0 15 3,15 * * *"
+        then:
+          - if:
+              condition:
+                lambda: |-
+                  return "${enable_sync_time}" == "True";
+              then:
+                - logger.log: "Syncing inverter time with HomeAssistant"
+                - script.execute: set_inverter_time_script
+              else:
+                - logger.log: "HomeAssistant time sync is disabled"
+                
+button:
+  - platform: template
+    name: "Hackman Flex3L Sync Inverter Time"
+    id: hackman_flex3l_sync_inverter_time
+    icon: mdi:timer-sync
+    entity_category: diagnostic
+    on_press:
+      - script.execute: set_inverter_time_script
+
+script:
+  - id: set_inverter_time_script
+    then:
+      - lambda: |-
+          auto time = id(esptime).now();
+          if (!time.is_valid()) {
+            ESP_LOGE("time_sync", "Invalid time");
+            return;
+          }
+
+          if (time.year < 2000) {
+            ESP_LOGE("time_sync", "Invalid year (expected >= 2000, got %04d)", time.year);
+            return;
+          }
+
+          uint8_t year = time.year - 2000;
+          if (year > 255) year = 255;
+
+          uint8_t month = time.month;
+          if (month < 1) month = 1;
+          if (month > 12) month = 12;
+
+          uint8_t day = time.day_of_month;
+          if (day < 1) day = 1;
+          if (day > 31) day = 31;
+
+          uint8_t hour = time.hour;
+          if (hour > 23) hour = 23;
+
+          uint8_t minute = time.minute;
+          if (minute > 59) minute = 59;
+
+          uint8_t second = time.second;
+          if (second > 59) second = 59;
+
+          uint16_t reg162 = ((uint16_t)year << 8) | month;
+          uint16_t reg163 = ((uint16_t)day << 8) | hour;
+          uint16_t reg164 = ((uint16_t)minute << 8) | second;
+
+          std::vector<uint16_t> data = {reg162, reg163, reg164};
+          auto *controller = id(${modbus_controller_id});
+          auto cmd = esphome::modbus_controller::ModbusCommandItem::create_write_multiple_command(controller, 162, data.size(), data);
+          controller->queue_command(cmd);
+
+          ESP_LOGI("time_sync", "Time set: %04d-%02d-%02d %02d:%02d:%02d (reg162=0x%04X, reg163=0x%04X, reg164=0x%04X)",
+                   time.year, time.month, time.day_of_month, time.hour, time.minute, time.second,
+                   reg162, reg163, reg164);
+# --- KONIEC PLIKU TIME ---
