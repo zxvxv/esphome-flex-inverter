@@ -1,32 +1,24 @@
 # --- POCZĄTEK PLIKU GŁÓWNEGO ---
-# Wersja v1.02 - Plik główny (Orkiestrator) dla Hackman Flex3L.
-# Zmiany: Zdefiniowano konkretne piny UART (tx_pin: GPIO43, rx_pin: GPIO44) na podstawie grafiki płytki.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# Wersja v1.05 - Plik główny (Orkiestrator) dla Hackman Flex3L.
+# Zmiany: Dodano 'refresh: 0s' wymuszające pobieranie świeżego kodu z GitHuba.
 
 substitutions:
   name: "hackman-flex3l"
   friendly_name: "Hackman Flex3L Inverter"
   modbus_controller_id: "hackman_flex3l_modbus_controller"
   baud_rate: "9600"
-  update_interval: ${calibration_update_interval}
+  update_interval: "5s"
   safe_mode_delay: 5min
-  # Safe Mode Default parameters
-  default_maximum_battery_charge_current: "140" # Amps
-  default_max_sell_power: "12000" # Watts
-  default_system_work_mode: "Zero Export To Load" # "Selling First", "Zero Export To Load", "Zero Export To CT"
-  default_solar_sell: "on" # "on", "off"
-  default_force_off_grid: "off" # "on", "off"
+  default_maximum_battery_charge_current: "140"
+  default_max_sell_power: "12000"
+  default_system_work_mode: "Zero Export To Load"
+  default_solar_sell: "on"
+  default_force_off_grid: "off"
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: arduino
 
 esphome:
   name: "${name}"
@@ -34,7 +26,7 @@ esphome:
   comment: "Hackman Flex3L - Modbus Inverter Controller"
   project:
     name: "hackman.flex3l-inverter"
-    version: "1.01.0"
+    version: "1.05.0"
 
 logger:
   level: WARN
@@ -56,12 +48,17 @@ ota:
   - platform: esphome
 
 wifi:
-  # Captive portal automatycznie zapisze domowe sieci w pamięci flash
   ap:
     ssid: "Hackman"
-    # Otwarta sieć bez hasła, aby Captive Portal uruchomił się od razu po połączeniu
 
 captive_portal:
+
+web_server:
+  port: 80
+
+button:
+  - platform: restart
+    name: "Hackman Flex3L Restart Controller"
 
 uart:
   id: modbus_uart
@@ -76,7 +73,6 @@ modbus:
 
 modbus_controller:
   - id: ${modbus_controller_id}
-    # UWAGA: Upewnij się, że adres falownika (modbus_inverter_address) jest poprawny (zazwyczaj 1)
     address: 1
     modbus_id: modbus_1
     setup_priority: -10
@@ -108,6 +104,7 @@ packages:
   hackman_flex3l_modules:
     url: https://github.com/zxvxv/esphome-flex-inverter
     ref: main
+    refresh: 0s # <-- TA LINIJKA NAPRAWIA TWÓJ PROBLEM Z CACHE
     files:
       - packages/calibration.yaml
       - packages/device.yaml
