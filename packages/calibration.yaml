@@ -1,0 +1,176 @@
+# --- POCZĄTEK PLIKU KALIBRACJI ---
+# Wersja v1.00 - Inicjalizacja kalibracji dla Hackman Flex3L (dodano prefiksy 'hackman_flex3l_').
+#
+sensor:
+  - id: !extend hackman_flex3l_battery_power
+    filters:
+      multiply: 10
+  - id: !extend hackman_flex3l_battery_2_power
+    filters:
+      multiply: 10
+  - id: !extend hackman_flex3l_pv1_power
+    filters:
+      multiply: 10
+  - id: !extend hackman_flex3l_pv2_power
+    filters:
+      multiply: 10
+  - id: !extend hackman_flex3l_pv3_power
+    filters:
+      multiply: 10
+  - id: !extend hackman_flex3l_pv4_power
+    filters:
+      multiply: 10
+  - id: !extend hackman_flex3l_battery_voltage
+    filters:
+      multiply: 0.1
+  - id: !extend hackman_flex3l_battery_2_voltage
+    filters:
+      multiply: 0.1
+  - id: !extend hackman_flex3l_battery_bms_voltage
+    filters:
+      multiply: 0.1
+  - id: !extend hackman_flex3l_battery_bms_charging_voltage
+    filters:
+      multiply: 0.1
+  - id: !extend hackman_flex3l_battery_bms_discharging_voltage
+    filters:
+      multiply: 0.1
+
+number:
+  - id: !extend hackman_flex3l_generator_peak_shaving_power
+    multiply: 0.1
+    step: 10
+  - id: !extend hackman_flex3l_grid_peak_shaving_power
+    multiply: 0.1
+    step: 10
+  - id: !extend hackman_flex3l_max_sell_power
+    multiply: 0.1
+    step: 10
+  - id: !extend hackman_flex3l_max_solar_power
+    multiply: 0.1
+    step: 10
+  - id: !extend hackman_flex3l_zero_export_power
+    multiply: 0.1
+    step: 10
+  - id: !extend hackman_flex3l_time_of_use_1_out_power
+    multiply: 0.1
+    step: 10
+  - id: !extend hackman_flex3l_time_of_use_2_out_power
+    multiply: 0.1
+    step: 10
+  - id: !extend hackman_flex3l_time_of_use_3_out_power
+    multiply: 0.1
+    step: 10
+  - id: !extend hackman_flex3l_time_of_use_4_out_power
+    multiply: 0.1
+    step: 10
+  - id: !extend hackman_flex3l_time_of_use_5_out_power
+    multiply: 0.1
+    step: 10
+  - id: !extend hackman_flex3l_time_of_use_6_out_power
+    multiply: 0.1
+    step: 10
+  - id: !extend hackman_flex3l_battery_shutdown_voltage
+    multiply: 10
+    step: 0.1
+    min_value: 150
+    max_value: 710
+  - id: !extend hackman_flex3l_battery_restart_voltage
+    multiply: 10
+    step: 0.1
+    min_value: 150
+    max_value: 710
+  - id: !extend hackman_flex3l_battery_low_voltage
+    multiply: 10
+    step: 0.1
+    min_value: 150
+    max_value: 710
+  - id: !extend hackman_flex3l_battery_equalization_voltage
+    multiply: 10
+    step: 0.1
+    min_value: 150
+    max_value: 710
+  - id: !extend hackman_flex3l_battery_absorption_voltage
+    multiply: 10
+    step: 0.1
+    min_value: 150
+    max_value: 710
+  - id: !extend hackman_flex3l_battery_float_voltage
+    multiply: 10
+    step: 0.1
+    min_value: 150
+    max_value: 710
+  - id: !extend hackman_flex3l_battery_empty_voltage
+    multiply: 10
+    step: 0.1
+    min_value: 150
+    max_value: 710
+  - id: !extend hackman_flex3l_battery_grid_charging_start_voltage
+    multiply: 10
+    step: 0.1
+    min_value: 150
+    max_value: 710
+  - id: !extend hackman_flex3l_battery_generator_charging_start_voltage
+    multiply: 10
+    step: 0.1
+    min_value: 150
+    max_value: 710
+  - id: !extend hackman_flex3l_smartload_off_voltage
+    multiply: 10
+    step: 0.1
+    min_value: 150
+    max_value: 710
+  - id: !extend hackman_flex3l_smartload_on_voltage
+    multiply: 10
+    step: 0.1
+    min_value: 150
+    max_value: 710
+  - id: !extend hackman_flex3l_time_of_use_1_voltage
+    multiply: 10
+    step: 0.1
+    min_value: 150
+    max_value: 710
+  - id: !extend hackman_flex3l_time_of_use_2_voltage
+    multiply: 10
+    step: 0.1
+    min_value: 150
+    max_value: 710
+  - id: !extend hackman_flex3l_time_of_use_3_voltage
+    multiply: 10
+    step: 0.1
+    min_value: 150
+    max_value: 710
+  - id: !extend hackman_flex3l_time_of_use_4_voltage
+    multiply: 10
+    step: 0.1
+    min_value: 150
+    max_value: 710
+  - id: !extend hackman_flex3l_time_of_use_5_voltage
+    multiply: 10
+    step: 0.1
+    min_value: 150
+    max_value: 710
+  - id: !extend hackman_flex3l_time_of_use_6_voltage
+    multiply: 10
+    step: 0.1
+    min_value: 150
+    max_value: 710
+  - id: !extend hackman_flex3l_time_of_use_all_voltage
+    step: 0.1
+    min_value: 150
+    max_value: 710
+
+switch:
+  - id: !extend hackman_flex3l_switch_time_of_use_1_sell
+    disabled_by_default: false
+  - id: !extend hackman_flex3l_switch_time_of_use_2_sell
+    disabled_by_default: false
+  - id: !extend hackman_flex3l_switch_time_of_use_3_sell
+    disabled_by_default: false
+  - id: !extend hackman_flex3l_switch_time_of_use_4_sell
+    disabled_by_default: false
+  - id: !extend hackman_flex3l_switch_time_of_use_5_sell
+    disabled_by_default: false
+  - id: !extend hackman_flex3l_switch_time_of_use_6_sell
+    disabled_by_default: false
+# --- KONIEC PLIKU KALIBRACJI ---
