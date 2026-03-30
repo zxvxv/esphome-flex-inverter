@@ -1,0 +1,124 @@
+# --- POCZĄTEK PLIKU GŁÓWNEGO ---
+# Wersja v1.01 - Plik główny (Orkiestrator) dla Hackman Flex3L.
+# Zmiany: Dodano logikę Safe Mode, połączono zmienne, dodano sekcję pobierania pakietów z GitHub.
+#
+# Copyright 2025 Lewa-Reka <lewareka.yt@gmail.com> (Adaptacja Hackman Flex3L)
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+substitutions:
+  name: "hackman-flex3l"
+  friendly_name: "Hackman Flex3L Inverter"
+  modbus_controller_id: "hackman_flex3l_modbus_controller"
+  baud_rate: "9600"
+  update_interval: 5s
+  safe_mode_delay: 5min
+  # Safe Mode Default parameters
+  default_maximum_battery_charge_current: "140" # Amps
+  default_max_sell_power: "12000" # Watts
+  default_system_work_mode: "Zero Export To Load" # "Selling First", "Zero Export To Load", "Zero Export To CT"
+  default_solar_sell: "on" # "on", "off"
+  default_force_off_grid: "off" # "on", "off"
+
+esphome:
+  name: "${name}"
+  friendly_name: "${friendly_name}"
+  comment: "Hackman Flex3L - Modbus Inverter Controller"
+  project:
+    name: "hackman.flex3l-inverter"
+    version: "1.01.0"
+
+logger:
+  level: WARN
+
+api:
+  on_client_disconnected:
+    - delay: ${safe_mode_delay}
+    - if:
+        condition:
+          not: api.connected
+        then:
+          - logger.log: "Lost connection to HomeAssistant API - Activating safe mode"
+          - script.execute: set_safe_modbus_registers
+
+  on_client_connected:
+    - logger.log: "Connection to HomeAssistant API restored"
+
+ota:
+  - platform: esphome
+
+wifi:
+  # Captive portal automatycznie zapisze domowe sieci w pamięci flash
+  ap:
+    ssid: "Hackman"
+    # Otwarta sieć bez hasła, aby Captive Portal uruchomił się od razu po połączeniu
+
+captive_portal:
+
+uart:
+  id: modbus_uart
+  baud_rate: ${baud_rate}
+  stop_bits: 1
+  # UWAGA: Upewnij się, że zdefiniowałeś piny tx_pin i rx_pin dla swojej płytki ESP32 (np. rx_pin: GPIO16, tx_pin: GPIO17)
+
+modbus:
+  id: modbus_1
+  uart_id: modbus_uart
+
+modbus_controller:
+  - id: ${modbus_controller_id}
+    # UWAGA: Upewnij się, że adres falownika (modbus_inverter_address) jest poprawny (zazwyczaj 1)
+    address: 1
+    modbus_id: modbus_1
+    setup_priority: -10
+    update_interval: ${update_interval}
+    command_throttle: 60ms
+    offline_skip_updates: 3
+
+script:
+  - id: set_safe_modbus_registers
+    then:
+      - logger.log:
+          level: INFO
+          format: "Setting safe Modbus register values"
+      - number.set:
+          id: hackman_flex3l_maximum_battery_charge_current
+          value: ${default_maximum_battery_charge_current}
+      - number.set:
+          id: hackman_flex3l_max_sell_power
+          value: ${default_max_sell_power}
+      - select.set:
+          id: hackman_flex3l_system_work_mode
+          option: ${default_system_work_mode}
+      - switch.turn_${default_solar_sell}:
+          id: hackman_flex3l_switch_solar_sell
+      - switch.turn_${default_force_off_grid}:
+          id: hackman_flex3l_switch_off_grid
+
+packages:
+  hackman_flex3l_modules:
+    url: https://github.com/zxvxv/esphome-flex-inverter
+    ref: main
+    files:
+      - packages/calibration.yaml
+      - packages/device.yaml
+      - packages/battery.yaml
+      - packages/generator.yaml
+      - packages/grid.yaml
+      - packages/inverter.yaml
+      - packages/load.yaml
+      - packages/pv.yaml
+      - packages/time.yaml
+      - packages/tou.yaml
+      - packages/work_mode.yaml
+# --- KONIEC PLIKU GŁÓWNEGO ---
