@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU GŁÓWNEGO ---
-# Wersja v1.01 - Plik główny (Orkiestrator) dla Hackman Flex3L.
-# Zmiany: Dodano logikę Safe Mode, połączono zmienne, dodano sekcję pobierania pakietów z GitHub.
+# Wersja v1.02 - Plik główny (Orkiestrator) dla Hackman Flex3L.
+# Zmiany: Zdefiniowano konkretne piny UART (tx_pin: GPIO43, rx_pin: GPIO44) na podstawie grafiki płytki.
 #
 # Copyright 2025 Lewa-Reka <lewareka.yt@gmail.com> (Adaptacja Hackman Flex3L)
 #
@@ -21,7 +21,7 @@ substitutions:
   friendly_name: "Hackman Flex3L Inverter"
   modbus_controller_id: "hackman_flex3l_modbus_controller"
   baud_rate: "9600"
-  update_interval: 5s
+  update_interval: ${calibration_update_interval}
   safe_mode_delay: 5min
   # Safe Mode Default parameters
   default_maximum_battery_charge_current: "140" # Amps
@@ -67,9 +67,10 @@ captive_portal:
 
 uart:
   id: modbus_uart
+  rx_pin: GPIO44
+  tx_pin: GPIO43
   baud_rate: ${baud_rate}
   stop_bits: 1
-  # UWAGA: Upewnij się, że zdefiniowałeś piny tx_pin i rx_pin dla swojej płytki ESP32 (np. rx_pin: GPIO16, tx_pin: GPIO17)
 
 modbus:
   id: modbus_1
