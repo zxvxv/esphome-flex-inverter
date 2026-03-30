@@ -1,0 +1,224 @@
+# --- POCZĄTEK PLIKU PV ---
+# Wersja v1.00 - Inicjalizacja konfiguracji paneli słonecznych (PV) dla Hackman Flex3L.
+# Plik zawiera sensory produkcji, mocy, prądów i napięć ze stringów słonecznych oraz zliczanie ogólnej produkcji.
+
+sensor:
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Hackman Flex3L PV1 Power"
+    id: hackman_flex3l_pv1_power
+    register_type: holding
+    address: 772
+    unit_of_measurement: "W"
+    device_class: power
+    state_class: "measurement"
+    accuracy_decimals: 0
+    value_type: U_WORD
+    icon: "mdi:solar-power-variant"
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Hackman Flex3L PV2 Power"
+    id: hackman_flex3l_pv2_power
+    register_type: holding
+    address: 773
+    unit_of_measurement: "W"
+    device_class: power
+    state_class: "measurement"
+    accuracy_decimals: 0
+    value_type: U_WORD
+    icon: "mdi:solar-power-variant"
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Hackman Flex3L PV3 Power"
+    id: hackman_flex3l_pv3_power
+    register_type: holding
+    address: 774
+    unit_of_measurement: "W"
+    device_class: power
+    state_class: "measurement"
+    accuracy_decimals: 0
+    value_type: U_WORD
+    icon: "mdi:solar-power-variant"
+    disabled_by_default: true
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Hackman Flex3L PV4 Power"
+    id: hackman_flex3l_pv4_power
+    register_type: holding
+    address: 775
+    unit_of_measurement: "W"
+    device_class: power
+    state_class: "measurement"
+    accuracy_decimals: 0
+    value_type: U_WORD
+    icon: "mdi:solar-power-variant"
+    disabled_by_default: true
+
+  - platform: template
+    name: "Hackman Flex3L PV Power"
+    unit_of_measurement: "W"
+    id: hackman_flex3l_pv_power
+    device_class: power
+    state_class: "measurement"
+    accuracy_decimals: 0
+    update_interval: 5s
+    icon: "mdi:solar-power-variant"
+    lambda: |-
+      float pv1 = isnan(id(hackman_flex3l_pv1_power).state) ? 0.0 : id(hackman_flex3l_pv1_power).state;
+      float pv2 = isnan(id(hackman_flex3l_pv2_power).state) ? 0.0 : id(hackman_flex3l_pv2_power).state;
+      float pv3 = isnan(id(hackman_flex3l_pv3_power).state) ? 0.0 : id(hackman_flex3l_pv3_power).state;
+      float pv4 = isnan(id(hackman_flex3l_pv4_power).state) ? 0.0 : id(hackman_flex3l_pv4_power).state;
+      return pv1 + pv2 + pv3 + pv4;
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Hackman Flex3L PV1 Voltage"
+    register_type: holding
+    address: 776
+    unit_of_measurement: "V"
+    device_class: voltage
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    value_type: U_WORD
+    icon: "mdi:solar-power-variant"
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Hackman Flex3L PV1 Current"
+    register_type: holding
+    address: 777
+    unit_of_measurement: "A"
+    device_class: current
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    value_type: U_WORD
+    icon: "mdi:solar-power-variant"
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Hackman Flex3L PV2 Voltage"
+    register_type: holding
+    address: 778
+    unit_of_measurement: "V"
+    device_class: voltage
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    value_type: U_WORD
+    icon: "mdi:solar-power-variant"
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Hackman Flex3L PV2 Current"
+    register_type: holding
+    address: 779
+    unit_of_measurement: "A"
+    device_class: current
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    value_type: U_WORD
+    icon: "mdi:solar-power-variant"
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Hackman Flex3L PV3 Voltage"
+    register_type: holding
+    address: 780
+    unit_of_measurement: "V"
+    device_class: voltage
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    value_type: U_WORD
+    icon: "mdi:solar-power-variant"
+    disabled_by_default: true
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Hackman Flex3L PV3 Current"
+    register_type: holding
+    address: 781
+    unit_of_measurement: "A"
+    device_class: current
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    value_type: U_WORD
+    icon: "mdi:solar-power-variant"
+    disabled_by_default: true
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Hackman Flex3L PV4 Voltage"
+    register_type: holding
+    address: 782
+    unit_of_measurement: "V"
+    device_class: voltage
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    value_type: U_WORD
+    icon: "mdi:solar-power-variant"
+    disabled_by_default: true
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Hackman Flex3L PV4 Current"
+    register_type: holding
+    address: 783
+    unit_of_measurement: "A"
+    device_class: current
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    value_type: U_WORD
+    icon: "mdi:solar-power-variant"
+    disabled_by_default: true
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Hackman Flex3L Daily PV Production"
+    id: hackman_flex3l_daily_pv_production
+    register_type: holding
+    address: 629
+    unit_of_measurement: "kWh"
+    device_class: energy
+    state_class: "total_increasing"
+    accuracy_decimals: 1
+    filters:
+      - multiply: 0.1
+    value_type: U_WORD
+    icon: "mdi:solar-power"
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Hackman Flex3L Total PV Production"
+    id: hackman_flex3l_total_pv_production
+    register_type: holding
+    address: 634
+    unit_of_measurement: "kWh"
+    device_class: energy
+    state_class: "total_increasing"
+    accuracy_decimals: 1
+    value_type: U_DWORD_R
+    filters:
+      - multiply: 0.1
+    icon: "mdi:solar-power"
+
+switch:
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Hackman Flex3L MPPT Multi-point Scanning"
+    register_type: holding
+    address: 441
+    bitmask: 0x0004
+    entity_category: config
+    icon: "mdi:solar-power-variant-outline"
+# --- KONIEC PLIKU PV ---
