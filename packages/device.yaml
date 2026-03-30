@@ -1,5 +1,5 @@
 # --- POCZĄTEK PLIKU DEVICE ---
-# Wersja v1.00 - Inicjalizacja konfiguracji urządzenia dla Hackman Flex3L.
+# Wersja v1.01 - Poprawka adresacji dla Hackman Flex3L (usunięcie pustych rejestrów, korekta SN i Firmware).
 # Plik zawiera podstawowe sensory diagnostyczne, informacje o firmware, statusy błędów i główny włącznik.
 
 sensor:
@@ -35,18 +35,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Device Control Board Firmware Raw 11"
-    id: hackman_flex3l_device_firmware_raw_11
-    register_type: holding
-    address: 111
-    accuracy_decimals: 0
-    value_type: U_WORD
-    internal: true
-
-  - platform: modbus_controller
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Device Control Board Firmware Raw 14"
-    id: hackman_flex3l_device_firmware_raw_14
+    name: "Hackman Flex3L Device Control Board Firmware Raw 114"
+    id: hackman_flex3l_device_firmware_raw_114
     register_type: holding
     address: 114
     accuracy_decimals: 0
@@ -55,8 +45,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Device Control Board Firmware Raw 15"
-    id: hackman_flex3l_device_firmware_raw_15
+    name: "Hackman Flex3L Device Control Board Firmware Raw 115"
+    id: hackman_flex3l_device_firmware_raw_115
     register_type: holding
     address: 115
     accuracy_decimals: 0
@@ -65,8 +55,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Device Communication Board Firmware Raw 16"
-    id: hackman_flex3l_device_comm_firmware_raw_16
+    name: "Hackman Flex3L Device Communication Board Firmware Raw 116"
+    id: hackman_flex3l_device_comm_firmware_raw_116
     register_type: holding
     address: 116
     accuracy_decimals: 0
@@ -75,8 +65,8 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Device Communication Board Firmware Raw 17"
-    id: hackman_flex3l_device_comm_firmware_raw_17
+    name: "Hackman Flex3L Device Communication Board Firmware Raw 117"
+    id: hackman_flex3l_device_comm_firmware_raw_117
     register_type: holding
     address: 117
     accuracy_decimals: 0
@@ -85,24 +75,13 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Device Communication Board Firmware Raw 18"
-    id: hackman_flex3l_device_comm_firmware_raw_18
+    name: "Hackman Flex3L Device Communication Board Firmware Raw 118"
+    id: hackman_flex3l_device_comm_firmware_raw_118
     register_type: holding
     address: 118
     accuracy_decimals: 0
     value_type: U_WORD
     internal: true
-
-  - platform: modbus_controller
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Device Modbus Address"
-    register_type: holding
-    address: 101
-    unit_of_measurement: ""
-    accuracy_decimals: 0
-    value_type: U_WORD
-    icon: "mdi:identifier"
-    entity_category: diagnostic
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -117,52 +96,7 @@ sensor:
     filters:
       - multiply: 0.1
     value_type: U_DWORD_R
-
     icon: "mdi:flash"
-
-  - platform: modbus_controller
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Device MPPTs"
-    register_type: holding
-    address: 122
-    unit_of_measurement: ""
-    accuracy_decimals: 0
-    value_type: U_WORD
-    icon: "mdi:solar-panel"
-
-    entity_category: diagnostic
-    filters:
-      - lambda: |-
-          uint16_t value = (uint16_t)x;
-          // Extract upper nibble (bits 8-11) and shift right 8 bits
-          uint16_t mppts = (value >> 8) & 0x0F;
-          // Validation: if value exceeds 12 MPPTs, use default of 2
-          if (mppts < 1 || mppts > 12) {
-            return 2.0;
-          }
-          return (float)mppts;
-
-  - platform: modbus_controller
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Device Phases"
-    register_type: holding
-    address: 122
-    unit_of_measurement: ""
-    accuracy_decimals: 0
-    value_type: U_WORD
-    icon: "mdi:transmission-tower"
-
-    entity_category: diagnostic
-    filters:
-      - lambda: |-
-          uint16_t value = (uint16_t)x;
-          // Extract lower nibble (bits 0-3)
-          uint16_t phases = value & 0x0F;
-          // Validation: if value exceeds 3 phases, use default of 3
-          if (phases < 1 || phases > 3) {
-            return 3.0;
-          }
-          return (float)phases;
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
@@ -242,13 +176,11 @@ text_sensor:
         return std::string("invalid data");
       }
 
-      // Assemble words without rotating bytes within words
       uint16_t word0 = ((uint16_t)(uint8_t)x[0] << 8) | (uint8_t)x[1];
       uint16_t word1 = ((uint16_t)(uint8_t)x[2] << 8) | (uint8_t)x[3];
       uint16_t word2 = ((uint16_t)(uint8_t)x[4] << 8) | (uint8_t)x[5];
       uint16_t word3 = ((uint16_t)(uint8_t)x[6] << 8) | (uint8_t)x[7];
 
-      // Assemble uint64_t value; words are in little-endian order
       uint64_t value = ((uint64_t)word3 << 48) |
                       ((uint64_t)word2 << 32) |
                       ((uint64_t)word1 << 16) |
@@ -408,26 +340,9 @@ text_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Device Protocol Version"
-    register_type: holding
-    address: 102
-    bitmask: 0
-    raw_encode: NONE
-
-    icon: "mdi:protocol"
-    entity_category: diagnostic
-    lambda: |-
-      if (x.size() < 2) return std::string("N/A");
-      uint16_t value = ((uint16_t)(uint8_t)x[0] << 8) | (uint8_t)x[1];
-      char buffer[10];
-      snprintf(buffer, sizeof(buffer), "%04X", value);
-      return std::string(buffer);
-
-  - platform: modbus_controller
-    modbus_controller_id: ${modbus_controller_id}
     name: "Hackman Flex3L Device Serial Number"
     register_type: holding
-    address: 103
+    address: 101
     response_size: 10
     bitmask: 0
     raw_encode: NONE
@@ -446,92 +361,22 @@ text_sensor:
       }
       return serial.empty() ? std::string("N/A") : serial;
 
-  - platform: modbus_controller
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Device MCU Board Version"
-    register_type: holding
-    address: 110
-    bitmask: 0
-    raw_encode: NONE
-
-    icon: "mdi:memory"
-    entity_category: diagnostic
-    lambda: |-
-      if (x.size() < 2) return std::string("N/A");
-      uint16_t value = ((uint16_t)(uint8_t)x[0] << 8) | (uint8_t)x[1];
-      char buffer[20];
-      snprintf(buffer, sizeof(buffer), "%04X", value);
-      return std::string(buffer);
-
-  - platform: modbus_controller
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Device Arc Board Firmware Version"
-    register_type: holding
-    address: 112
-    bitmask: 0
-    raw_encode: NONE
-
-    icon: "mdi:chip"
-    entity_category: diagnostic
-    lambda: |-
-      if (x.size() < 2) return std::string("N/A");
-      uint16_t value = ((uint16_t)(uint8_t)x[0] << 8) | (uint8_t)x[1];
-      char buffer[20];
-      snprintf(buffer, sizeof(buffer), "%04X", value);
-      return std::string(buffer);
-
-  - platform: modbus_controller
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Device Slave MCU Version"
-    register_type: holding
-    address: 113
-    bitmask: 0
-    raw_encode: NONE
-
-    icon: "mdi:chip"
-    entity_category: diagnostic
-    lambda: |-
-      if (x.size() < 2) return std::string("N/A");
-      uint16_t value = ((uint16_t)(uint8_t)x[0] << 8) | (uint8_t)x[1];
-      char buffer[20];
-      snprintf(buffer, sizeof(buffer), "%04X", value);
-      return std::string(buffer);
-
-  - platform: modbus_controller
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Device Self-check"
-    register_type: holding
-    address: 136
-    bitmask: 0
-    raw_encode: HEXBYTES
-    icon: "mdi:check-circle"
-    entity_category: diagnostic
-    lambda: |-
-      uint16_t value = modbus_controller::word_from_hex_str(x, 0);
-      switch (value) {
-        case 0x0000: return std::string("Disabled");
-        case 0x0001: return std::string("Enabled");
-        default: return std::string("Unknown");
-      }
-
   - platform: template
     name: "Hackman Flex3L Device MAIN Firmware Version"
     icon: "mdi:chip"
     update_interval: 600s
     entity_category: diagnostic
     lambda: |-
-      auto reg14 = (uint16_t)id(hackman_flex3l_device_firmware_raw_14).state;
-      auto reg15 = (uint16_t)id(hackman_flex3l_device_firmware_raw_15).state;
-      auto reg11 = (uint16_t)id(hackman_flex3l_device_firmware_raw_11).state;
+      auto reg114 = (uint16_t)id(hackman_flex3l_device_firmware_raw_114).state;
+      auto reg115 = (uint16_t)id(hackman_flex3l_device_firmware_raw_115).state;
 
-      if (isnan(id(hackman_flex3l_device_firmware_raw_14).state) || 
-          isnan(id(hackman_flex3l_device_firmware_raw_15).state) || 
-          isnan(id(hackman_flex3l_device_firmware_raw_11).state)) {
+      if (isnan(id(hackman_flex3l_device_firmware_raw_114).state) || 
+          isnan(id(hackman_flex3l_device_firmware_raw_115).state)) {
         return {"N/A"};
       }
 
       char buffer[50];
-      snprintf(buffer, sizeof(buffer), "%04X-%04X-%04X", reg14, reg15, reg11);
+      snprintf(buffer, sizeof(buffer), "%04X-%04X", reg115, reg114);
       return {buffer};
 
   - platform: template
@@ -540,21 +385,21 @@ text_sensor:
     icon: "mdi:chip"
     entity_category: diagnostic
     lambda: |-
-      auto reg17 = (uint16_t)id(hackman_flex3l_device_comm_firmware_raw_17).state;
-      auto reg18 = (uint16_t)id(hackman_flex3l_device_comm_firmware_raw_18).state;
-      auto reg16 = (uint16_t)id(hackman_flex3l_device_comm_firmware_raw_16).state;
+      auto reg116 = (uint16_t)id(hackman_flex3l_device_comm_firmware_raw_116).state;
+      auto reg117 = (uint16_t)id(hackman_flex3l_device_comm_firmware_raw_117).state;
+      auto reg118 = (uint16_t)id(hackman_flex3l_device_comm_firmware_raw_118).state;
 
-      if (isnan(id(hackman_flex3l_device_comm_firmware_raw_17).state) || 
-          isnan(id(hackman_flex3l_device_comm_firmware_raw_18).state) || 
-          isnan(id(hackman_flex3l_device_comm_firmware_raw_16).state)) {
+      if (isnan(id(hackman_flex3l_device_comm_firmware_raw_116).state) || 
+          isnan(id(hackman_flex3l_device_comm_firmware_raw_117).state) || 
+          isnan(id(hackman_flex3l_device_comm_firmware_raw_118).state)) {
         return {"N/A"};
       }
 
       char buffer[50];
-      if (reg16 == 0) {
-        snprintf(buffer, sizeof(buffer), "%04X-%04X", reg17, reg18);
+      if (reg116 == 0) {
+        snprintf(buffer, sizeof(buffer), "%04X-%04X", reg118, reg117);
       } else {
-        snprintf(buffer, sizeof(buffer), "%04X-%04X-%04X", reg17, reg18, reg16);
+        snprintf(buffer, sizeof(buffer), "%04X-%04X-%04X", reg118, reg117, reg116);
       }
       return {buffer};
 
@@ -613,54 +458,4 @@ text_sensor:
       if (value & (1UL << 31)) return std::string("Parallel communication quality");
 
       return std::string("Error");
-
-  - platform: modbus_controller
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Device Fault"
-    register_type: holding
-    address: 655
-    response_size: 8
-    bitmask: 0
-    entity_category: diagnostic
-    raw_encode: NONE
-    icon: "mdi:message-alert-outline"
-    lambda: |-
-      if (x.size() < 8) return std::string("N/A");
-
-      uint16_t word1 = ((uint16_t)(uint8_t)x[0] << 8) | (uint8_t)x[1];
-      uint16_t word2 = ((uint16_t)(uint8_t)x[2] << 8) | (uint8_t)x[3];
-      uint16_t word3 = ((uint16_t)(uint8_t)x[4] << 8) | (uint8_t)x[5];
-      uint16_t word4 = ((uint16_t)(uint8_t)x[6] << 8) | (uint8_t)x[7];
-
-      uint64_t value = ((uint64_t)word4 << 48) | ((uint64_t)word3 << 32) | 
-                      ((uint64_t)word2 << 16) | word1;
-
-      if (value == 0) return std::string("OK");
-
-      if (value & (1ULL << 6)) return std::string("DC/DC Soft Start failure");
-      if (value & (1ULL << 9)) return std::string("Auxiliary power supply failure");
-      if (value & (1ULL << 12)) return std::string("Working mode changed");
-      if (value & (1ULL << 17)) return std::string("AC Over-current failure");
-      if (value & (1ULL << 18)) return std::string("Tz_Integ_Fault failure");
-      if (value & (1ULL << 19)) return std::string("DC Over-current failure");
-      if (value & (1ULL << 22)) return std::string("AC current leakage failure");
-      if (value & (1ULL << 63)) return std::string("Temperature is too high");
-
-      return std::string("Error");
-
-number:
-  - platform: modbus_controller
-    use_write_multiple: true
-    mode: box
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Self Check Time"
-    id: hackman_flex3l_self_check_time
-    register_type: holding
-    address: 161
-    unit_of_measurement: "s"
-    min_value: 0
-    max_value: 1000
-    step: 1
-    entity_category: diagnostic
-    icon: "mdi:timer-check"
 # --- KONIEC PLIKU DEVICE ---
