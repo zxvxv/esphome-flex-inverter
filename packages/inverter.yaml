@@ -181,4 +181,32 @@ binary_sensor:
     bitmask: 0x1
     device_class: power
     icon: "mdi:toggle-switch"
+
+text_sensor:
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Hackman Flex3L Serial Number"
+    id: pl_hackman_flex3l_serial_number
+    register_type: holding
+    address: 203
+    register_count: 5
+    response_size: 10
+    raw_encode: STRING
+    entity_category: diagnostic
+    icon: "mdi:barcode"
+
+sensor:
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Hackman Flex3L Rated Power"
+    id: pl_hackman_flex3l_rated_power
+    register_type: holding
+    address: 220
+    value_type: U_DWORD_R
+    unit_of_measurement: "W"
+    device_class: power
+    entity_category: diagnostic
+    icon: "mdi:lightning-bolt"
+    filters:
+      - multiply: 0.1
 # --- KONIEC PLIKU INVERTER ---
