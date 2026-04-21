@@ -191,7 +191,7 @@ text_sensor:
     address: 203
     register_count: 5
     response_size: 10
-    raw_encode: STRING
+    raw_encode: NONE
     entity_category: diagnostic
     icon: "mdi:barcode"
 
