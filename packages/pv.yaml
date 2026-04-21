@@ -1,11 +1,11 @@
 # --- POCZĄTEK PLIKU PV ---
-# Wersja v1.00 - Inicjalizacja konfiguracji paneli słonecznych (PV) dla Hackman Flex3L.
-# Plik zawiera sensory produkcji, mocy, prądów i napięć ze stringów słonecznych oraz zliczanie ogólnej produkcji.
+# Wersja v1.01 - Konfiguracja paneli słonecznych (PV) dla Hackman Flex3L.
+# Zmiany: Usunięto przedrostki "Hackman Flex3L" z nazw wyświetlanych (name).
 
 sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L PV1 Power"
+    name: "PV1 Power"
     id: hackman_flex3l_pv1_power
     register_type: holding
     address: 772
@@ -18,7 +18,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L PV2 Power"
+    name: "PV2 Power"
     id: hackman_flex3l_pv2_power
     register_type: holding
     address: 773
@@ -31,7 +31,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L PV3 Power"
+    name: "PV3 Power"
     id: hackman_flex3l_pv3_power
     register_type: holding
     address: 774
@@ -45,7 +45,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L PV4 Power"
+    name: "PV4 Power"
     id: hackman_flex3l_pv4_power
     register_type: holding
     address: 775
@@ -58,7 +58,7 @@ sensor:
     disabled_by_default: true
 
   - platform: template
-    name: "Hackman Flex3L PV Power"
+    name: "PV Power"
     unit_of_measurement: "W"
     id: hackman_flex3l_pv_power
     device_class: power
@@ -75,7 +75,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L PV1 Voltage"
+    name: "PV1 Voltage"
     register_type: holding
     address: 776
     unit_of_measurement: "V"
@@ -88,7 +88,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L PV1 Current"
+    name: "PV1 Current"
     register_type: holding
     address: 777
     unit_of_measurement: "A"
@@ -101,7 +101,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L PV2 Voltage"
+    name: "PV2 Voltage"
     register_type: holding
     address: 778
     unit_of_measurement: "V"
@@ -114,7 +114,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L PV2 Current"
+    name: "PV2 Current"
     register_type: holding
     address: 779
     unit_of_measurement: "A"
@@ -127,7 +127,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L PV3 Voltage"
+    name: "PV3 Voltage"
     register_type: holding
     address: 780
     unit_of_measurement: "V"
@@ -141,7 +141,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L PV3 Current"
+    name: "PV3 Current"
     register_type: holding
     address: 781
     unit_of_measurement: "A"
@@ -155,7 +155,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L PV4 Voltage"
+    name: "PV4 Voltage"
     register_type: holding
     address: 782
     unit_of_measurement: "V"
@@ -169,7 +169,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L PV4 Current"
+    name: "PV4 Current"
     register_type: holding
     address: 783
     unit_of_measurement: "A"
@@ -183,7 +183,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Daily PV Production"
+    name: "Daily PV Production"
     id: hackman_flex3l_daily_pv_production
     register_type: holding
     address: 629
@@ -198,7 +198,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Total PV Production"
+    name: "Total PV Production"
     id: hackman_flex3l_total_pv_production
     register_type: holding
     address: 634
@@ -215,7 +215,7 @@ switch:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L MPPT Multi-point Scanning"
+    name: "MPPT Multi-point Scanning"
     register_type: holding
     address: 441
     bitmask: 0x0004
