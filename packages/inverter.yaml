@@ -195,7 +195,7 @@ text_sensor:
     entity_category: diagnostic
     icon: "mdi:barcode"
 
-# Drugi blok sensor na końcu usunięty i przeniesiony na początek pliku, by nie duplikować klucza w YAML.
+sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     name: "Rated Power"
