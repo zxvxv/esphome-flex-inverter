@@ -1,0 +1,115 @@
+# --- POCZĄTEK PLIKU AUTOMATIONS ---
+# Wersja v1.00 - Automatyka przekaźnika (Web Server UI) dla ESP32-S3 Waveshare
+
+switch:
+  - platform: gpio
+    pin: GPIO47
+    id: waveshare_relay
+    name: "Przekaźnik Zewnętrzny (Stycznik)"
+    restore_mode: ALWAYS_OFF
+    icon: "mdi:relay"
+
+select:
+  - platform: template
+    name: "Tryb pracy przekaźnika"
+    id: relay_mode
+    optimistic: true
+    options:
+      - "Wyłączony"
+      - "Ręczny"
+      - "Przepięcie Sieci"
+      - "Nadmiar Baterii"
+    initial_option: "Wyłączony"
+    icon: "mdi:state-machine"
+
+number:
+  - platform: template
+    name: "Napięcie załączenia (Max z L1/L2/L3)"
+    id: relay_volt_on
+    optimistic: true
+    min_value: 240
+    max_value: 260
+    step: 0.1
+    initial_value: 251.0
+    unit_of_measurement: "V"
+    icon: "mdi:lightning-bolt"
+
+  - platform: template
+    name: "Napięcie wyłączenia (Histereza)"
+    id: relay_volt_off
+    optimistic: true
+    min_value: 230
+    max_value: 255
+    step: 0.1
+    initial_value: 248.0
+    unit_of_measurement: "V"
+    icon: "mdi:lightning-bolt-outline"
+
+  - platform: template
+    name: "Bateria SOC załączenia"
+    id: relay_soc_on
+    optimistic: true
+    min_value: 50
+    max_value: 100
+    step: 1
+    initial_value: 98
+    unit_of_measurement: "%"
+    icon: "mdi:battery-arrow-up"
+
+  - platform: template
+    name: "Bateria SOC wyłączenia (Histereza)"
+    id: relay_soc_off
+    optimistic: true
+    min_value: 40
+    max_value: 99
+    step: 1
+    initial_value: 90
+    unit_of_measurement: "%"
+    icon: "mdi:battery-arrow-down"
+
+interval:
+  - interval: 5s
+    then:
+      - lambda: |-
+          std::string mode = id(relay_mode).state;
+
+          // 1. Tryb: Wyłączony (twardy OFF)
+          if (mode == "Wyłączony") {
+            if (id(waveshare_relay).state) {
+              id(waveshare_relay).turn_off();
+            }
+          }
+          // 2. Tryb: Ręczny (ignoruje automatykę, sterujesz klikając z WWW)
+          else if (mode == "Ręczny") {
+            // Nic nie rób, czekaj na kliknięcie użytkownika
+          }
+          // 3. Tryb: Przepięcie Sieci (Histereza V)
+          else if (mode == "Przepięcie Sieci") {
+            float v1 = id(hackman_flex3l_grid_voltage_l1).state;
+            float v2 = id(hackman_flex3l_grid_voltage_l2).state;
+            float v3 = id(hackman_flex3l_grid_voltage_l3).state;
+            
+            // Znajdź najwyższe napięcie z 3 faz
+            float max_v = v1;
+            if (v2 > max_v) max_v = v2;
+            if (v3 > max_v) max_v = v3;
+
+            // Logika histerezy
+            if (max_v >= id(relay_volt_on).state) {
+              if (!id(waveshare_relay).state) id(waveshare_relay).turn_on();
+            } else if (max_v <= id(relay_volt_off).state) {
+              if (id(waveshare_relay).state) id(waveshare_relay).turn_off();
+            }
+          }
+          // 4. Tryb: Nadmiar Baterii (Histereza SOC)
+          else if (mode == "Nadmiar Baterii") {
+            // Używamy ID baterii (założenie, że w pliku battery.yaml jest to ID)
+            float soc = id(hackman_flex3l_battery_soc).state;
+            
+            if (soc >= id(relay_soc_on).state) {
+              if (!id(waveshare_relay).state) id(waveshare_relay).turn_on();
+            } else if (soc <= id(relay_soc_off).state) {
+              if (id(waveshare_relay).state) id(waveshare_relay).turn_off();
+            }
+          }
+# --- KONIEC PLIKU AUTOMATIONS ---
