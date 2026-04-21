@@ -1,6 +1,7 @@
 # --- POCZĄTEK PLIKU KALIBRACJI ---
-# Wersja v1.00 - Inicjalizacja kalibracji dla Hackman Flex3L (dodano prefiksy 'hackman_flex3l_').
-#
+# Wersja v1.01 - Inicjalizacja kalibracji dla Hackman Flex3L.
+# Zmiany: Plik sprawdzony pod kątem nazw. Brak zmian - plik operuje tylko na ID.
+
 sensor:
   - id: !extend hackman_flex3l_battery_power
     filters:
