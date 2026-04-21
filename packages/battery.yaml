@@ -1,11 +1,11 @@
 # --- POCZĄTEK PLIKU BATTERY ---
-# Wersja v1.00 - Inicjalizacja konfiguracji baterii dla Hackman Flex3L.
-# Plik zawiera sensory, przełączniki i kontrolki do zarządzania magazynem energii.
+# Wersja v1.01 - Konfiguracja baterii dla Hackman Flex3L.
+# Zmiany: Usunięto przedrostki "Hackman Flex3L" z nazw wyświetlanych (name).
 
 sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Daily Battery Charge"
+    name: "Daily Battery Charge"
     id: hackman_flex3l_daily_battery_charge
     register_type: holding
     address: 614
@@ -20,7 +20,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Daily Battery Discharge"
+    name: "Daily Battery Discharge"
     id: hackman_flex3l_daily_battery_discharge
     register_type: holding
     address: 615
@@ -35,7 +35,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Total Battery Charge"
+    name: "Total Battery Charge"
     id: hackman_flex3l_total_battery_charge
     register_type: holding
     address: 616
@@ -50,7 +50,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Total Battery Discharge"
+    name: "Total Battery Discharge"
     id: hackman_flex3l_total_battery_discharge
     register_type: holding
     address: 618
@@ -65,7 +65,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Temperature"
+    name: "Battery Temperature"
     register_type: holding
     address: 686
     unit_of_measurement: "°C"
@@ -79,7 +79,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Voltage"
+    name: "Battery Voltage"
     id: hackman_flex3l_battery_voltage
     register_type: holding
     address: 687
@@ -93,7 +93,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery SOC"
+    name: "Battery SOC"
     register_type: holding
     address: 688
     unit_of_measurement: "%"
@@ -104,7 +104,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery 2 SOC"
+    name: "Battery 2 SOC"
     register_type: holding
     address: 689
     unit_of_measurement: "%"
@@ -116,7 +116,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Power"
+    name: "Battery Power"
     id: hackman_flex3l_battery_power
     register_type: holding
     address: 690
@@ -129,7 +129,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Current"
+    name: "Battery Current"
     register_type: holding
     address: 691
     unit_of_measurement: "A"
@@ -142,7 +142,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Corrected Capacity"
+    name: "Battery Corrected Capacity"
     id: hackman_flex3l_battery_corrected_capacity
     register_type: holding
     address: 692
@@ -153,7 +153,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery BMS Charging Voltage"
+    name: "Battery BMS Charging Voltage"
     id: hackman_flex3l_battery_bms_charging_voltage
     register_type: holding
     address: 310
@@ -167,7 +167,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery BMS Discharging Voltage"
+    name: "Battery BMS Discharging Voltage"
     id: hackman_flex3l_battery_bms_discharging_voltage
     register_type: holding
     address: 311
@@ -181,7 +181,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery BMS Charging Current"
+    name: "Battery BMS Charging Current"
     register_type: holding
     address: 312
     unit_of_measurement: "A"
@@ -192,7 +192,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery BMS Discharging Current"
+    name: "Battery BMS Discharging Current"
     register_type: holding
     address: 313
     unit_of_measurement: "A"
@@ -203,7 +203,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery BMS SOC"
+    name: "Battery BMS SOC"
     register_type: holding
     address: 314
     unit_of_measurement: "%"
@@ -213,7 +213,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery BMS Voltage"
+    name: "Battery BMS Voltage"
     id: hackman_flex3l_battery_bms_voltage
     register_type: holding
     address: 315
@@ -227,7 +227,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery BMS Current"
+    name: "Battery BMS Current"
     register_type: holding
     address: 316
     unit_of_measurement: "A"
@@ -238,7 +238,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery BMS Max Charging Current"
+    name: "Battery BMS Max Charging Current"
     register_type: holding
     address: 318
     unit_of_measurement: "A"
@@ -249,7 +249,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery BMS Max Discharging Current"
+    name: "Battery BMS Max Discharging Current"
     register_type: holding
     address: 319
     unit_of_measurement: "A"
@@ -260,7 +260,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery BMS Other Symbol"
+    name: "Battery BMS Other Symbol"
     register_type: holding
     address: 322
     accuracy_decimals: 0
@@ -269,7 +269,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery 2 Voltage"
+    name: "Battery 2 Voltage"
     id: hackman_flex3l_battery_2_voltage
     register_type: holding
     address: 693
@@ -284,7 +284,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery 2 Current"
+    name: "Battery 2 Current"
     register_type: holding
     address: 694
     unit_of_measurement: "A"
@@ -298,7 +298,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery 2 Power"
+    name: "Battery 2 Power"
     id: hackman_flex3l_battery_2_power
     register_type: holding
     address: 695
@@ -312,7 +312,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery 2 Temperature"
+    name: "Battery 2 Temperature"
     register_type: holding
     address: 696
     unit_of_measurement: "°C"
@@ -327,7 +327,7 @@ sensor:
 binary_sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Alarm"
+    name: "Battery Alarm"
     register_type: holding
     address: 320
     device_class: problem
@@ -336,7 +336,7 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Fault"
+    name: "Battery Fault"
     register_type: holding
     address: 321
     device_class: problem
@@ -347,7 +347,7 @@ select:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Control Mode"
+    name: "Battery Control Mode"
     address: 198
     value_type: U_WORD
     entity_category: config
@@ -359,7 +359,7 @@ select:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Operation Mode"
+    name: "Battery Operation Mode"
     id: hackman_flex3l_battery_operation_mode
     address: 211
     value_type: U_WORD
@@ -373,7 +373,7 @@ select:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery BMS Type"
+    name: "Battery BMS Type"
     address: 323
     value_type: U_WORD
     icon: "mdi:battery-charging-high"
@@ -404,7 +404,7 @@ switch:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Wake Up"
+    name: "Battery Wake Up"
     register_type: holding
     address: 212
     bitmask: 1 # Bit0: Battery 1 wake up (0=enabled, 1=disabled)
@@ -414,7 +414,7 @@ switch:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery 2 Wake Up"
+    name: "Battery 2 Wake Up"
     register_type: holding
     address: 212
     bitmask: 256 # Bit8: Battery 2 wake up (0=enabled, 1=disabled)
@@ -425,7 +425,7 @@ switch:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Generator Charging"
+    name: "Battery Generator Charging"
     register_type: holding
     address: 229
     bitmask: 1
@@ -435,7 +435,7 @@ switch:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Grid Charging"
+    name: "Battery Grid Charging"
     register_type: holding
     address: 230
     bitmask: 1
@@ -446,7 +446,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Generator Charging Start Voltage"
+    name: "Battery Generator Charging Start Voltage"
     id: hackman_flex3l_battery_generator_charging_start_voltage
     address: 223
     unit_of_measurement: "V"
@@ -463,7 +463,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Generator Charging Start SOC"
+    name: "Battery Generator Charging Start SOC"
     address: 224
     unit_of_measurement: "%"
     value_type: U_WORD
@@ -477,7 +477,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Generator Charging Current"
+    name: "Battery Generator Charging Current"
     address: 225
     unit_of_measurement: "A"
     device_class: current
@@ -492,7 +492,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Grid Charging Start Voltage"
+    name: "Battery Grid Charging Start Voltage"
     id: hackman_flex3l_battery_grid_charging_start_voltage
     address: 226
     unit_of_measurement: "V"
@@ -509,7 +509,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Grid Charging Start SOC"
+    name: "Battery Grid Charging Start SOC"
     address: 227
     unit_of_measurement: "%"
     value_type: U_WORD
@@ -523,7 +523,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Equalization Cycle"
+    name: "Battery Equalization Cycle"
     address: 205
     unit_of_measurement: "d"
     device_class: duration
@@ -538,7 +538,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Equalization Time"
+    name: "Battery Equalization Time"
     address: 206
     unit_of_measurement: "h"
     device_class: duration
@@ -554,7 +554,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Temperature Compensation"
+    name: "Battery Temperature Compensation"
     address: 207
     unit_of_measurement: "mV/°C"
     value_type: S_WORD
@@ -568,7 +568,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Resistance"
+    name: "Battery Resistance"
     address: 213
     unit_of_measurement: "mΩ"
     value_type: U_WORD
@@ -582,7 +582,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Charging Efficiency"
+    name: "Battery Charging Efficiency"
     address: 214
     unit_of_measurement: "%"
     value_type: U_WORD
@@ -597,7 +597,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Shutdown SOC"
+    name: "Battery Shutdown SOC"
     address: 215
     unit_of_measurement: "%"
     value_type: U_WORD
@@ -611,7 +611,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Restart SOC"
+    name: "Battery Restart SOC"
     address: 216
     unit_of_measurement: "%"
     value_type: U_WORD
@@ -625,7 +625,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Low SOC"
+    name: "Battery Low SOC"
     address: 217
     unit_of_measurement: "%"
     value_type: U_WORD
@@ -639,7 +639,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Shutdown Voltage"
+    name: "Battery Shutdown Voltage"
     id: hackman_flex3l_battery_shutdown_voltage
     address: 218
     unit_of_measurement: "V"
@@ -656,7 +656,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Restart Voltage"
+    name: "Battery Restart Voltage"
     id: hackman_flex3l_battery_restart_voltage
     address: 219
     unit_of_measurement: "V"
@@ -673,7 +673,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Low Voltage"
+    name: "Battery Low Voltage"
     id: hackman_flex3l_battery_low_voltage
     address: 220
     unit_of_measurement: "V"
@@ -690,7 +690,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Equalization Voltage"
+    name: "Battery Equalization Voltage"
     id: hackman_flex3l_battery_equalization_voltage
     address: 199
     unit_of_measurement: "V"
@@ -707,7 +707,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Absorption Voltage"
+    name: "Battery Absorption Voltage"
     id: hackman_flex3l_battery_absorption_voltage
     address: 200
     unit_of_measurement: "V"
@@ -724,7 +724,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Float Voltage"
+    name: "Battery Float Voltage"
     id: hackman_flex3l_battery_float_voltage
     address: 201
     unit_of_measurement: "V"
@@ -741,7 +741,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Capacity"
+    name: "Battery Capacity"
     address: 202
     unit_of_measurement: "Ah"
     value_type: U_WORD
@@ -755,7 +755,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Battery Empty Voltage"
+    name: "Battery Empty Voltage"
     id: hackman_flex3l_battery_empty_voltage
     address: 203
     unit_of_measurement: "V"
@@ -773,7 +773,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     id: hackman_flex3l_maximum_battery_charge_current
-    name: "Hackman Flex3L Maximum Battery Charge Current"
+    name: "Maximum Battery Charge Current"
     address: 208
     unit_of_measurement: A
     device_class: current
@@ -785,7 +785,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     id: hackman_flex3l_maximum_battery_discharge_current
-    name: "Hackman Flex3L Maximum Battery Discharge Current"
+    name: "Maximum Battery Discharge Current"
     address: 209
     unit_of_measurement: A
     device_class: current
@@ -797,7 +797,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Maximum Battery Grid Charge Current"
+    name: "Maximum Battery Grid Charge Current"
     address: 228
     unit_of_measurement: A
     entity_category: config
