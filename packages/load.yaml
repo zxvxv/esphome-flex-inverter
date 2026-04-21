@@ -1,11 +1,11 @@
 # --- POCZĄTEK PLIKU LOAD ---
-# Wersja v1.00 - Inicjalizacja konfiguracji obciążenia domowego dla Hackman Flex3L.
-# Plik zawiera odczyty mocy/napięć na wyjściu obciążenia (Load/UPS) oraz obliczenia strat.
+# Wersja v1.01 - Konfiguracja obciążenia domowego dla Hackman Flex3L.
+# Zmiany: Usunięto przedrostki "Hackman Flex3L" z nazw wyświetlanych (name).
 
 sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Load L1 Voltage"
+    name: "Load L1 Voltage"
     register_type: holding
     address: 744
     unit_of_measurement: "V"
@@ -18,7 +18,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Load L2 Voltage"
+    name: "Load L2 Voltage"
     register_type: holding
     address: 745
     unit_of_measurement: "V"
@@ -31,7 +31,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Load L3 Voltage"
+    name: "Load L3 Voltage"
     register_type: holding
     address: 746
     unit_of_measurement: "V"
@@ -44,7 +44,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Load L1 Power"
+    name: "Load L1 Power"
     register_type: holding
     address: 750
     unit_of_measurement: "W"
@@ -56,7 +56,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Load L2 Power"
+    name: "Load L2 Power"
     register_type: holding
     address: 751
     unit_of_measurement: "W"
@@ -68,7 +68,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Load L3 Power"
+    name: "Load L3 Power"
     register_type: holding
     address: 752
     unit_of_measurement: "W"
@@ -80,7 +80,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Load Power"
+    name: "Load Power"
     register_type: holding
     address: 753
     unit_of_measurement: "W"
@@ -92,7 +92,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Load Frequency"
+    name: "Load Frequency"
     register_type: holding
     address: 755
     unit_of_measurement: "Hz"
@@ -105,7 +105,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Daily Load Consumption"
+    name: "Daily Load Consumption"
     id: hackman_flex3l_daily_load_consumption
     register_type: holding
     address: 626
@@ -120,7 +120,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Total Consumption"
+    name: "Total Consumption"
     id: hackman_flex3l_total_consumption
     register_type: holding
     address: 627
@@ -135,7 +135,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Load UPS L1 Power"
+    name: "Load UPS L1 Power"
     register_type: holding
     address: 740
     unit_of_measurement: "W"
@@ -148,7 +148,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Load UPS L2 Power"
+    name: "Load UPS L2 Power"
     register_type: holding
     address: 741
     unit_of_measurement: "W"
@@ -161,7 +161,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Load UPS L3 Power"
+    name: "Load UPS L3 Power"
     register_type: holding
     address: 742
     unit_of_measurement: "W"
@@ -174,7 +174,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Load UPS Power"
+    name: "Load UPS Power"
     register_type: holding
     address: 743
     unit_of_measurement: "W"
@@ -186,7 +186,7 @@ sensor:
     disabled_by_default: true
 
   - platform: template
-    name: "Hackman Flex3L Power Losses"
+    name: "Power Losses"
     id: hackman_flex3l_power_losses
     unit_of_measurement: "W"
     device_class: power
@@ -205,7 +205,7 @@ sensor:
     icon: "mdi:home-lightning-bolt"
 
   - platform: template
-    name: "Hackman Flex3L Daily Losses"
+    name: "Daily Losses"
     id: hackman_flex3l_daily_losses
     unit_of_measurement: "kWh"
     device_class: energy
@@ -224,7 +224,7 @@ sensor:
     icon: "mdi:home-lightning-bolt"
 
   - platform: template
-    name: "Hackman Flex3L Total Losses"
+    name: "Total Losses"
     id: hackman_flex3l_total_losses
     unit_of_measurement: "kWh"
     device_class: energy
@@ -245,7 +245,7 @@ sensor:
 binary_sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L AC Load Relay Reserved"
+    name: "AC Load Relay Reserved"
     register_type: holding
     address: 652
     bitmask: 0x2
