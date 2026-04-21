@@ -1,11 +1,11 @@
 # --- POCZĄTEK PLIKU GRID ---
-# Wersja v1.00 - Inicjalizacja konfiguracji sieci (Grid) dla Hackman Flex3L.
-# Plik zawiera sensory parametrów sieci, odczyty CT, statystyki poboru/oddawania energii oraz konfigurację standardów AC.
+# Wersja v1.01 - Konfiguracja sieci (Grid) dla Hackman Flex3L.
+# Zmiany: Usunięto przedrostki "Hackman Flex3L" z nazw wyświetlanych (name).
 
 sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Grid L1 Power"
+    name: "Grid L1 Power"
     register_type: holding
     address: 722
     unit_of_measurement: "W"
@@ -17,7 +17,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Grid L2 Power"
+    name: "Grid L2 Power"
     register_type: holding
     address: 723
     unit_of_measurement: "W"
@@ -29,7 +29,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Grid L3 Power"
+    name: "Grid L3 Power"
     register_type: holding
     address: 724
     unit_of_measurement: "W"
@@ -41,7 +41,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Grid Power"
+    name: "Grid Power"
     register_type: holding
     address: 725
     unit_of_measurement: "W"
@@ -53,7 +53,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Grid Frequency"
+    name: "Grid Frequency"
     register_type: holding
     address: 709
     unit_of_measurement: "Hz"
@@ -66,7 +66,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Grid L1 Voltage"
+    name: "Grid L1 Voltage"
     id: hackman_flex3l_grid_voltage_l1
     register_type: holding
     address: 698
@@ -80,7 +80,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Grid L2 Voltage"
+    name: "Grid L2 Voltage"
     id: hackman_flex3l_grid_voltage_l2
     register_type: holding
     address: 699
@@ -94,7 +94,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Grid L3 Voltage"
+    name: "Grid L3 Voltage"
     id: hackman_flex3l_grid_voltage_l3
     register_type: holding
     address: 700
@@ -108,7 +108,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Grid Power Factor"
+    name: "Grid Power Factor"
     register_type: holding
     address: 721
     unit_of_measurement: "%"
@@ -121,7 +121,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Daily Energy Bought"
+    name: "Daily Energy Bought"
     id: hackman_flex3l_daily_energy_bought
     register_type: holding
     address: 620
@@ -136,7 +136,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Daily Energy Sold"
+    name: "Daily Energy Sold"
     id: hackman_flex3l_daily_energy_sold
     register_type: holding
     address: 621
@@ -151,7 +151,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Total Energy Bought"
+    name: "Total Energy Bought"
     id: hackman_flex3l_total_energy_bought
     register_type: holding
     address: 622
@@ -166,7 +166,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Total Energy Sold"
+    name: "Total Energy Sold"
     id: hackman_flex3l_total_energy_sold
     register_type: holding
     address: 624
@@ -181,7 +181,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Internal CT L1 Power"
+    name: "Internal CT L1 Power"
     register_type: holding
     address: 704
     unit_of_measurement: "W"
@@ -193,7 +193,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Internal CT L2 Power"
+    name: "Internal CT L2 Power"
     register_type: holding
     address: 705
     unit_of_measurement: "W"
@@ -205,7 +205,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Internal CT L3 Power"
+    name: "Internal CT L3 Power"
     register_type: holding
     address: 706
     unit_of_measurement: "W"
@@ -217,7 +217,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Internal CT Power"
+    name: "Internal CT Power"
     register_type: holding
     address: 707
     unit_of_measurement: "W"
@@ -229,7 +229,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L External CT L1 Power"
+    name: "External CT L1 Power"
     register_type: holding
     address: 716
     unit_of_measurement: "W"
@@ -241,7 +241,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L External CT L2 Power"
+    name: "External CT L2 Power"
     register_type: holding
     address: 717
     unit_of_measurement: "W"
@@ -253,7 +253,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L External CT L3 Power"
+    name: "External CT L3 Power"
     register_type: holding
     address: 718
     unit_of_measurement: "W"
@@ -265,7 +265,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L External CT Power"
+    name: "External CT Power"
     register_type: holding
     address: 719
     unit_of_measurement: "W"
@@ -277,7 +277,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Internal CT L1 Current"
+    name: "Internal CT L1 Current"
     id: hackman_flex3l_internal_ct_l1_current
     register_type: holding
     address: 710
@@ -291,7 +291,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Internal CT L2 Current"
+    name: "Internal CT L2 Current"
     id: hackman_flex3l_internal_ct_l2_current
     register_type: holding
     address: 711
@@ -305,7 +305,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Internal CT L3 Current"
+    name: "Internal CT L3 Current"
     id: hackman_flex3l_internal_ct_l3_current
     register_type: holding
     address: 712
@@ -319,7 +319,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L External CT L1 Current"
+    name: "External CT L1 Current"
     id: hackman_flex3l_external_ct_l1_current
     register_type: holding
     address: 713
@@ -333,7 +333,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L External CT L2 Current"
+    name: "External CT L2 Current"
     id: hackman_flex3l_external_ct_l2_current
     register_type: holding
     address: 714
@@ -347,7 +347,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L External CT L3 Current"
+    name: "External CT L3 Current"
     id: hackman_flex3l_external_ct_l3_current
     register_type: holding
     address: 715
@@ -362,7 +362,7 @@ sensor:
 binary_sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L AC Grid Relay"
+    name: "AC Grid Relay"
     register_type: holding
     address: 652
     bitmask: 0x4
@@ -371,7 +371,7 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L CT L1 Self Test"
+    name: "CT L1 Self Test"
     register_type: holding
     address: 697
     bitmask: 0x01
@@ -383,7 +383,7 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L CT L2 Self Test"
+    name: "CT L2 Self Test"
     register_type: holding
     address: 697
     bitmask: 0x02
@@ -395,7 +395,7 @@ binary_sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L CT L3 Self Test"
+    name: "CT L3 Self Test"
     register_type: holding
     address: 697
     bitmask: 0x04
@@ -409,7 +409,7 @@ select:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Grid Frequency"
+    name: "Grid Frequency"
     address: 283
     value_type: U_WORD
     entity_category: config
@@ -421,7 +421,7 @@ select:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L AC Couple"
+    name: "AC Couple"
     address: 334
     value_type: U_WORD
     entity_category: config
@@ -439,7 +439,7 @@ select:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Grid Voltage"
+    name: "Grid Voltage"
     address: 238
     value_type: U_WORD
     entity_category: config
@@ -455,7 +455,7 @@ select:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Charging Signal"
+    name: "Charging Signal"
     address: 240
     value_type: U_WORD
     entity_category: config
@@ -470,7 +470,7 @@ switch:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Force Off Grid"
+    name: "Force Off Grid"
     id: hackman_flex3l_switch_off_grid
     register_type: holding
     address: 279
@@ -480,14 +480,14 @@ switch:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Generator Grid Side"
+    name: "Generator Grid Side"
     register_type: holding
     address: 289
     entity_category: config
     icon: "mdi:generator-stationary"
 
   - platform: template
-    name: "Hackman Flex3L Asymmetric Phase Feeding"
+    name: "Asymmetric Phase Feeding"
     id: hackman_flex3l_switch_asymmetric_phase_feeding
     icon: "mdi:transmission-tower"
     optimistic: true
@@ -507,7 +507,7 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Asymmetric Phase Feeding Raw"
+    name: "Asymmetric Phase Feeding Raw"
     id: hackman_flex3l_asymmetric_phase_feeding_raw
     register_type: holding
     address: 337
