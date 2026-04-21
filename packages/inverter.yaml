@@ -1,11 +1,11 @@
 # --- POCZĄTEK PLIKU INVERTER ---
-# Wersja v1.00 - Inicjalizacja konfiguracji falownika dla Hackman Flex3L.
-# Plik zawiera sensory odczytu temperatur wewnętrznych oraz wyjściowych parametrów prądu przemiennego (Output AC).
+# Wersja v1.01 - Konfiguracja falownika dla Hackman Flex3L.
+# Zmiany: Usunięto przedrostki "Hackman Flex3L" z nazw wyświetlanych (name). Dodano SN i Moc znamionową (na końcu pliku).
 
 sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L DC Temperature"
+    name: "DC Temperature"
     register_type: holding
     address: 640
     unit_of_measurement: "°C"
@@ -20,7 +20,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L AC Temperature"
+    name: "AC Temperature"
     register_type: holding
     address: 641
     unit_of_measurement: "°C"
@@ -34,7 +34,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Output Frequency"
+    name: "Output Frequency"
     register_type: holding
     address: 738
     unit_of_measurement: "Hz"
@@ -47,7 +47,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Output L1 Current"
+    name: "Output L1 Current"
     register_type: holding
     address: 730
     unit_of_measurement: "A"
@@ -60,7 +60,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Output L2 Current"
+    name: "Output L2 Current"
     register_type: holding
     address: 731
     unit_of_measurement: "A"
@@ -73,7 +73,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Output L3 Current"
+    name: "Output L3 Current"
     register_type: holding
     address: 732
     unit_of_measurement: "A"
@@ -86,7 +86,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Output L1 Power"
+    name: "Output L1 Power"
     register_type: holding
     address: 733
     unit_of_measurement: "W"
@@ -98,7 +98,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Output L2 Power"
+    name: "Output L2 Power"
     register_type: holding
     address: 734
     unit_of_measurement: "W"
@@ -110,7 +110,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Output L3 Power"
+    name: "Output L3 Power"
     register_type: holding
     address: 735
     unit_of_measurement: "W"
@@ -122,7 +122,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Output Power"
+    name: "Output Power"
     id: hackman_flex3l_output_power
     register_type: holding
     address: 736
@@ -135,7 +135,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Output L1 Voltage"
+    name: "Output L1 Voltage"
     register_type: holding
     address: 727
     unit_of_measurement: "V"
@@ -148,7 +148,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Output L2 Voltage"
+    name: "Output L2 Voltage"
     register_type: holding
     address: 728
     unit_of_measurement: "V"
@@ -161,7 +161,7 @@ sensor:
 
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Output L3 Voltage"
+    name: "Output L3 Voltage"
     register_type: holding
     address: 729
     unit_of_measurement: "V"
@@ -175,7 +175,7 @@ sensor:
 binary_sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L AC Inverter Relay"
+    name: "AC Inverter Relay"
     register_type: holding
     address: 652
     bitmask: 0x1
@@ -185,7 +185,7 @@ binary_sensor:
 text_sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Serial Number"
+    name: "Serial Number"
     id: pl_hackman_flex3l_serial_number
     register_type: holding
     address: 203
@@ -195,10 +195,10 @@ text_sensor:
     entity_category: diagnostic
     icon: "mdi:barcode"
 
-sensor:
+# Drugi blok sensor na końcu usunięty i przeniesiony na początek pliku, by nie duplikować klucza w YAML.
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "Hackman Flex3L Rated Power"
+    name: "Rated Power"
     id: pl_hackman_flex3l_rated_power
     register_type: holding
     address: 220
