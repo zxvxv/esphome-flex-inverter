@@ -1,1 +1,120 @@
+# --- POCZĄTEK PLIKU GŁÓWNEGO ---
+# Wersja v1.06 - Plik główny (Orkiestrator) dla Hackman Flex3L.
+# Zmiany: Usunięto przedrostek z nazwy przycisku restartu. Zachowano friendly_name urządzenia.
 
+substitutions:
+  name: "hackman-flex3l"
+  friendly_name: "Hackman Flex3L Inverter"
+  modbus_controller_id: "hackman_flex3l_modbus_controller"
+  baud_rate: "9600"
+  update_interval: "5s"
+  safe_mode_delay: 5min
+  default_maximum_battery_charge_current: "140"
+  default_max_sell_power: "12000"
+  default_system_work_mode: "Zero Export To Load"
+  default_solar_sell: "on"
+  default_force_off_grid: "off"
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: arduino
+
+esphome:
+  name: "${name}"
+  friendly_name: "${friendly_name}"
+  comment: "Hackman Flex3L - Modbus Inverter Controller"
+  project:
+    name: "hackman.flex3l-inverter"
+    version: "1.06.0"
+
+logger:
+  level: WARN
+
+api:
+  on_client_disconnected:
+    - delay: ${safe_mode_delay}
+    - if:
+        condition:
+          not: api.connected
+        then:
+          - logger.log: "Lost connection to HomeAssistant API - Activating safe mode"
+          - script.execute: set_safe_modbus_registers
+
+  on_client_connected:
+    - logger.log: "Connection to HomeAssistant API restored"
+
+ota:
+  - platform: esphome
+
+wifi:
+  ap:
+    ssid: "Hackman"
+
+captive_portal:
+
+web_server:
+  port: 80
+
+button:
+  - platform: restart
+    name: "Restart Controller"
+
+uart:
+  id: modbus_uart
+  rx_pin: GPIO44
+  tx_pin: GPIO43
+  baud_rate: ${baud_rate}
+  stop_bits: 1
+
+modbus:
+  id: modbus_1
+  uart_id: modbus_uart
+
+modbus_controller:
+  - id: ${modbus_controller_id}
+    address: 1
+    modbus_id: modbus_1
+    setup_priority: -10
+    update_interval: ${update_interval}
+    command_throttle: 60ms
+    offline_skip_updates: 3
+
+script:
+  - id: set_safe_modbus_registers
+    then:
+      - logger.log:
+          level: INFO
+          format: "Setting safe Modbus register values"
+      - number.set:
+          id: hackman_flex3l_maximum_battery_charge_current
+          value: ${default_maximum_battery_charge_current}
+      - number.set:
+          id: hackman_flex3l_max_sell_power
+          value: ${default_max_sell_power}
+      - select.set:
+          id: hackman_flex3l_system_work_mode
+          option: ${default_system_work_mode}
+      - switch.turn_${default_solar_sell}:
+          id: hackman_flex3l_switch_solar_sell
+      - switch.turn_${default_force_off_grid}:
+          id: hackman_flex3l_switch_off_grid
+
+packages:
+  hackman_flex3l_modules:
+    url: https://github.com/zxvxv/esphome-flex-inverter
+    ref: main
+    refresh: 0s
+    files:
+      - packages/calibration.yaml
+      - packages/device.yaml
+      - packages/battery.yaml
+      - packages/generator.yaml
+      - packages/grid.yaml
+      - packages/inverter.yaml
+      - packages/load.yaml
+      - packages/pv.yaml
+      - packages/time.yaml
+      - packages/tou.yaml
+      - packages/work_mode.yaml
+# --- KONIEC PLIKU GŁÓWNEGO ---
