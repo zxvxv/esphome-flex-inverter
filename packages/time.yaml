@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU TIME ---
-# Wersja v1.00 - Inicjalizacja modułu synchronizacji czasu dla Hackman Flex3L.
-# Plik zawiera komponenty pobierające czas z HA oraz skrypt zapisujący go do rejestrów falownika (162-164).
+# Wersja v1.01 - Moduł synchronizacji czasu dla Hackman Flex3L.
+# Zmiany: Usunięto przedrostki "Hackman Flex3L" z nazw wyświetlanych (name).
 
 substitutions:
   enable_sync_time: false
@@ -23,7 +23,7 @@ time:
                 
 button:
   - platform: template
-    name: "Hackman Flex3L Sync Inverter Time"
+    name: "Sync Inverter Time"
     id: hackman_flex3l_sync_inverter_time
     icon: mdi:timer-sync
     entity_category: diagnostic
