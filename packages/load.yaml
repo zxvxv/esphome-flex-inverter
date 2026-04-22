@@ -1,6 +1,7 @@
 # --- POCZĄTEK PLIKU LOAD ---
-# Wersja v1.01 - Konfiguracja obciążenia domowego dla Hackman Flex3L.
-# Zmiany: Usunięto przedrostki "Hackman Flex3L" z nazw wyświetlanych (name).
+# Wersja v1.02 - Konfiguracja obciążenia domowego dla Hackman Flex3L.
+# Zmiany: Usunięcie przedrostków z lokalnych encji. Aktualizacja lambd strat (nowe ID baterii). 
+# Celowo pozostawiono przedrostki dla PV/Grid/Generator do czasu wyczyszczenia tamtych plików.
 
 sensor:
   - platform: modbus_controller
@@ -106,7 +107,7 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     name: "Daily Load Consumption"
-    id: hackman_flex3l_daily_load_consumption
+    id: daily_load_consumption
     register_type: holding
     address: 626
     unit_of_measurement: "kWh"
@@ -121,7 +122,7 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     name: "Total Consumption"
-    id: hackman_flex3l_total_consumption
+    id: total_consumption
     register_type: holding
     address: 627
     unit_of_measurement: "kWh"
@@ -187,7 +188,7 @@ sensor:
 
   - platform: template
     name: "Power Losses"
-    id: hackman_flex3l_power_losses
+    id: power_losses
     unit_of_measurement: "W"
     device_class: power
     state_class: "measurement"
@@ -198,7 +199,7 @@ sensor:
         id(hackman_flex3l_pv2_power).state +
         (id(hackman_flex3l_pv3_power).state) +
         (id(hackman_flex3l_pv4_power).state) +
-        id(hackman_flex3l_battery_power).state -
+        id(battery_power).state -
         id(hackman_flex3l_generator_power_total).state -
         id(hackman_flex3l_output_power).state
       );
@@ -206,7 +207,7 @@ sensor:
 
   - platform: template
     name: "Daily Losses"
-    id: hackman_flex3l_daily_losses
+    id: daily_losses
     unit_of_measurement: "kWh"
     device_class: energy
     state_class: total_increasing
@@ -216,16 +217,16 @@ sensor:
         id(hackman_flex3l_daily_energy_bought).state +
         id(hackman_flex3l_daily_pv_production).state +
         id(hackman_flex3l_daily_generator_production).state +
-        id(hackman_flex3l_daily_battery_discharge).state -
+        id(daily_battery_discharge).state -
         id(hackman_flex3l_daily_energy_sold).state -
-        id(hackman_flex3l_daily_battery_charge).state -
-        id(hackman_flex3l_daily_load_consumption).state
+        id(daily_battery_charge).state -
+        id(daily_load_consumption).state
       );
     icon: "mdi:home-lightning-bolt"
 
   - platform: template
     name: "Total Losses"
-    id: hackman_flex3l_total_losses
+    id: total_losses
     unit_of_measurement: "kWh"
     device_class: energy
     state_class: total_increasing
@@ -235,10 +236,10 @@ sensor:
         id(hackman_flex3l_total_energy_bought).state +
         id(hackman_flex3l_total_pv_production).state +
         id(hackman_flex3l_total_generator_production).state +
-        id(hackman_flex3l_total_battery_discharge).state -
+        id(total_battery_discharge).state -
         id(hackman_flex3l_total_energy_sold).state -
-        id(hackman_flex3l_total_battery_charge).state -
-        id(hackman_flex3l_total_consumption).state
+        id(total_battery_charge).state -
+        id(total_consumption).state
       );
     icon: "mdi:home-lightning-bolt"
 
