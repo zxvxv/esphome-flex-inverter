@@ -1,41 +1,42 @@
 # --- POCZĄTEK PLIKU KALIBRACJI ---
-# Wersja v1.01 - Inicjalizacja kalibracji dla Hackman Flex3L.
-# Zmiany: Plik sprawdzony pod kątem nazw. Brak zmian - plik operuje tylko na ID.
+# Wersja v1.02 - Inicjalizacja kalibracji dla Hackman Flex3L.
+# Zmiany: Usunięcie przedrostków dla wszystkich encji powiązanych z baterią. 
+# Encje PV, sieci, generatora i TOU pozostawiono w oryginalnej formie.
 
 sensor:
-  - id: !extend hackman_flex3l_battery_power
+  - id: !extend battery_power
     filters:
-      multiply: 10
-  - id: !extend hackman_flex3l_battery_2_power
+      - multiply: 10
+  - id: !extend battery_2_power
     filters:
-      multiply: 10
+      - multiply: 10
   - id: !extend hackman_flex3l_pv1_power
     filters:
-      multiply: 10
+      - multiply: 10
   - id: !extend hackman_flex3l_pv2_power
     filters:
-      multiply: 10
+      - multiply: 10
   - id: !extend hackman_flex3l_pv3_power
     filters:
-      multiply: 10
+      - multiply: 10
   - id: !extend hackman_flex3l_pv4_power
     filters:
-      multiply: 10
-  - id: !extend hackman_flex3l_battery_voltage
+      - multiply: 10
+  - id: !extend battery_voltage
     filters:
-      multiply: 0.1
-  - id: !extend hackman_flex3l_battery_2_voltage
+      - multiply: 0.1
+  - id: !extend battery_2_voltage
     filters:
-      multiply: 0.1
-  - id: !extend hackman_flex3l_battery_bms_voltage
+      - multiply: 0.1
+  - id: !extend battery_bms_voltage
     filters:
-      multiply: 0.1
-  - id: !extend hackman_flex3l_battery_bms_charging_voltage
+      - multiply: 0.1
+  - id: !extend battery_bms_charging_voltage
     filters:
-      multiply: 0.1
-  - id: !extend hackman_flex3l_battery_bms_discharging_voltage
+      - multiply: 0.1
+  - id: !extend battery_bms_discharging_voltage
     filters:
-      multiply: 0.1
+      - multiply: 0.1
 
 number:
   - id: !extend hackman_flex3l_generator_peak_shaving_power
@@ -71,47 +72,47 @@ number:
   - id: !extend hackman_flex3l_time_of_use_6_out_power
     multiply: 0.1
     step: 10
-  - id: !extend hackman_flex3l_battery_shutdown_voltage
+  - id: !extend battery_shutdown_voltage
     multiply: 10
     step: 0.1
     min_value: 150
     max_value: 710
-  - id: !extend hackman_flex3l_battery_restart_voltage
+  - id: !extend battery_restart_voltage
     multiply: 10
     step: 0.1
     min_value: 150
     max_value: 710
-  - id: !extend hackman_flex3l_battery_low_voltage
+  - id: !extend battery_low_voltage
     multiply: 10
     step: 0.1
     min_value: 150
     max_value: 710
-  - id: !extend hackman_flex3l_battery_equalization_voltage
+  - id: !extend battery_equalization_voltage
     multiply: 10
     step: 0.1
     min_value: 150
     max_value: 710
-  - id: !extend hackman_flex3l_battery_absorption_voltage
+  - id: !extend battery_absorption_voltage
     multiply: 10
     step: 0.1
     min_value: 150
     max_value: 710
-  - id: !extend hackman_flex3l_battery_float_voltage
+  - id: !extend battery_float_voltage
     multiply: 10
     step: 0.1
     min_value: 150
     max_value: 710
-  - id: !extend hackman_flex3l_battery_empty_voltage
+  - id: !extend battery_empty_voltage
     multiply: 10
     step: 0.1
     min_value: 150
     max_value: 710
-  - id: !extend hackman_flex3l_battery_grid_charging_start_voltage
+  - id: !extend battery_grid_charging_start_voltage
     multiply: 10
     step: 0.1
     min_value: 150
     max_value: 710
-  - id: !extend hackman_flex3l_battery_generator_charging_start_voltage
+  - id: !extend battery_generator_charging_start_voltage
     multiply: 10
     step: 0.1
     min_value: 150
