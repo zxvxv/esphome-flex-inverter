@@ -1,5 +1,7 @@
 # --- POCZĄTEK PLIKU AUTOMATIONS ---
-# Wersja v1.00 - Automatyka przekaźnika (Web Server UI) dla ESP32-S3 Waveshare
+# Wersja v1.02 - Automatyka przekaźnika (Web Server UI) dla ESP32-S3 Waveshare
+# Zmiany: Usunięcie znaków specjalnych (ukośników) z nazw UI.
+# Zmiany: Dostosowanie ID do wyczyszczonego pliku battery.yaml (id: battery_soc).
 
 switch:
   - platform: gpio
@@ -24,7 +26,7 @@ select:
 
 number:
   - platform: template
-    name: "Napięcie załączenia (Max z L1/L2/L3)"
+    name: "Napięcie załączenia (Max z 3 faz)"
     id: relay_volt_on
     optimistic: true
     min_value: 240
@@ -85,6 +87,7 @@ interval:
           }
           // 3. Tryb: Przepięcie Sieci (Histereza V)
           else if (mode == "Przepięcie Sieci") {
+            // Zostawiamy oryginalne przedrostki dla sieci, bo nie czyściliśmy pliku grid.yaml
             float v1 = id(hackman_flex3l_grid_voltage_l1).state;
             float v2 = id(hackman_flex3l_grid_voltage_l2).state;
             float v3 = id(hackman_flex3l_grid_voltage_l3).state;
@@ -103,8 +106,8 @@ interval:
           }
           // 4. Tryb: Nadmiar Baterii (Histereza SOC)
           else if (mode == "Nadmiar Baterii") {
-            // Używamy ID baterii (założenie, że w pliku battery.yaml jest to ID)
-            float soc = id(hackman_flex3l_battery_soc).state;
+            // Używamy nowego, wyczyszczonego ID baterii z pliku battery.yaml
+            float soc = id(battery_soc).state;
             
             if (soc >= id(relay_soc_on).state) {
               if (!id(waveshare_relay).state) id(waveshare_relay).turn_on();
