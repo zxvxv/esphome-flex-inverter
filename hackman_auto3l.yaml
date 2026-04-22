@@ -1,6 +1,7 @@
 # --- POCZĄTEK PLIKU GŁÓWNEGO (WERSJA Z AUTOMATYKĄ) ---
-# Wersja v2.00 - Plik główny (Orkiestrator) z automatyką dla Hackman Flex3L.
-# Zmiany: Zmieniono nazwę systemową na '-auto', dodano pakiet automations.yaml.
+# Nazwa pliku: hackman-flex3l-auto.yaml
+# Wersja v2.01 - Orkiestrator dla Hackman Flex3L (Paweł Edit)
+# Zmiany: Otwarta sieć konfiguracji, naprawa ID dla wyczyszczonego modułu baterii.
 
 substitutions:
   name: "hackman-flex3l-auto"
@@ -23,10 +24,10 @@ esp32:
 esphome:
   name: "${name}"
   friendly_name: "${friendly_name}"
-  comment: "Hackman Flex3L - Wersja z Automatyką (Edge Computing)"
+  comment: "Hackman Flex3L - Automatyka i Edge Computing"
   project:
     name: "hackman.flex3l-auto"
-    version: "2.00.0"
+    version: "2.01.0"
 
 logger:
   level: WARN
@@ -49,7 +50,8 @@ ota:
 
 wifi:
   ap:
-    ssid: "Hackman-Auto"
+    ssid: "Hackman_Konfiguracja"
+    # Sieć otwarta dla wygody konfiguracji początkowej
 
 captive_portal:
 
@@ -87,7 +89,7 @@ script:
           level: INFO
           format: "Setting safe Modbus register values"
       - number.set:
-          id: hackman_flex3l_maximum_battery_charge_current
+          id: maximum_battery_charge_current  # Dopasowane do nowej wersji battery.yaml
           value: ${default_maximum_battery_charge_current}
       - number.set:
           id: hackman_flex3l_max_sell_power
@@ -118,4 +120,5 @@ packages:
       - packages/tou.yaml
       - packages/work_mode.yaml
       - packages/automations.yaml
-# --- KONIEC PLIKU GŁÓWNEGO (WERSJA Z AUTOMATYKĄ) ---
+
+# --- KONIEC PLIKU GŁÓWNEGO ---
