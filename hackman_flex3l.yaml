@@ -1,9 +1,11 @@
-# --- POCZĄTEK PLIKU GŁÓWNEGO ---
-# Wersja v1.06 - Plik główny (Orkiestrator) dla Hackman Flex3L.
-# Zmiany: Usunięto przedrostek z nazwy przycisku restartu. Zachowano friendly_name urządzenia.
+# --- POCZĄTEK PLIKU GŁÓWNEGO (ORKIESTRATOR) ---
+# Nazwa pliku: hackman-flex3l-auto.yaml
+# Wersja v2.02 - Pełna synchronizacja ID i otwarta sieć konfiguracji
+# Zmiany: Naprawa błędu 'maximum_battery_charge_current' w skrypcie bezpieczeństwa.
+# Zmiany: Wymuszenie otwartej sieci AP "Hackman_Konfiguracja" bez hasła.
 
 substitutions:
-  name: "hackman-flex3l"
+  name: "hackman-flex3l-auto"
   friendly_name: "Hackman Flex3L Inverter"
   modbus_controller_id: "hackman_flex3l_modbus_controller"
   baud_rate: "9600"
@@ -23,10 +25,10 @@ esp32:
 esphome:
   name: "${name}"
   friendly_name: "${friendly_name}"
-  comment: "Hackman Flex3L - Modbus Inverter Controller"
+  comment: "Hackman Flex3L - Automatyka i Edge Computing"
   project:
-    name: "hackman.flex3l-inverter"
-    version: "1.06.0"
+    name: "hackman.flex3l-auto"
+    version: "2.02.0"
 
 logger:
   level: WARN
@@ -48,8 +50,10 @@ ota:
   - platform: esphome
 
 wifi:
+  # Konfiguracja punktu dostępowego (AP) - sieć otwarta
   ap:
-    ssid: "Hackman"
+    ssid: "Hackman_Konfiguracja"
+    # Brak parametru password oznacza sieć otwartą
 
 captive_portal:
 
@@ -87,7 +91,8 @@ script:
           level: INFO
           format: "Setting safe Modbus register values"
       - number.set:
-          id: hackman_flex3l_maximum_battery_charge_current
+          # Poprawione ID zgodne z nowym plikiem battery.yaml
+          id: maximum_battery_charge_current
           value: ${default_maximum_battery_charge_current}
       - number.set:
           id: hackman_flex3l_max_sell_power
@@ -117,4 +122,6 @@ packages:
       - packages/time.yaml
       - packages/tou.yaml
       - packages/work_mode.yaml
+      - packages/automations.yaml
+
 # --- KONIEC PLIKU GŁÓWNEGO ---
