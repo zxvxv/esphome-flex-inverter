@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU INVERTER ---
-# Wersja v1.02 - Konfiguracja falownika dla Hackman Flex3L.
-# Zmiany: Pełna naprawa wcięć i struktury (Rated Power przeniesione do głównej grupy sensor).
+# Wersja v1.03 - Konfiguracja falownika dla Hackman Flex3L.
+# Zmiany: Usunięcie problematycznych text_sensor (eliminacja błędów UTF-8 i zrywania połączeń API), korekta odczytu Rated Power (zmiana na U_WORD, usunięcie mnożnika).
 
 sensor:
   - platform: modbus_controller
@@ -178,13 +178,13 @@ sensor:
     id: pl_hackman_flex3l_rated_power
     register_type: holding
     address: 220
-    value_type: U_DWORD_R
+    value_type: U_WORD
     unit_of_measurement: "W"
     device_class: power
     entity_category: diagnostic
     icon: "mdi:lightning-bolt"
-    filters:
-      - multiply: 0.1
+    # filters:
+    #   - multiply: 0.1
 
 binary_sensor:
   - platform: modbus_controller
@@ -196,16 +196,16 @@ binary_sensor:
     device_class: power
     icon: "mdi:toggle-switch"
 
-text_sensor:
-  - platform: modbus_controller
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Serial Number"
-    id: pl_hackman_flex3l_serial_number
-    register_type: holding
-    address: 203
-    register_count: 5
-    response_size: 10
-    raw_encode: NONE
-    entity_category: diagnostic
-    icon: "mdi:barcode"
+# text_sensor:
+#   - platform: modbus_controller
+#     modbus_controller_id: ${modbus_controller_id}
+#     name: "Serial Number"
+#     id: pl_hackman_flex3l_serial_number
+#     register_type: holding
+#     address: 203
+#     register_count: 5
+#     response_size: 10
+#     raw_encode: NONE
+#     entity_category: diagnostic
+#     icon: "mdi:barcode"
 # --- KONIEC PLIKU INVERTER ---
