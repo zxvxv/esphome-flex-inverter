@@ -1,1109 +1,519 @@
 # --- POCZĄTEK PLIKU TOU ---
-# Wersja v1.01 - Konfiguracja Time of Use (harmonogramu pracy) dla Hackman Flex3L.
-# Zmiany: Usunięto przedrostki "Hackman Flex3L" z nazw wyświetlanych (name).
+# Wersja v1.02 - Korekta Time of Use dla Hackman Flex3L.
+# Zmiany: Dodanie filtru multiply: 0.1 do wszystkich encji napięciowych (V) i prądowych/mocy (W), aby zniwelować błędy przeskalowania rzędu 120000 W i 490 V.
 
-substitutions:
-  func_int_to_time: |-
-    uint8_t hours = raw / 100;
-    uint8_t minutes = raw - (hours * 100);
-    return ESPTime {.minute = minutes, .hour = hours};
-  func_time_to_int: "return x.hour * 100 + x.minute;"
-
-datetime:
-  - platform: template
-    name: "Time of Use 1 Start"
-    id: hackman_flex3l_time_of_use_1_start
-    type: time
-    update_interval: 15s
-    lambda: |-
-      auto raw = id(hackman_flex3l_time_of_use_1_start_raw).state;
-      ${func_int_to_time}
-    set_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_1_start_raw
-          value: !lambda ${func_time_to_int}
-
-  - platform: template
-    name: "Time of Use 2 Start"
-    id: hackman_flex3l_time_of_use_2_start
-    type: time
-    update_interval: 15s
-    lambda: |-
-      auto raw = id(hackman_flex3l_time_of_use_2_start_raw).state;
-      ${func_int_to_time}
-    set_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_2_start_raw
-          value: !lambda ${func_time_to_int}
-
-  - platform: template
-    name: "Time of Use 3 Start"
-    id: hackman_flex3l_time_of_use_3_start
-    type: time
-    update_interval: 15s
-    lambda: |-
-      auto raw = id(hackman_flex3l_time_of_use_3_start_raw).state;
-      ${func_int_to_time}
-    set_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_3_start_raw
-          value: !lambda ${func_time_to_int}
-
-  - platform: template
-    name: "Time of Use 4 Start"
-    id: hackman_flex3l_time_of_use_4_start
-    type: time
-    update_interval: 15s
-    lambda: |-
-      auto raw = id(hackman_flex3l_time_of_use_4_start_raw).state;
-      ${func_int_to_time}
-    set_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_4_start_raw
-          value: !lambda ${func_time_to_int}
-
-  - platform: template
-    name: "Time of Use 5 Start"
-    id: hackman_flex3l_time_of_use_5_start
-    type: time
-    update_interval: 15s
-    lambda: |-
-      auto raw = id(hackman_flex3l_time_of_use_5_start_raw).state;
-      ${func_int_to_time}
-    set_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_5_start_raw
-          value: !lambda ${func_time_to_int}
-
-  - platform: template
-    name: "Time of Use 6 Start"
-    id: hackman_flex3l_time_of_use_6_start
-    type: time
-    update_interval: 15s
-    lambda: |-
-      auto raw = id(hackman_flex3l_time_of_use_6_start_raw).state;
-      ${func_int_to_time}
-    set_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_6_start_raw
-          value: !lambda ${func_time_to_int}
-
-switch:
-  - platform: template
-    name: "Time of Use"
-    icon: "mdi:toggle-switch"
-    optimistic: true
-    restore_mode: DISABLED
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_enabled_raw).state & 0b00000001) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_enabled_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_enabled_raw).state | 0b00000001;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_enabled_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_enabled_raw).state & ~0b00000001;"
-
-  - platform: template
-    name: "Time of Use Monday"
-    icon: "mdi:toggle-switch"
-    optimistic: true
-    restore_mode: DISABLED
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_enabled_raw).state & 0b00000010) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_enabled_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_enabled_raw).state | 0b00000010;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_enabled_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_enabled_raw).state & ~0b00000010;"
-
-  - platform: template
-    name: "Time of Use Tuesday"
-    icon: "mdi:toggle-switch"
-    optimistic: true
-    restore_mode: DISABLED
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_enabled_raw).state & 0b00000100) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_enabled_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_enabled_raw).state | 0b00000100;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_enabled_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_enabled_raw).state & ~0b00000100;"
-
-  - platform: template
-    name: "Time of Use Wednesday"
-    icon: "mdi:toggle-switch"
-    optimistic: true
-    restore_mode: DISABLED
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_enabled_raw).state & 0b00001000) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_enabled_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_enabled_raw).state | 0b00001000;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_enabled_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_enabled_raw).state & ~0b00001000;"
-
-  - platform: template
-    name: "Time of Use Thursday"
-    icon: "mdi:toggle-switch"
-    optimistic: true
-    restore_mode: DISABLED
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_enabled_raw).state & 0b00010000) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_enabled_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_enabled_raw).state | 0b00010000;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_enabled_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_enabled_raw).state & ~0b00010000;"
-
-  - platform: template
-    name: "Time of Use Friday"
-    icon: "mdi:toggle-switch"
-    optimistic: true
-    restore_mode: DISABLED
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_enabled_raw).state & 0b00100000) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_enabled_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_enabled_raw).state | 0b00100000;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_enabled_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_enabled_raw).state & ~0b00100000;"
-
-  - platform: template
-    name: "Time of Use Saturday"
-    icon: "mdi:toggle-switch"
-    optimistic: true
-    restore_mode: DISABLED
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_enabled_raw).state & 0b01000000) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_enabled_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_enabled_raw).state | 0b01000000;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_enabled_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_enabled_raw).state & ~0b01000000;"
-
-  - platform: template
-    name: "Time of Use Sunday"
-    icon: "mdi:toggle-switch"
-    optimistic: true
-    restore_mode: DISABLED
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_enabled_raw).state & 0b10000000) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_enabled_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_enabled_raw).state | 0b10000000;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_enabled_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_enabled_raw).state & ~0b10000000;"
-
-  - platform: template
-    name: "Time of Use 1 Grid Charge"
-    id: hackman_flex3l_switch_time_of_use_1_grid_charge
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_1_raw).state & 0b00000001) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_1_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_1_raw).state | 0b00000001;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_1_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_1_raw).state & ~0b00000001;"
-
-  - platform: template
-    name: "Time of Use 1 Gen"
-    id: hackman_flex3l_switch_time_of_use_1_gen
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_1_raw).state & 0b00000010) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_1_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_1_raw).state | 0b00000010;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_1_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_1_raw).state & ~0b00000010;"
-
-  - platform: template
-    name: "Time of Use 1 Sell"
-    id: hackman_flex3l_switch_time_of_use_1_sell
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    disabled_by_default: true
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_1_raw).state & 0b00100000) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_1_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_1_raw).state | 0b00100000;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_1_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_1_raw).state & ~0b00100000;"
-
-  - platform: template
-    name: "Time of Use 2 Grid Charge"
-    id: hackman_flex3l_switch_time_of_use_2_grid_charge
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_2_raw).state & 0b00000001) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_2_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_2_raw).state | 0b00000001;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_2_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_2_raw).state & ~0b00000001;"
-
-  - platform: template
-    name: "Time of Use 2 Gen"
-    id: hackman_flex3l_switch_time_of_use_2_gen
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_2_raw).state & 0b00000010) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_2_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_2_raw).state | 0b00000010;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_2_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_2_raw).state & ~0b00000010;"
-
-  - platform: template
-    name: "Time of Use 2 Sell"
-    id: hackman_flex3l_switch_time_of_use_2_sell
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    disabled_by_default: true
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_2_raw).state & 0b00100000) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_2_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_2_raw).state | 0b00100000;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_2_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_2_raw).state & ~0b00100000;"
-
-  - platform: template
-    name: "Time of Use 3 Grid Charge"
-    id: hackman_flex3l_switch_time_of_use_3_grid_charge
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_3_raw).state & 0b00000001) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_3_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_3_raw).state | 0b00000001;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_3_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_3_raw).state & ~0b00000001;"
-
-  - platform: template
-    name: "Time of Use 3 Gen"
-    id: hackman_flex3l_switch_time_of_use_3_gen
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_3_raw).state & 0b00000010) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_3_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_3_raw).state | 0b00000010;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_3_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_3_raw).state & ~0b00000010;"
-
-  - platform: template
-    name: "Time of Use 3 Sell"
-    id: hackman_flex3l_switch_time_of_use_3_sell
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    disabled_by_default: true
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_3_raw).state & 0b00100000) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_3_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_3_raw).state | 0b00100000;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_3_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_3_raw).state & ~0b00100000;"
-
-  - platform: template
-    name: "Time of Use 4 Grid Charge"
-    id: hackman_flex3l_switch_time_of_use_4_grid_charge
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_4_raw).state & 0b00000001) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_4_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_4_raw).state | 0b00000001;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_4_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_4_raw).state & ~0b00000001;"
-
-  - platform: template
-    name: "Time of Use 4 Gen"
-    id: hackman_flex3l_switch_time_of_use_4_gen
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_4_raw).state & 0b00000010) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_4_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_4_raw).state | 0b00000010;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_4_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_4_raw).state & ~0b00000010;"
-
-  - platform: template
-    name: "Time of Use 4 Sell"
-    id: hackman_flex3l_switch_time_of_use_4_sell
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    disabled_by_default: true
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_4_raw).state & 0b00100000) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_4_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_4_raw).state | 0b00100000;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_4_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_4_raw).state & ~0b00100000;"
-
-  - platform: template
-    name: "Time of Use 5 Grid Charge"
-    id: hackman_flex3l_switch_time_of_use_5_grid_charge
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_5_raw).state & 0b00000001) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_5_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_5_raw).state | 0b00000001;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_5_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_5_raw).state & ~0b00000001;"
-
-  - platform: template
-    name: "Time of Use 5 Gen"
-    id: hackman_flex3l_switch_time_of_use_5_gen
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_5_raw).state & 0b00000010) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_5_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_5_raw).state | 0b00000010;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_5_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_5_raw).state & ~0b00000010;"
-
-  - platform: template
-    name: "Time of Use 5 Sell"
-    id: hackman_flex3l_switch_time_of_use_5_sell
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    disabled_by_default: true
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_5_raw).state & 0b00100000) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_5_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_5_raw).state | 0b00100000;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_5_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_5_raw).state & ~0b00100000;"
-
-  - platform: template
-    name: "Time of Use 6 Grid Charge"
-    id: hackman_flex3l_switch_time_of_use_6_grid_charge
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_6_raw).state & 0b00000001) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_6_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_6_raw).state | 0b00000001;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_6_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_6_raw).state & ~0b00000001;"
-
-  - platform: template
-    name: "Time of Use 6 Gen"
-    id: hackman_flex3l_switch_time_of_use_6_gen
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_6_raw).state & 0b00000010) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_6_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_6_raw).state | 0b00000010;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_6_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_6_raw).state & ~0b00000010;"
-
-  - platform: template
-    name: "Time of Use 6 Sell"
-    id: hackman_flex3l_switch_time_of_use_6_sell
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    disabled_by_default: true
-    lambda: "return ((int)id(hackman_flex3l_time_of_use_6_raw).state & 0b00100000) != 0;"
-    turn_on_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_6_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_6_raw).state | 0b00100000;"
-    turn_off_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_6_raw
-          value: !lambda "return (int)id(hackman_flex3l_time_of_use_6_raw).state & ~0b00100000;"
-
-  - platform: template
-    name: "Time of Use All Grid Charge"
-    id: hackman_flex3l_switch_time_of_use_all_grid_charge
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    disabled_by_default: true
-    lambda: |-
-      return id(hackman_flex3l_switch_time_of_use_1_grid_charge).state;
-    turn_on_action:
-      - switch.turn_on:
-          id: hackman_flex3l_switch_time_of_use_1_grid_charge
-      - switch.turn_on:
-          id: hackman_flex3l_switch_time_of_use_2_grid_charge
-      - switch.turn_on:
-          id: hackman_flex3l_switch_time_of_use_3_grid_charge
-      - switch.turn_on:
-          id: hackman_flex3l_switch_time_of_use_4_grid_charge
-      - switch.turn_on:
-          id: hackman_flex3l_switch_time_of_use_5_grid_charge
-      - switch.turn_on:
-          id: hackman_flex3l_switch_time_of_use_6_grid_charge
-    turn_off_action:
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_1_grid_charge
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_2_grid_charge
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_3_grid_charge
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_4_grid_charge
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_5_grid_charge
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_6_grid_charge
-
-  - platform: template
-    name: "Time of Use All Gen"
-    id: hackman_flex3l_switch_time_of_use_all_gen
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    disabled_by_default: true
-    lambda: |-
-      return id(hackman_flex3l_switch_time_of_use_1_gen).state;
-    turn_on_action:
-      - switch.turn_on:
-          id: hackman_flex3l_switch_time_of_use_1_gen
-      - switch.turn_on:
-          id: hackman_flex3l_switch_time_of_use_2_gen
-      - switch.turn_on:
-          id: hackman_flex3l_switch_time_of_use_3_gen
-      - switch.turn_on:
-          id: hackman_flex3l_switch_time_of_use_4_gen
-      - switch.turn_on:
-          id: hackman_flex3l_switch_time_of_use_5_gen
-      - switch.turn_on:
-          id: hackman_flex3l_switch_time_of_use_6_gen
-    turn_off_action:
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_1_gen
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_2_gen
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_3_gen
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_4_gen
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_5_gen
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_6_gen
-
-  - platform: template
-    name: "Time of Use All Sell"
-    id: hackman_flex3l_switch_time_of_use_all_sell
-    icon: "mdi:battery-plus"
-    optimistic: true
-    restore_mode: DISABLED
-    disabled_by_default: true
-    lambda: |-
-      return id(hackman_flex3l_switch_time_of_use_1_sell).state;
-    turn_on_action:
-      - switch.turn_on:
-          id: hackman_flex3l_switch_time_of_use_1_sell
-      - switch.turn_on:
-          id: hackman_flex3l_switch_time_of_use_2_sell
-      - switch.turn_on:
-          id: hackman_flex3l_switch_time_of_use_3_sell
-      - switch.turn_on:
-          id: hackman_flex3l_switch_time_of_use_4_sell
-      - switch.turn_on:
-          id: hackman_flex3l_switch_time_of_use_5_sell
-      - switch.turn_on:
-          id: hackman_flex3l_switch_time_of_use_6_sell
-    turn_off_action:
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_1_sell
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_2_sell
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_3_sell
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_4_sell
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_5_sell
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_6_sell
+time:
+  - platform: sntp
+    id: sntp_time
 
 number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Time of Use Enabled Raw"
-    id: hackman_flex3l_time_of_use_enabled_raw
-    register_type: holding
-    address: 246
-    internal: true
+    name: "Time of Use All Voltage"
+    address: 231
+    unit_of_measurement: "V"
+    device_class: voltage
+    value_type: U_WORD
+    multiply: 0.1
+    min_value: 38
+    max_value: 61
+    step: 0.1
+    entity_category: config
+    mode: box
+    icon: "mdi:flash"
 
   - platform: modbus_controller
     use_write_multiple: true
-    name: "Time of Use 1 Start Raw"
-    id: hackman_flex3l_time_of_use_1_start_raw
     modbus_controller_id: ${modbus_controller_id}
-    register_type: holding
-    address: 248
+    name: "Time of Use All Out Power"
+    address: 232
+    unit_of_measurement: "W"
+    device_class: power
     value_type: U_WORD
+    multiply: 0.1
     min_value: 0
-    max_value: 2359
-    internal: true
+    max_value: 12000
+    step: 100
+    entity_category: config
+    mode: box
+    icon: "mdi:lightning-bolt"
 
   - platform: modbus_controller
     use_write_multiple: true
-    name: "Time of Use 2 Start Raw"
-    id: hackman_flex3l_time_of_use_2_start_raw
     modbus_controller_id: ${modbus_controller_id}
-    register_type: holding
-    address: 249
+    name: "Time of Use All SoC"
+    address: 233
+    unit_of_measurement: "%"
     value_type: U_WORD
     min_value: 0
-    max_value: 2359
-    internal: true
-
-  - platform: modbus_controller
-    use_write_multiple: true
-    name: "Time of Use 3 Start Raw"
-    id: hackman_flex3l_time_of_use_3_start_raw
-    modbus_controller_id: ${modbus_controller_id}
-    register_type: holding
-    address: 250
-    value_type: U_WORD
-    min_value: 0
-    max_value: 2359
-    internal: true
-
-  - platform: modbus_controller
-    use_write_multiple: true
-    name: "Time of Use 4 Start Raw"
-    id: hackman_flex3l_time_of_use_4_start_raw
-    modbus_controller_id: ${modbus_controller_id}
-    register_type: holding
-    address: 251
-    value_type: U_WORD
-    min_value: 0
-    max_value: 2359
-    internal: true
-
-  - platform: modbus_controller
-    use_write_multiple: true
-    name: "Time of Use 5 Start Raw"
-    id: hackman_flex3l_time_of_use_5_start_raw
-    modbus_controller_id: ${modbus_controller_id}
-    register_type: holding
-    address: 252
-    value_type: U_WORD
-    min_value: 0
-    max_value: 2359
-    internal: true
-
-  - platform: modbus_controller
-    use_write_multiple: true
-    name: "Time of Use 6 Start Raw"
-    id: hackman_flex3l_time_of_use_6_start_raw
-    modbus_controller_id: ${modbus_controller_id}
-    register_type: holding
-    address: 253
-    value_type: U_WORD
-    min_value: 0
-    max_value: 2359
-    internal: true
+    max_value: 100
+    step: 1
+    entity_category: config
+    mode: box
+    icon: "mdi:battery"
 
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 1 Voltage"
-    id: hackman_flex3l_time_of_use_1_voltage
-    register_type: holding
-    address: 260
+    address: 240
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 100
-    min_value: 0
-    max_value: 63
-    step: 0.01
+    multiply: 0.1
+    min_value: 38
+    max_value: 61
+    step: 0.1
+    entity_category: config
     mode: box
-    icon: "mdi:sun-clock"
+    icon: "mdi:flash"
 
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 2 Voltage"
-    id: hackman_flex3l_time_of_use_2_voltage
-    register_type: holding
-    address: 261
+    address: 241
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 100
-    min_value: 0
-    max_value: 63
-    step: 0.01
+    multiply: 0.1
+    min_value: 38
+    max_value: 61
+    step: 0.1
+    entity_category: config
     mode: box
-    icon: "mdi:sun-clock"
+    icon: "mdi:flash"
 
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 3 Voltage"
-    id: hackman_flex3l_time_of_use_3_voltage
-    register_type: holding
-    address: 262
+    address: 242
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 100
-    min_value: 0
-    max_value: 63
-    step: 0.01
+    multiply: 0.1
+    min_value: 38
+    max_value: 61
+    step: 0.1
+    entity_category: config
     mode: box
-    icon: "mdi:sun-clock"
+    icon: "mdi:flash"
 
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 4 Voltage"
-    id: hackman_flex3l_time_of_use_4_voltage
-    register_type: holding
-    address: 263
+    address: 243
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 100
-    min_value: 0
-    max_value: 63
-    step: 0.01
+    multiply: 0.1
+    min_value: 38
+    max_value: 61
+    step: 0.1
+    entity_category: config
     mode: box
-    icon: "mdi:sun-clock"
+    icon: "mdi:flash"
 
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 5 Voltage"
-    id: hackman_flex3l_time_of_use_5_voltage
-    register_type: holding
-    address: 264
+    address: 244
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 100
-    min_value: 0
-    max_value: 63
-    step: 0.01
+    multiply: 0.1
+    min_value: 38
+    max_value: 61
+    step: 0.1
+    entity_category: config
     mode: box
-    icon: "mdi:sun-clock"
+    icon: "mdi:flash"
 
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 6 Voltage"
-    id: hackman_flex3l_time_of_use_6_voltage
-    register_type: holding
-    address: 265
+    address: 245
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 100
-    min_value: 0
-    max_value: 63
-    step: 0.01
+    multiply: 0.1
+    min_value: 38
+    max_value: 61
+    step: 0.1
+    entity_category: config
     mode: box
-    icon: "mdi:sun-clock"
-
-  - platform: modbus_controller
-    use_write_multiple: true
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Time of Use 1 Out Power"
-    id: hackman_flex3l_time_of_use_1_out_power
-    unit_of_measurement: W
-    device_class: power
-    address: 254
-    value_type: U_WORD
-    mode: box
-    icon: "mdi:power-plug"
-
-  - platform: modbus_controller
-    use_write_multiple: true
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Time of Use 2 Out Power"
-    id: hackman_flex3l_time_of_use_2_out_power
-    unit_of_measurement: W
-    device_class: power
-    address: 255
-    value_type: U_WORD
-    mode: box
-    icon: "mdi:power-plug"
-
-  - platform: modbus_controller
-    use_write_multiple: true
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Time of Use 3 Out Power"
-    id: hackman_flex3l_time_of_use_3_out_power
-    unit_of_measurement: W
-    device_class: power
-    address: 256
-    value_type: U_WORD
-    mode: box
-    icon: "mdi:power-plug"
-
-  - platform: modbus_controller
-    use_write_multiple: true
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Time of Use 4 Out Power"
-    id: hackman_flex3l_time_of_use_4_out_power
-    unit_of_measurement: W
-    device_class: power
-    address: 257
-    value_type: U_WORD
-    mode: box
-    icon: "mdi:power-plug"
-
-  - platform: modbus_controller
-    use_write_multiple: true
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Time of Use 5 Out Power"
-    id: hackman_flex3l_time_of_use_5_out_power
-    unit_of_measurement: W
-    device_class: power
-    address: 258
-    value_type: U_WORD
-    mode: box
-    icon: "mdi:power-plug"
-
-  - platform: modbus_controller
-    use_write_multiple: true
-    modbus_controller_id: ${modbus_controller_id}
-    name: "Time of Use 6 Out Power"
-    id: hackman_flex3l_time_of_use_6_out_power
-    unit_of_measurement: W
-    device_class: power
-    address: 259
-    value_type: U_WORD
-    mode: box
-    icon: "mdi:power-plug"
+    icon: "mdi:flash"
 
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 1 SoC"
-    id: hackman_flex3l_time_of_use_1_soc
+    address: 246
     unit_of_measurement: "%"
-    address: 266
+    value_type: U_WORD
     min_value: 0
     max_value: 100
     step: 1
-    value_type: U_WORD
+    entity_category: config
     mode: box
-    icon: "mdi:battery-clock"
+    icon: "mdi:battery"
 
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 2 SoC"
-    id: hackman_flex3l_time_of_use_2_soc
+    address: 247
     unit_of_measurement: "%"
-    address: 267
+    value_type: U_WORD
     min_value: 0
     max_value: 100
     step: 1
-    value_type: U_WORD
+    entity_category: config
     mode: box
-    icon: "mdi:battery-clock"
+    icon: "mdi:battery"
 
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 3 SoC"
-    id: hackman_flex3l_time_of_use_3_soc
+    address: 248
     unit_of_measurement: "%"
-    address: 268
+    value_type: U_WORD
     min_value: 0
     max_value: 100
     step: 1
-    value_type: U_WORD
+    entity_category: config
     mode: box
-    icon: "mdi:battery-clock"
+    icon: "mdi:battery"
 
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 4 SoC"
-    id: hackman_flex3l_time_of_use_4_soc
+    address: 249
     unit_of_measurement: "%"
-    address: 269
+    value_type: U_WORD
     min_value: 0
     max_value: 100
     step: 1
-    value_type: U_WORD
+    entity_category: config
     mode: box
-    icon: "mdi:battery-clock"
+    icon: "mdi:battery"
 
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 5 SoC"
-    id: hackman_flex3l_time_of_use_5_soc
+    address: 250
     unit_of_measurement: "%"
-    address: 270
+    value_type: U_WORD
     min_value: 0
     max_value: 100
     step: 1
-    value_type: U_WORD
+    entity_category: config
     mode: box
-    icon: "mdi:battery-clock"
+    icon: "mdi:battery"
 
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 6 SoC"
-    id: hackman_flex3l_time_of_use_6_soc
+    address: 251
     unit_of_measurement: "%"
-    address: 271
-    min_value: 0
-    max_value: 100
-    step: 1
     value_type: U_WORD
-    mode: box
-    icon: "mdi:battery-clock"
-
-  - platform: template
-    mode: box
-    name: "Time of Use All SoC"
-    id: hackman_flex3l_time_of_use_all_soc
-    unit_of_measurement: "%"
-    device_class: battery
     min_value: 0
     max_value: 100
     step: 1
-    update_interval: 1s
-    icon: "mdi:battery-clock"
-    disabled_by_default: true
-    lambda: |-
-      return id(hackman_flex3l_time_of_use_1_soc).state;
-    set_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_1_soc
-          value: !lambda "return x;"
-      - number.set:
-          id: hackman_flex3l_time_of_use_2_soc
-          value: !lambda "return x;"
-      - number.set:
-          id: hackman_flex3l_time_of_use_3_soc
-          value: !lambda "return x;"
-      - number.set:
-          id: hackman_flex3l_time_of_use_4_soc
-          value: !lambda "return x;"
-      - number.set:
-          id: hackman_flex3l_time_of_use_5_soc
-          value: !lambda "return x;"
-      - number.set:
-          id: hackman_flex3l_time_of_use_6_soc
-          value: !lambda "return x;"
-
-  - platform: template
+    entity_category: config
     mode: box
-    name: "Time of Use All Out Power"
-    id: hackman_flex3l_time_of_use_all_out_power
-    unit_of_measurement: W
+    icon: "mdi:battery"
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 1 Out Power"
+    address: 252
+    unit_of_measurement: "W"
     device_class: power
+    value_type: U_WORD
+    multiply: 0.1
     min_value: 0
-    max_value: 20000
-    step: 1
-    update_interval: 1s
-    icon: "mdi:power-plug"
-    disabled_by_default: true
-    lambda: |-
-      return id(hackman_flex3l_time_of_use_1_out_power).state;
-    set_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_1_out_power
-          value: !lambda "return x;"
-      - number.set:
-          id: hackman_flex3l_time_of_use_2_out_power
-          value: !lambda "return x;"
-      - number.set:
-          id: hackman_flex3l_time_of_use_3_out_power
-          value: !lambda "return x;"
-      - number.set:
-          id: hackman_flex3l_time_of_use_4_out_power
-          value: !lambda "return x;"
-      - number.set:
-          id: hackman_flex3l_time_of_use_5_out_power
-          value: !lambda "return x;"
-      - number.set:
-          id: hackman_flex3l_time_of_use_6_out_power
-          value: !lambda "return x;"
-
-  - platform: template
+    max_value: 12000
+    step: 100
+    entity_category: config
     mode: box
-    name: "Time of Use All Voltage"
-    id: hackman_flex3l_time_of_use_all_voltage
-    unit_of_measurement: "V"
-    device_class: voltage
+    icon: "mdi:lightning-bolt"
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 2 Out Power"
+    address: 253
+    unit_of_measurement: "W"
+    device_class: power
+    value_type: U_WORD
+    multiply: 0.1
     min_value: 0
-    max_value: 63
-    step: 0.01
-    update_interval: 1s
-    icon: "mdi:sun-clock"
-    disabled_by_default: true
-    lambda: |-
-      return id(hackman_flex3l_time_of_use_1_voltage).state;
-    set_action:
-      - number.set:
-          id: hackman_flex3l_time_of_use_1_voltage
-          value: !lambda "return x;"
-      - number.set:
-          id: hackman_flex3l_time_of_use_2_voltage
-          value: !lambda "return x;"
-      - number.set:
-          id: hackman_flex3l_time_of_use_3_voltage
-          value: !lambda "return x;"
-      - number.set:
-          id: hackman_flex3l_time_of_use_4_voltage
-          value: !lambda "return x;"
-      - number.set:
-          id: hackman_flex3l_time_of_use_5_voltage
-          value: !lambda "return x;"
-      - number.set:
-          id: hackman_flex3l_time_of_use_6_voltage
-          value: !lambda "return x;"
+    max_value: 12000
+    step: 100
+    entity_category: config
+    mode: box
+    icon: "mdi:lightning-bolt"
 
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Time of Use 1 Raw"
-    id: hackman_flex3l_time_of_use_1_raw
-    register_type: holding
-    address: 272
-    internal: true
+    name: "Time of Use 3 Out Power"
+    address: 254
+    unit_of_measurement: "W"
+    device_class: power
+    value_type: U_WORD
+    multiply: 0.1
+    min_value: 0
+    max_value: 12000
+    step: 100
+    entity_category: config
+    mode: box
+    icon: "mdi:lightning-bolt"
 
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Time of Use 2 Raw"
-    id: hackman_flex3l_time_of_use_2_raw
-    register_type: holding
-    address: 273
-    internal: true
+    name: "Time of Use 4 Out Power"
+    address: 255
+    unit_of_measurement: "W"
+    device_class: power
+    value_type: U_WORD
+    multiply: 0.1
+    min_value: 0
+    max_value: 12000
+    step: 100
+    entity_category: config
+    mode: box
+    icon: "mdi:lightning-bolt"
 
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Time of Use 3 Raw"
-    id: hackman_flex3l_time_of_use_3_raw
-    register_type: holding
-    address: 274
-    internal: true
+    name: "Time of Use 5 Out Power"
+    address: 256
+    unit_of_measurement: "W"
+    device_class: power
+    value_type: U_WORD
+    multiply: 0.1
+    min_value: 0
+    max_value: 12000
+    step: 100
+    entity_category: config
+    mode: box
+    icon: "mdi:lightning-bolt"
 
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Time of Use 4 Raw"
-    id: hackman_flex3l_time_of_use_4_raw
-    register_type: holding
-    address: 275
-    internal: true
+    name: "Time of Use 6 Out Power"
+    address: 257
+    unit_of_measurement: "W"
+    device_class: power
+    value_type: U_WORD
+    multiply: 0.1
+    min_value: 0
+    max_value: 12000
+    step: 100
+    entity_category: config
+    mode: box
+    icon: "mdi:lightning-bolt"
+
+datetime:
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 1 Start"
+    address: 234
+    value_type: U_WORD
+    entity_category: config
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 2 Start"
+    address: 235
+    value_type: U_WORD
+    entity_category: config
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 3 Start"
+    address: 236
+    value_type: U_WORD
+    entity_category: config
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 4 Start"
+    address: 237
+    value_type: U_WORD
+    entity_category: config
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 5 Start"
+    address: 238
+    value_type: U_WORD
+    entity_category: config
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 6 Start"
+    address: 239
+    value_type: U_WORD
+    entity_category: config
+
+switch:
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 1 Time Enable"
+    address: 258
+    bitmask: 1
+    entity_category: config
 
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Time of Use 5 Raw"
-    id: hackman_flex3l_time_of_use_5_raw
-    register_type: holding
-    address: 276
-    internal: true
+    name: "Time of Use 2 Time Enable"
+    address: 258
+    bitmask: 2
+    entity_category: config
 
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Time of Use 6 Raw"
-    id: hackman_flex3l_time_of_use_6_raw
-    register_type: holding
-    address: 277
-    internal: true
+    name: "Time of Use 3 Time Enable"
+    address: 258
+    bitmask: 4
+    entity_category: config
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 4 Time Enable"
+    address: 258
+    bitmask: 8
+    entity_category: config
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 5 Time Enable"
+    address: 258
+    bitmask: 16
+    entity_category: config
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 6 Time Enable"
+    address: 258
+    bitmask: 32
+    entity_category: config
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 1 Peak Shaving Enable"
+    address: 259
+    bitmask: 1
+    entity_category: config
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 2 Peak Shaving Enable"
+    address: 259
+    bitmask: 2
+    entity_category: config
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 3 Peak Shaving Enable"
+    address: 259
+    bitmask: 4
+    entity_category: config
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 4 Peak Shaving Enable"
+    address: 259
+    bitmask: 8
+    entity_category: config
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 5 Peak Shaving Enable"
+    address: 259
+    bitmask: 16
+    entity_category: config
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 6 Peak Shaving Enable"
+    address: 259
+    bitmask: 32
+    entity_category: config
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 1 Export Power Enable"
+    address: 260
+    bitmask: 1
+    entity_category: config
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 2 Export Power Enable"
+    address: 260
+    bitmask: 2
+    entity_category: config
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 3 Export Power Enable"
+    address: 260
+    bitmask: 4
+    entity_category: config
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 4 Export Power Enable"
+    address: 260
+    bitmask: 8
+    entity_category: config
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 5 Export Power Enable"
+    address: 260
+    bitmask: 16
+    entity_category: config
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 6 Export Power Enable"
+    address: 260
+    bitmask: 32
+    entity_category: config
 # --- KONIEC PLIKU TOU ---
