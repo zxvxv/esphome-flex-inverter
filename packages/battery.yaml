@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU BATTERY ---
-# Wersja v1.04 - Konfiguracja baterii dla Hackman Flex3L.
-# Zmiany: Usunięcie offsetu temperatury, korekta filtrów napięcia i prądu (0.1 zamiast 0.01), poprawa mnożników (10 zamiast 100) i skoku dla encji sterujących (Number) LV.
+# Wersja v1.05 - Ostateczna korekta baterii dla Hackman Flex3L.
+# Zmiany: Zmiana mnożnika 'multiply' w encjach 'number' na 0.1.
 
 sensor:
   - platform: modbus_controller
@@ -452,7 +452,7 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 10
+    multiply: 0.1
     min_value: 38
     max_value: 61
     step: 0.1
@@ -498,7 +498,7 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 10
+    multiply: 0.1
     min_value: 38
     max_value: 61
     step: 0.1
@@ -586,7 +586,7 @@ number:
     address: 214
     unit_of_measurement: "%"
     value_type: U_WORD
-    multiply: 10
+    multiply: 0.1
     min_value: 0
     max_value: 100
     step: 0.1
@@ -645,7 +645,7 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 10
+    multiply: 0.1
     min_value: 38
     max_value: 61
     step: 0.1
@@ -662,7 +662,7 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 10
+    multiply: 0.1
     min_value: 38
     max_value: 61
     step: 0.1
@@ -679,7 +679,7 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 10
+    multiply: 0.1
     min_value: 38
     max_value: 61
     step: 0.1
@@ -696,7 +696,7 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 10
+    multiply: 0.1
     min_value: 38
     max_value: 61
     step: 0.1
@@ -713,7 +713,7 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 10
+    multiply: 0.1
     min_value: 38
     max_value: 61
     step: 0.1
@@ -730,7 +730,7 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 10
+    multiply: 0.1
     min_value: 38
     max_value: 61
     step: 0.1
@@ -761,7 +761,7 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 10
+    multiply: 0.1
     min_value: 38
     max_value: 61
     step: 0.1
