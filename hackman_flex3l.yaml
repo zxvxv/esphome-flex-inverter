@@ -1,8 +1,9 @@
 # --- POCZĄTEK PLIKU GŁÓWNEGO (ORKIESTRATOR) ---
 # Nazwa pliku: hackman-flex3l-auto.yaml
-# Wersja v2.02 - Pełna synchronizacja ID i otwarta sieć konfiguracji
+# Wersja v2.03 - Pełna synchronizacja ID i otwarta sieć konfiguracji
 # Zmiany: Naprawa błędu 'maximum_battery_charge_current' w skrypcie bezpieczeństwa.
 # Zmiany: Wymuszenie otwartej sieci AP "Hackman_Konfiguracja" bez hasła.
+# Zmiany: Dodanie flow_control_pin, aktualizacja pinów RX/TX oraz wymuszenie czyszczenia cache (refresh: always).
 
 substitutions:
   name: "hackman-flex3l-auto"
@@ -28,7 +29,7 @@ esphome:
   comment: "Hackman Flex3L - Automatyka i Edge Computing"
   project:
     name: "hackman.flex3l-auto"
-    version: "2.02.0"
+    version: "2.03.0"
 
 logger:
   level: WARN
@@ -66,8 +67,9 @@ button:
 
 uart:
   id: modbus_uart
-  rx_pin: GPIO44
-  tx_pin: GPIO43
+  rx_pin: GPIO18
+  tx_pin: GPIO17
+  flow_control_pin: GPIO21
   baud_rate: ${baud_rate}
   stop_bits: 1
 
@@ -109,7 +111,7 @@ packages:
   hackman_flex3l_modules:
     url: https://github.com/zxvxv/esphome-flex-inverter
     ref: main
-    refresh: 0s
+    refresh: always
     files:
       - packages/calibration.yaml
       - packages/device.yaml
