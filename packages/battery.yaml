@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU BATTERY ---
-# Wersja v1.03 - Konfiguracja baterii dla Hackman Flex3L.
-# Zmiany: Usunięto przedrostki "hackman_flex3l_" ze wszystkich identyfikatorów "id:". Dodano "id: battery_soc".
+# Wersja v1.04 - Konfiguracja baterii dla Hackman Flex3L.
+# Zmiany: Usunięcie offsetu temperatury, korekta filtrów napięcia i prądu (0.1 zamiast 0.01), poprawa mnożników (10 zamiast 100) i skoku dla encji sterujących (Number) LV.
 
 sensor:
   - platform: modbus_controller
@@ -70,10 +70,9 @@ sensor:
     address: 686
     unit_of_measurement: "°C"
     device_class: temperature
-    accuracy_decimals: 0
+    accuracy_decimals: 1
     value_type: S_WORD
     filters:
-      - offset: -1000
       - multiply: 0.1
     icon: "mdi:thermometer"
 
@@ -85,9 +84,9 @@ sensor:
     address: 687
     unit_of_measurement: "V"
     device_class: voltage
-    accuracy_decimals: 2
+    accuracy_decimals: 1
     filters:
-      - multiply: 0.01
+      - multiply: 0.1
     value_type: U_WORD
     icon: "mdi:flash"
 
@@ -135,9 +134,9 @@ sensor:
     address: 691
     unit_of_measurement: "A"
     device_class: current
-    accuracy_decimals: 2
+    accuracy_decimals: 1
     filters:
-      - multiply: 0.01
+      - multiply: 0.1
     value_type: S_WORD
     icon: "mdi:current-dc"
 
@@ -276,9 +275,9 @@ sensor:
     address: 693
     unit_of_measurement: "V"
     device_class: voltage
-    accuracy_decimals: 2
+    accuracy_decimals: 1
     filters:
-      - multiply: 0.01
+      - multiply: 0.1
     value_type: U_WORD
     disabled_by_default: true
     icon: "mdi:flash-outline"
@@ -290,9 +289,9 @@ sensor:
     address: 694
     unit_of_measurement: "A"
     device_class: current
-    accuracy_decimals: 2
+    accuracy_decimals: 1
     filters:
-      - multiply: 0.01
+      - multiply: 0.1
     value_type: S_WORD
     disabled_by_default: true
     icon: "mdi:current-dc"
@@ -453,10 +452,10 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 100
-    min_value: 0
-    max_value: 63
-    step: 0.01
+    multiply: 10
+    min_value: 38
+    max_value: 61
+    step: 0.1
     entity_category: config
     mode: box
     icon: "mdi:battery"
@@ -499,10 +498,10 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 100
-    min_value: 0
-    max_value: 63
-    step: 0.01
+    multiply: 10
+    min_value: 38
+    max_value: 61
+    step: 0.1
     entity_category: config
     mode: box
     icon: "mdi:battery"
@@ -646,10 +645,10 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 100
+    multiply: 10
     min_value: 38
     max_value: 61
-    step: 0.01
+    step: 0.1
     entity_category: config
     mode: box
     icon: "mdi:battery"
@@ -663,10 +662,10 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 100
+    multiply: 10
     min_value: 38
     max_value: 61
-    step: 0.01
+    step: 0.1
     entity_category: config
     mode: box
     icon: "mdi:battery"
@@ -680,10 +679,10 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 100
+    multiply: 10
     min_value: 38
     max_value: 61
-    step: 0.01
+    step: 0.1
     entity_category: config
     mode: box
     icon: "mdi:battery"
@@ -697,10 +696,10 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 100
+    multiply: 10
     min_value: 38
     max_value: 61
-    step: 0.01
+    step: 0.1
     entity_category: config
     mode: box
     icon: "mdi:battery"
@@ -714,10 +713,10 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 100
+    multiply: 10
     min_value: 38
     max_value: 61
-    step: 0.01
+    step: 0.1
     entity_category: config
     mode: box
     icon: "mdi:battery"
@@ -731,10 +730,10 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 100
+    multiply: 10
     min_value: 38
     max_value: 61
-    step: 0.01
+    step: 0.1
     entity_category: config
     mode: box
     icon: "mdi:battery"
@@ -762,10 +761,10 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 100
+    multiply: 10
     min_value: 38
     max_value: 61
-    step: 0.01
+    step: 0.1
     entity_category: config
     mode: box
     icon: "mdi:battery"
