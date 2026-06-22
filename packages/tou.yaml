@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU TOU ---
-# Wersja v1.05 - Ostateczna korekta skalowania mocy i napięć.
-# Zmiany: Zostawiamy multiply: 0.1 TYLKO dla napięć. Usuwamy błędny mnożnik dla MOCY, ponieważ falownik czyta ją ze skokiem 1W (co powodowało błąd 120000 W na zapisie). Wszystkie suwaki zmienione na mode: box.
+# Wersja v1.06 - Korekta mnożnika napięć według hipotezy 0.01.
+# Zmiany: Zastosowano multiply: 0.01 dla fizycznych rejestrów napięcia TOU (260-265) oraz step: 0.01. Mnożniki mocy usunięte. Wszystko w trybie box.
 
 substitutions:
   func_int_to_time: |-
@@ -694,10 +694,10 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.1
+    multiply: 0.01
     min_value: 38
     max_value: 61
-    step: 0.1
+    step: 0.01
     entity_category: config
     mode: box
     icon: "mdi:flash"
@@ -712,10 +712,10 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.1
+    multiply: 0.01
     min_value: 38
     max_value: 61
-    step: 0.1
+    step: 0.01
     entity_category: config
     mode: box
     icon: "mdi:flash"
@@ -730,10 +730,10 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.1
+    multiply: 0.01
     min_value: 38
     max_value: 61
-    step: 0.1
+    step: 0.01
     entity_category: config
     mode: box
     icon: "mdi:flash"
@@ -748,10 +748,10 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.1
+    multiply: 0.01
     min_value: 38
     max_value: 61
-    step: 0.1
+    step: 0.01
     entity_category: config
     mode: box
     icon: "mdi:flash"
@@ -766,10 +766,10 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.1
+    multiply: 0.01
     min_value: 38
     max_value: 61
-    step: 0.1
+    step: 0.01
     entity_category: config
     mode: box
     icon: "mdi:flash"
@@ -784,10 +784,10 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.1
+    multiply: 0.01
     min_value: 38
     max_value: 61
-    step: 0.1
+    step: 0.01
     entity_category: config
     mode: box
     icon: "mdi:flash"
@@ -1054,7 +1054,7 @@ number:
     device_class: voltage
     min_value: 38
     max_value: 61
-    step: 0.1
+    step: 0.01
     update_interval: 1s
     icon: "mdi:sun-clock"
     disabled_by_default: true
