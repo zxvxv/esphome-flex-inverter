@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU BATTERY ---
-# Wersja v1.07 - Reset logiki Number dla Flex3L.
-# Zmiany: Powrót do multiply: 0.1 dla komponentów typu number (ESPHome natywnie ogarnia dwukierunkowość tego filtru od wersji 2023.x). Zmiana U_WORD na S_WORD dla sensorów BMS.
+# Wersja v1.08 - Czysty powrót do natywnego mnożnika i korekta prądów.
+# Zmiany: Usunięcie konfliktów podwójnego skalowania w locie. Utrzymanie S_WORD dla prądów BMS i głównej baterii, aby zniwelować skoki do 65535 A.
 
 sensor:
   - platform: modbus_controller
