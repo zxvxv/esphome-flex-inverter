@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU TOU ---
-# Wersja v1.05 - Bezpieczne mnożniki i pola tekstowe (box).
-# Zmiany: Zmiana domyślnego trybu suwaków na mode: box we wszystkich ukrytych rejestrach konfiguracyjnych. Dodanie multiply: 0.1 dla mocy i napięć (tylko rejestry _raw), nie zmieniając logiki ID i Template.
+# Wersja v1.05 - Ostateczna korekta skalowania mocy i napięć.
+# Zmiany: Zostawiamy multiply: 0.1 TYLKO dla napięć. Usuwamy błędny mnożnik dla MOCY, ponieważ falownik czyta ją ze skokiem 1W (co powodowało błąd 120000 W na zapisie). Wszystkie suwaki zmienione na mode: box.
 
 substitutions:
   func_int_to_time: |-
@@ -891,7 +891,6 @@ number:
     unit_of_measurement: "W"
     device_class: power
     value_type: U_WORD
-    multiply: 0.1
     min_value: 0
     max_value: 12000
     step: 100
@@ -908,7 +907,6 @@ number:
     unit_of_measurement: "W"
     device_class: power
     value_type: U_WORD
-    multiply: 0.1
     min_value: 0
     max_value: 12000
     step: 100
@@ -925,7 +923,6 @@ number:
     unit_of_measurement: "W"
     device_class: power
     value_type: U_WORD
-    multiply: 0.1
     min_value: 0
     max_value: 12000
     step: 100
@@ -942,7 +939,6 @@ number:
     unit_of_measurement: "W"
     device_class: power
     value_type: U_WORD
-    multiply: 0.1
     min_value: 0
     max_value: 12000
     step: 100
@@ -959,7 +955,6 @@ number:
     unit_of_measurement: "W"
     device_class: power
     value_type: U_WORD
-    multiply: 0.1
     min_value: 0
     max_value: 12000
     step: 100
@@ -976,7 +971,6 @@ number:
     unit_of_measurement: "W"
     device_class: power
     value_type: U_WORD
-    multiply: 0.1
     min_value: 0
     max_value: 12000
     step: 100
@@ -1022,7 +1016,7 @@ number:
     mode: box
     name: "Time of Use All Out Power"
     id: hackman_flex3l_time_of_use_all_out_power
-    unit_of_measurement: W
+    unit_of_measurement: "W"
     device_class: power
     min_value: 0
     max_value: 12000
