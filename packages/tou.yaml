@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU TOU ---
-# Wersja v1.04 - Odbudowa oryginalnej logiki Template z poprawną matematyką Modbus.
-# Zmiany: Naprawa zepsutej struktury YAML. Zachowanie oryginalnych ID i wirtualnych encji Template. Dodanie multiply: 0.1 dla mocy i napięć w rejestrach ukrytych.
+# Wersja v1.05 - Bezpieczne mnożniki i pola tekstowe (box).
+# Zmiany: Zmiana domyślnego trybu suwaków na mode: box we wszystkich ukrytych rejestrach konfiguracyjnych. Dodanie multiply: 0.1 dla mocy i napięć (tylko rejestry _raw), nie zmieniając logiki ID i Template.
 
 substitutions:
   func_int_to_time: |-
@@ -596,19 +596,6 @@ switch:
       - switch.turn_on:
           id: hackman_flex3l_switch_time_of_use_5_sell
       - switch.turn_on:
-          id: hackman_flex3l_switch_time_of_use_6_sell
-    turn_off_action:
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_1_sell
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_2_sell
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_3_sell
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_4_sell
-      - switch.turn_off:
-          id: hackman_flex3l_switch_time_of_use_5_sell
-      - switch.turn_off:
           id: hackman_flex3l_switch_time_of_use_6_sell
 
 time:
