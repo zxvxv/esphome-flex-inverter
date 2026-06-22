@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU TOU ---
-# Wersja v1.02 - Korekta Time of Use dla Hackman Flex3L.
-# Zmiany: Dodanie filtru multiply: 0.1 do wszystkich encji napięciowych (V) i prądowych/mocy (W), aby zniwelować błędy przeskalowania rzędu 120000 W i 490 V.
+# Wersja v1.03 - Dodanie brakujących atrybutów ID.
+# Zmiany: Wstrzyknięcie unikalnych identyfikatorów 'id' (prefiks hackman_flex3l_) dla każdej encji, aby zapobiec błędom kompilatora przy odwołaniach. Utrzymano mnożniki 0.1 dla mocy i napięć.
 
 time:
   - platform: sntp
@@ -11,6 +11,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use All Voltage"
+    id: hackman_flex3l_time_of_use_all_voltage
     address: 231
     unit_of_measurement: "V"
     device_class: voltage
@@ -27,6 +28,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use All Out Power"
+    id: hackman_flex3l_time_of_use_all_out_power
     address: 232
     unit_of_measurement: "W"
     device_class: power
@@ -43,6 +45,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use All SoC"
+    id: hackman_flex3l_time_of_use_all_soc
     address: 233
     unit_of_measurement: "%"
     value_type: U_WORD
@@ -57,6 +60,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 1 Voltage"
+    id: hackman_flex3l_time_of_use_1_voltage
     address: 240
     unit_of_measurement: "V"
     device_class: voltage
@@ -73,6 +77,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 2 Voltage"
+    id: hackman_flex3l_time_of_use_2_voltage
     address: 241
     unit_of_measurement: "V"
     device_class: voltage
@@ -89,6 +94,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 3 Voltage"
+    id: hackman_flex3l_time_of_use_3_voltage
     address: 242
     unit_of_measurement: "V"
     device_class: voltage
@@ -105,6 +111,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 4 Voltage"
+    id: hackman_flex3l_time_of_use_4_voltage
     address: 243
     unit_of_measurement: "V"
     device_class: voltage
@@ -121,6 +128,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 5 Voltage"
+    id: hackman_flex3l_time_of_use_5_voltage
     address: 244
     unit_of_measurement: "V"
     device_class: voltage
@@ -137,6 +145,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 6 Voltage"
+    id: hackman_flex3l_time_of_use_6_voltage
     address: 245
     unit_of_measurement: "V"
     device_class: voltage
@@ -153,6 +162,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 1 SoC"
+    id: hackman_flex3l_time_of_use_1_soc
     address: 246
     unit_of_measurement: "%"
     value_type: U_WORD
@@ -167,6 +177,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 2 SoC"
+    id: hackman_flex3l_time_of_use_2_soc
     address: 247
     unit_of_measurement: "%"
     value_type: U_WORD
@@ -181,6 +192,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 3 SoC"
+    id: hackman_flex3l_time_of_use_3_soc
     address: 248
     unit_of_measurement: "%"
     value_type: U_WORD
@@ -195,6 +207,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 4 SoC"
+    id: hackman_flex3l_time_of_use_4_soc
     address: 249
     unit_of_measurement: "%"
     value_type: U_WORD
@@ -209,6 +222,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 5 SoC"
+    id: hackman_flex3l_time_of_use_5_soc
     address: 250
     unit_of_measurement: "%"
     value_type: U_WORD
@@ -223,6 +237,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 6 SoC"
+    id: hackman_flex3l_time_of_use_6_soc
     address: 251
     unit_of_measurement: "%"
     value_type: U_WORD
@@ -237,6 +252,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 1 Out Power"
+    id: hackman_flex3l_time_of_use_1_out_power
     address: 252
     unit_of_measurement: "W"
     device_class: power
@@ -253,6 +269,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 2 Out Power"
+    id: hackman_flex3l_time_of_use_2_out_power
     address: 253
     unit_of_measurement: "W"
     device_class: power
@@ -269,6 +286,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 3 Out Power"
+    id: hackman_flex3l_time_of_use_3_out_power
     address: 254
     unit_of_measurement: "W"
     device_class: power
@@ -285,6 +303,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 4 Out Power"
+    id: hackman_flex3l_time_of_use_4_out_power
     address: 255
     unit_of_measurement: "W"
     device_class: power
@@ -301,6 +320,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 5 Out Power"
+    id: hackman_flex3l_time_of_use_5_out_power
     address: 256
     unit_of_measurement: "W"
     device_class: power
@@ -317,6 +337,7 @@ number:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 6 Out Power"
+    id: hackman_flex3l_time_of_use_6_out_power
     address: 257
     unit_of_measurement: "W"
     device_class: power
@@ -333,6 +354,7 @@ datetime:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 1 Start"
+    id: hackman_flex3l_time_of_use_1_start
     address: 234
     value_type: U_WORD
     entity_category: config
@@ -340,6 +362,7 @@ datetime:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 2 Start"
+    id: hackman_flex3l_time_of_use_2_start
     address: 235
     value_type: U_WORD
     entity_category: config
@@ -347,6 +370,7 @@ datetime:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 3 Start"
+    id: hackman_flex3l_time_of_use_3_start
     address: 236
     value_type: U_WORD
     entity_category: config
@@ -354,6 +378,7 @@ datetime:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 4 Start"
+    id: hackman_flex3l_time_of_use_4_start
     address: 237
     value_type: U_WORD
     entity_category: config
@@ -361,6 +386,7 @@ datetime:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 5 Start"
+    id: hackman_flex3l_time_of_use_5_start
     address: 238
     value_type: U_WORD
     entity_category: config
@@ -368,6 +394,7 @@ datetime:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 6 Start"
+    id: hackman_flex3l_time_of_use_6_start
     address: 239
     value_type: U_WORD
     entity_category: config
@@ -377,6 +404,7 @@ switch:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 1 Time Enable"
+    id: hackman_flex3l_time_of_use_1_time_enable
     address: 258
     bitmask: 1
     entity_category: config
@@ -385,6 +413,7 @@ switch:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 2 Time Enable"
+    id: hackman_flex3l_time_of_use_2_time_enable
     address: 258
     bitmask: 2
     entity_category: config
@@ -393,6 +422,7 @@ switch:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 3 Time Enable"
+    id: hackman_flex3l_time_of_use_3_time_enable
     address: 258
     bitmask: 4
     entity_category: config
@@ -401,6 +431,7 @@ switch:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 4 Time Enable"
+    id: hackman_flex3l_time_of_use_4_time_enable
     address: 258
     bitmask: 8
     entity_category: config
@@ -409,6 +440,7 @@ switch:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 5 Time Enable"
+    id: hackman_flex3l_time_of_use_5_time_enable
     address: 258
     bitmask: 16
     entity_category: config
@@ -417,6 +449,7 @@ switch:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 6 Time Enable"
+    id: hackman_flex3l_time_of_use_6_time_enable
     address: 258
     bitmask: 32
     entity_category: config
@@ -425,6 +458,7 @@ switch:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 1 Peak Shaving Enable"
+    id: hackman_flex3l_time_of_use_1_peak_shaving_enable
     address: 259
     bitmask: 1
     entity_category: config
@@ -433,6 +467,7 @@ switch:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 2 Peak Shaving Enable"
+    id: hackman_flex3l_time_of_use_2_peak_shaving_enable
     address: 259
     bitmask: 2
     entity_category: config
@@ -441,6 +476,7 @@ switch:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 3 Peak Shaving Enable"
+    id: hackman_flex3l_time_of_use_3_peak_shaving_enable
     address: 259
     bitmask: 4
     entity_category: config
@@ -449,6 +485,7 @@ switch:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 4 Peak Shaving Enable"
+    id: hackman_flex3l_time_of_use_4_peak_shaving_enable
     address: 259
     bitmask: 8
     entity_category: config
@@ -457,6 +494,7 @@ switch:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 5 Peak Shaving Enable"
+    id: hackman_flex3l_time_of_use_5_peak_shaving_enable
     address: 259
     bitmask: 16
     entity_category: config
@@ -465,6 +503,7 @@ switch:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 6 Peak Shaving Enable"
+    id: hackman_flex3l_time_of_use_6_peak_shaving_enable
     address: 259
     bitmask: 32
     entity_category: config
@@ -473,6 +512,7 @@ switch:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 1 Export Power Enable"
+    id: hackman_flex3l_time_of_use_1_export_power_enable
     address: 260
     bitmask: 1
     entity_category: config
@@ -481,6 +521,7 @@ switch:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 2 Export Power Enable"
+    id: hackman_flex3l_time_of_use_2_export_power_enable
     address: 260
     bitmask: 2
     entity_category: config
@@ -489,6 +530,7 @@ switch:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 3 Export Power Enable"
+    id: hackman_flex3l_time_of_use_3_export_power_enable
     address: 260
     bitmask: 4
     entity_category: config
@@ -497,6 +539,7 @@ switch:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 4 Export Power Enable"
+    id: hackman_flex3l_time_of_use_4_export_power_enable
     address: 260
     bitmask: 8
     entity_category: config
@@ -505,6 +548,7 @@ switch:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 5 Export Power Enable"
+    id: hackman_flex3l_time_of_use_5_export_power_enable
     address: 260
     bitmask: 16
     entity_category: config
@@ -513,6 +557,7 @@ switch:
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 6 Export Power Enable"
+    id: hackman_flex3l_time_of_use_6_export_power_enable
     address: 260
     bitmask: 32
     entity_category: config
