@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU TOU ---
-# Wersja v2.02 - Golden Release (Korekta kompilatora).
-# Zmiany: Usunięcie konfliktowego 'restore_value: false' z encji template posiadających lambdę. Dla Napięć przywrócono precyzyjne odczyty C++ (lambda * 0.1, write_lambda * 10.0), eliminując bugi natywnych filtrów multiply. Brak mnożnika dla Mocy. Tryb box wszędzie.
+# Wersja v2.03 - Golden Release (Skalpel na moc).
+# Zmiany: Napięcie działa idealnie. Moc ucięta do limitu sprzętowego 6000W i wyposażona w precyzyjne lambdy konwertujące (rozdzielczość rejestru 0.1 W udowodniona w testach). Tryb box dla stabilności interfejsu.
 
 substitutions:
   func_int_to_time: |-
@@ -917,11 +917,17 @@ number:
     device_class: power
     value_type: U_WORD
     min_value: 0
-    max_value: 12000
-    step: 100
+    max_value: 6000
+    step: 10
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
+    lambda: "return x * 0.1;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 10.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -933,11 +939,17 @@ number:
     device_class: power
     value_type: U_WORD
     min_value: 0
-    max_value: 12000
-    step: 100
+    max_value: 6000
+    step: 10
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
+    lambda: "return x * 0.1;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 10.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -949,11 +961,17 @@ number:
     device_class: power
     value_type: U_WORD
     min_value: 0
-    max_value: 12000
-    step: 100
+    max_value: 6000
+    step: 10
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
+    lambda: "return x * 0.1;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 10.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -965,11 +983,17 @@ number:
     device_class: power
     value_type: U_WORD
     min_value: 0
-    max_value: 12000
-    step: 100
+    max_value: 6000
+    step: 10
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
+    lambda: "return x * 0.1;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 10.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -981,11 +1005,17 @@ number:
     device_class: power
     value_type: U_WORD
     min_value: 0
-    max_value: 12000
-    step: 100
+    max_value: 6000
+    step: 10
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
+    lambda: "return x * 0.1;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 10.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -997,11 +1027,17 @@ number:
     device_class: power
     value_type: U_WORD
     min_value: 0
-    max_value: 12000
-    step: 100
+    max_value: 6000
+    step: 10
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
+    lambda: "return x * 0.1;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 10.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: template
     mode: box
@@ -1044,8 +1080,8 @@ number:
     unit_of_measurement: "W"
     device_class: power
     min_value: 0
-    max_value: 12000
-    step: 100
+    max_value: 6000
+    step: 10
     update_interval: 1s
     icon: "mdi:power-plug"
     disabled_by_default: true
