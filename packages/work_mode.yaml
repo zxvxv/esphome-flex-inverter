@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU WORK MODE ---
-# Wersja v1.02 - Poprawka mnożników i rozdzielczości (Grid Peak Shaving, Max Sell Power, Max Solar Power).
-# Zmiany: Wdrożono natywny filtr multiply: 10 dla rejestrów mocy globalnej (sprzęt Deye operuje tam w jednostkach 10 W). Ustawiono step: 10 dla zachowania matematycznej ciągłości. Zero Export Power pozostawiono na 1:1, ponieważ działa w jednostkach 1 W.
+# Wersja v1.03 - Czysty odczyt 1:1 dla mocy globalnych.
+# Zmiany: Całkowicie usunięto błędne filtry multiply: 10 z Max Sell Power, Max Solar Power oraz Grid Peak Shaving Power. System czyta i zapisuje surowe wartości w Watach w proporcji 1:1. Utrzymano mode: box dla stabilności interfejsu.
 
 select:
   - platform: modbus_controller
@@ -67,8 +67,7 @@ number:
     device_class: power
     min_value: 0
     max_value: 12000
-    step: 10
-    multiply: 10
+    step: 1
     address: 243
     value_type: U_WORD
     mode: box
@@ -83,8 +82,7 @@ number:
     device_class: power
     min_value: 0
     max_value: 15000
-    step: 10
-    multiply: 10
+    step: 1
     address: 440
     value_type: U_WORD
     mode: box
@@ -117,8 +115,7 @@ number:
     value_type: U_WORD
     min_value: 0
     max_value: 100000
-    step: 10
-    multiply: 10
+    step: 1
     mode: box
     icon: "mdi:transmission-tower"
 # --- KONIEC PLIKU WORK MODE ---
