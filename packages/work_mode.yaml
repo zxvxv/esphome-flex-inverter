@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU WORK MODE ---
-# Wersja v1.01 - Konfiguracja głównych trybów pracy dla Hackman Flex3L.
-# Zmiany: Usunięto przedrostki "Hackman Flex3L" z nazw wyświetlanych (name).
+# Wersja v1.02 - Poprawka mnożników i rozdzielczości (Grid Peak Shaving, Max Sell Power, Max Solar Power).
+# Zmiany: Wdrożono natywny filtr multiply: 10 dla rejestrów mocy globalnej (sprzęt Deye operuje tam w jednostkach 10 W). Ustawiono step: 10 dla zachowania matematycznej ciągłości. Zero Export Power pozostawiono na 1:1, ponieważ działa w jednostkach 1 W.
 
 select:
   - platform: modbus_controller
@@ -66,7 +66,9 @@ number:
     unit_of_measurement: W
     device_class: power
     min_value: 0
-    step: 1
+    max_value: 12000
+    step: 10
+    multiply: 10
     address: 243
     value_type: U_WORD
     mode: box
@@ -80,7 +82,9 @@ number:
     unit_of_measurement: W
     device_class: power
     min_value: 0
-    step: 1
+    max_value: 15000
+    step: 10
+    multiply: 10
     address: 440
     value_type: U_WORD
     mode: box
@@ -112,7 +116,9 @@ number:
     device_class: power
     value_type: U_WORD
     min_value: 0
-    step: 1
+    max_value: 100000
+    step: 10
+    multiply: 10
     mode: box
     icon: "mdi:transmission-tower"
 # --- KONIEC PLIKU WORK MODE ---
