@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU TOU ---
-# Wersja v2.05 - Powrót do natywnego Modbusa (Złota Wersja).
-# Zmiany: Całkowite usunięcie bloków lambda i write_lambda z encji number dla mocy i napięć. Przywrócenie czystego mnożnika multiply: 0.1 dla napięć. Brak jakiegokolwiek mnożnika dla mocy (zapis 1:1, max_value: 12000). Tryb box dla stabilności.
+# Wersja v2.06 - Ostateczny skalpel (Dodanie multiply 0.1 dla mocy).
+# Zmiany: Zapis/Odczyt Modbus działa dwukierunkowo. Dodano brakujący natywny filtr multiply: 0.1 do encji Time of Use Out Power, ponieważ testy sprzętowe wykazały, że Deye przesyła moc w tych rejestrach z jednym miejscem po przecinku (np. 1200W jako 12000).
 
 substitutions:
   func_int_to_time: |-
@@ -904,9 +904,10 @@ number:
     unit_of_measurement: "W"
     device_class: power
     value_type: U_WORD
+    multiply: 0.1
     min_value: 0
     max_value: 12000
-    step: 100
+    step: 10
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
@@ -920,9 +921,10 @@ number:
     unit_of_measurement: "W"
     device_class: power
     value_type: U_WORD
+    multiply: 0.1
     min_value: 0
     max_value: 12000
-    step: 100
+    step: 10
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
@@ -936,9 +938,10 @@ number:
     unit_of_measurement: "W"
     device_class: power
     value_type: U_WORD
+    multiply: 0.1
     min_value: 0
     max_value: 12000
-    step: 100
+    step: 10
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
@@ -952,9 +955,10 @@ number:
     unit_of_measurement: "W"
     device_class: power
     value_type: U_WORD
+    multiply: 0.1
     min_value: 0
     max_value: 12000
-    step: 100
+    step: 10
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
@@ -968,9 +972,10 @@ number:
     unit_of_measurement: "W"
     device_class: power
     value_type: U_WORD
+    multiply: 0.1
     min_value: 0
     max_value: 12000
-    step: 100
+    step: 10
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
@@ -984,9 +989,10 @@ number:
     unit_of_measurement: "W"
     device_class: power
     value_type: U_WORD
+    multiply: 0.1
     min_value: 0
     max_value: 12000
-    step: 100
+    step: 10
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
@@ -1033,7 +1039,7 @@ number:
     device_class: power
     min_value: 0
     max_value: 12000
-    step: 100
+    step: 10
     update_interval: 1s
     icon: "mdi:power-plug"
     disabled_by_default: true
