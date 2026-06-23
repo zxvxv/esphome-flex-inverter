@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU TOU ---
-# Wersja v2.08 - Złota Wersja z Twardą Kompensacją (Brak multiply).
-# Zmiany: Usunięto wadliwy, natywny filtr multiply: 0.1. Zastosowano pewne wstawki w C++ (lambda / write_lambda) do konwersji wartości (x10) zarówno dla napięć, jak i dla mocy. Wprowadzono twardy limit max_value: 6500W dla mocy TOU, wynikający z ograniczeń 16-bitowych rejestrów U_WORD w architekturze falownika Deye (limit = 65535).
+# Wersja v2.09 - Poprawka bufora Modbus C++.
+# Zmiany: Skorygowano mechanizm zapisu w write_lambda. Zamiast dzielenia na dwa bajty (co powodowało błędy ramki 16-bitowej i odskakiwanie suwaków), wprowadzono poprawne pakowanie całego słowa uint16_t (payload.push_back(val);). Utrzymano logikę skalowania x10 dla mocy (limit 6500W) i napięć.
 
 substitutions:
   func_int_to_time: |-
@@ -716,8 +716,7 @@ number:
     lambda: "return x * 0.1;"
     write_lambda: |-
       uint16_t val = (uint16_t)(x * 10.0);
-      payload.push_back(val >> 8);
-      payload.push_back(val & 0xFF);
+      payload.push_back(val);
       return true;
 
   - platform: modbus_controller
@@ -739,8 +738,7 @@ number:
     lambda: "return x * 0.1;"
     write_lambda: |-
       uint16_t val = (uint16_t)(x * 10.0);
-      payload.push_back(val >> 8);
-      payload.push_back(val & 0xFF);
+      payload.push_back(val);
       return true;
 
   - platform: modbus_controller
@@ -762,8 +760,7 @@ number:
     lambda: "return x * 0.1;"
     write_lambda: |-
       uint16_t val = (uint16_t)(x * 10.0);
-      payload.push_back(val >> 8);
-      payload.push_back(val & 0xFF);
+      payload.push_back(val);
       return true;
 
   - platform: modbus_controller
@@ -785,8 +782,7 @@ number:
     lambda: "return x * 0.1;"
     write_lambda: |-
       uint16_t val = (uint16_t)(x * 10.0);
-      payload.push_back(val >> 8);
-      payload.push_back(val & 0xFF);
+      payload.push_back(val);
       return true;
 
   - platform: modbus_controller
@@ -808,8 +804,7 @@ number:
     lambda: "return x * 0.1;"
     write_lambda: |-
       uint16_t val = (uint16_t)(x * 10.0);
-      payload.push_back(val >> 8);
-      payload.push_back(val & 0xFF);
+      payload.push_back(val);
       return true;
 
   - platform: modbus_controller
@@ -831,8 +826,7 @@ number:
     lambda: "return x * 0.1;"
     write_lambda: |-
       uint16_t val = (uint16_t)(x * 10.0);
-      payload.push_back(val >> 8);
-      payload.push_back(val & 0xFF);
+      payload.push_back(val);
       return true;
 
   - platform: modbus_controller
@@ -943,8 +937,7 @@ number:
     lambda: "return x * 0.1;"
     write_lambda: |-
       uint16_t val = (uint16_t)(x * 10.0);
-      payload.push_back(val >> 8);
-      payload.push_back(val & 0xFF);
+      payload.push_back(val);
       return true;
 
   - platform: modbus_controller
@@ -965,8 +958,7 @@ number:
     lambda: "return x * 0.1;"
     write_lambda: |-
       uint16_t val = (uint16_t)(x * 10.0);
-      payload.push_back(val >> 8);
-      payload.push_back(val & 0xFF);
+      payload.push_back(val);
       return true;
 
   - platform: modbus_controller
@@ -987,8 +979,7 @@ number:
     lambda: "return x * 0.1;"
     write_lambda: |-
       uint16_t val = (uint16_t)(x * 10.0);
-      payload.push_back(val >> 8);
-      payload.push_back(val & 0xFF);
+      payload.push_back(val);
       return true;
 
   - platform: modbus_controller
@@ -1009,8 +1000,7 @@ number:
     lambda: "return x * 0.1;"
     write_lambda: |-
       uint16_t val = (uint16_t)(x * 10.0);
-      payload.push_back(val >> 8);
-      payload.push_back(val & 0xFF);
+      payload.push_back(val);
       return true;
 
   - platform: modbus_controller
@@ -1031,8 +1021,7 @@ number:
     lambda: "return x * 0.1;"
     write_lambda: |-
       uint16_t val = (uint16_t)(x * 10.0);
-      payload.push_back(val >> 8);
-      payload.push_back(val & 0xFF);
+      payload.push_back(val);
       return true;
 
   - platform: modbus_controller
@@ -1053,8 +1042,7 @@ number:
     lambda: "return x * 0.1;"
     write_lambda: |-
       uint16_t val = (uint16_t)(x * 10.0);
-      payload.push_back(val >> 8);
-      payload.push_back(val & 0xFF);
+      payload.push_back(val);
       return true;
 
   - platform: template
