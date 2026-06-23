@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU TOU ---
-# Wersja v2.03 - Golden Release (Skalpel na moc).
-# Zmiany: Napięcie działa idealnie. Moc ucięta do limitu sprzętowego 6000W i wyposażona w precyzyjne lambdy konwertujące (rozdzielczość rejestru 0.1 W udowodniona w testach). Tryb box dla stabilności interfejsu.
+# Wersja v2.04 - Powrót do 12 kW (Zdjecie limitu mocy 6kW).
+# Zmiany: Przywrócono max_value: 12000 dla wszystkich rejestrów Time of Use Out Power. Utrzymano poprawne skalowanie z v2.03 (lambda * 0.1, write_lambda * 10.0 dla napięć; bez mnożnika dla mocy + lambda ucinająca ducha 120 000W do 12000W). Tryb box.
 
 substitutions:
   func_int_to_time: |-
@@ -917,8 +917,8 @@ number:
     device_class: power
     value_type: U_WORD
     min_value: 0
-    max_value: 6000
-    step: 10
+    max_value: 12000
+    step: 100
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
@@ -939,8 +939,8 @@ number:
     device_class: power
     value_type: U_WORD
     min_value: 0
-    max_value: 6000
-    step: 10
+    max_value: 12000
+    step: 100
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
@@ -961,8 +961,8 @@ number:
     device_class: power
     value_type: U_WORD
     min_value: 0
-    max_value: 6000
-    step: 10
+    max_value: 12000
+    step: 100
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
@@ -983,8 +983,8 @@ number:
     device_class: power
     value_type: U_WORD
     min_value: 0
-    max_value: 6000
-    step: 10
+    max_value: 12000
+    step: 100
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
@@ -1005,8 +1005,8 @@ number:
     device_class: power
     value_type: U_WORD
     min_value: 0
-    max_value: 6000
-    step: 10
+    max_value: 12000
+    step: 100
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
@@ -1027,8 +1027,8 @@ number:
     device_class: power
     value_type: U_WORD
     min_value: 0
-    max_value: 6000
-    step: 10
+    max_value: 12000
+    step: 100
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
@@ -1080,8 +1080,8 @@ number:
     unit_of_measurement: "W"
     device_class: power
     min_value: 0
-    max_value: 6000
-    step: 10
+    max_value: 12000
+    step: 100
     update_interval: 1s
     icon: "mdi:power-plug"
     disabled_by_default: true
