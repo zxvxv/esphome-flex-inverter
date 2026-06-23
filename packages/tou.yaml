@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU TOU ---
-# Wersja v1.06 - Korekta mnożnika napięć według hipotezy 0.01.
-# Zmiany: Zastosowano multiply: 0.01 dla fizycznych rejestrów napięcia TOU (260-265) oraz step: 0.01. Mnożniki mocy usunięte. Wszystko w trybie box.
+# Wersja v1.07 - Twarda implementacja mnożników w lambdach (hipoteza Pawła).
+# Zmiany: Zastosowanie mnożników/dzielników (przesuwanie przecinka) bezpośrednio w blokach 'lambda' oraz 'set_action' dla wirtualnych encji (Template) sterujących napięciem i mocą, eliminując poleganie na filtrach Modbusa dla tych agregatów.
 
 substitutions:
   func_int_to_time: |-
@@ -597,6 +597,19 @@ switch:
           id: hackman_flex3l_switch_time_of_use_5_sell
       - switch.turn_on:
           id: hackman_flex3l_switch_time_of_use_6_sell
+    turn_off_action:
+      - switch.turn_off:
+          id: hackman_flex3l_switch_time_of_use_1_sell
+      - switch.turn_off:
+          id: hackman_flex3l_switch_time_of_use_2_sell
+      - switch.turn_off:
+          id: hackman_flex3l_switch_time_of_use_3_sell
+      - switch.turn_off:
+          id: hackman_flex3l_switch_time_of_use_4_sell
+      - switch.turn_off:
+          id: hackman_flex3l_switch_time_of_use_5_sell
+      - switch.turn_off:
+          id: hackman_flex3l_switch_time_of_use_6_sell
 
 time:
   - platform: sntp
@@ -694,13 +707,15 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.01
-    min_value: 38
-    max_value: 61
-    step: 0.01
     entity_category: config
     mode: box
     icon: "mdi:flash"
+    lambda: "return x * 0.01;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 100.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -712,13 +727,15 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.01
-    min_value: 38
-    max_value: 61
-    step: 0.01
     entity_category: config
     mode: box
     icon: "mdi:flash"
+    lambda: "return x * 0.01;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 100.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -730,13 +747,15 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.01
-    min_value: 38
-    max_value: 61
-    step: 0.01
     entity_category: config
     mode: box
     icon: "mdi:flash"
+    lambda: "return x * 0.01;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 100.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -748,13 +767,15 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.01
-    min_value: 38
-    max_value: 61
-    step: 0.01
     entity_category: config
     mode: box
     icon: "mdi:flash"
+    lambda: "return x * 0.01;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 100.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -766,13 +787,15 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.01
-    min_value: 38
-    max_value: 61
-    step: 0.01
     entity_category: config
     mode: box
     icon: "mdi:flash"
+    lambda: "return x * 0.01;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 100.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -784,13 +807,15 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.01
-    min_value: 38
-    max_value: 61
-    step: 0.01
     entity_category: config
     mode: box
     icon: "mdi:flash"
+    lambda: "return x * 0.01;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 100.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -897,6 +922,12 @@ number:
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
+    lambda: "return x * 0.1;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 10.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -913,6 +944,12 @@ number:
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
+    lambda: "return x * 0.1;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 10.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -929,6 +966,12 @@ number:
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
+    lambda: "return x * 0.1;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 10.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -945,6 +988,12 @@ number:
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
+    lambda: "return x * 0.1;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 10.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -961,6 +1010,12 @@ number:
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
+    lambda: "return x * 0.1;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 10.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -977,6 +1032,12 @@ number:
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
+    lambda: "return x * 0.1;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 10.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: template
     mode: box
@@ -1054,7 +1115,7 @@ number:
     device_class: voltage
     min_value: 38
     max_value: 61
-    step: 0.01
+    step: 0.1
     update_interval: 1s
     icon: "mdi:sun-clock"
     disabled_by_default: true
