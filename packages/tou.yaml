@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU TOU ---
-# Wersja v2.10 - Pełna synchronizacja natywna dla falownika LV (Low Voltage).
-# Zmiany: Usunięto błędne ograniczenia napięciowe (150V-750V) właściwe dla systemów HV. Skorygowano zakresy dla baterii 48V (38.0V - 62.0V) przy użyciu czystego, natywnego mnożnika multiply: 0.1. Moce przywrócone do pełnego zakresu 1:1 (0 - 12000W) bez żadnych ułomnych filtrów czy lambd, co całkowicie naprawia błędy zapisu.
+# Wersja v2.11 - Kompletna (Przywrócenie usuniętych encji SoC).
+# Zmiany: Przywrócono omyłkowo usunięte encje Time of Use 1-6 SoC. Utrzymano poprawne, czyste parametry dla napięć (multiply: 0.1, 38-62V) oraz mocy (1:1, 0-12000W) z v2.10, które naprawiły zapis Modbus.
 
 substitutions:
   func_int_to_time: |-
@@ -804,6 +804,96 @@ number:
     entity_category: config
     mode: box
     icon: "mdi:flash"
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 1 SoC"
+    id: hackman_flex3l_time_of_use_1_soc
+    address: 266
+    unit_of_measurement: "%"
+    value_type: U_WORD
+    min_value: 0
+    max_value: 100
+    step: 1
+    entity_category: config
+    mode: box
+    icon: "mdi:battery"
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 2 SoC"
+    id: hackman_flex3l_time_of_use_2_soc
+    address: 267
+    unit_of_measurement: "%"
+    value_type: U_WORD
+    min_value: 0
+    max_value: 100
+    step: 1
+    entity_category: config
+    mode: box
+    icon: "mdi:battery"
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 3 SoC"
+    id: hackman_flex3l_time_of_use_3_soc
+    address: 268
+    unit_of_measurement: "%"
+    value_type: U_WORD
+    min_value: 0
+    max_value: 100
+    step: 1
+    entity_category: config
+    mode: box
+    icon: "mdi:battery"
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 4 SoC"
+    id: hackman_flex3l_time_of_use_4_soc
+    address: 269
+    unit_of_measurement: "%"
+    value_type: U_WORD
+    min_value: 0
+    max_value: 100
+    step: 1
+    entity_category: config
+    mode: box
+    icon: "mdi:battery"
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 5 SoC"
+    id: hackman_flex3l_time_of_use_5_soc
+    address: 270
+    unit_of_measurement: "%"
+    value_type: U_WORD
+    min_value: 0
+    max_value: 100
+    step: 1
+    entity_category: config
+    mode: box
+    icon: "mdi:battery"
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 6 SoC"
+    id: hackman_flex3l_time_of_use_6_soc
+    address: 271
+    unit_of_measurement: "%"
+    value_type: U_WORD
+    min_value: 0
+    max_value: 100
+    step: 1
+    entity_category: config
+    mode: box
+    icon: "mdi:battery"
 
   - platform: modbus_controller
     use_write_multiple: true
