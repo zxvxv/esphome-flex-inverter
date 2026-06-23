@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU TOU ---
-# Wersja v2.01 - Czyszczenie pamięci Flash i manualny Write Lambda (Ostateczne starcie).
-# Zmiany: Zablokowano zapisywanie stanu w pamięci (restore_value: false), aby zabić wirtualne 120 000W z wczoraj. Dla Napięć przywrócono precyzyjne odczyty C++ (lambda * 0.1, write_lambda * 10.0), eliminując bugi natywnych filtrów multiply. Brak mnożnika dla Mocy. Tryb box wszędzie.
+# Wersja v2.02 - Golden Release (Korekta kompilatora).
+# Zmiany: Usunięcie konfliktowego 'restore_value: false' z encji template posiadających lambdę. Dla Napięć przywrócono precyzyjne odczyty C++ (lambda * 0.1, write_lambda * 10.0), eliminując bugi natywnych filtrów multiply. Brak mnożnika dla Mocy. Tryb box wszędzie.
 
 substitutions:
   func_int_to_time: |-
@@ -1013,7 +1013,6 @@ number:
     max_value: 100
     step: 1
     update_interval: 1s
-    restore_value: false
     icon: "mdi:battery-clock"
     disabled_by_default: true
     lambda: |-
@@ -1048,7 +1047,6 @@ number:
     max_value: 12000
     step: 100
     update_interval: 1s
-    restore_value: false
     icon: "mdi:power-plug"
     disabled_by_default: true
     lambda: |-
@@ -1083,7 +1081,6 @@ number:
     max_value: 61
     step: 0.1
     update_interval: 1s
-    restore_value: false
     icon: "mdi:sun-clock"
     disabled_by_default: true
     lambda: |-
