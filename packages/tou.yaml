@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU TOU ---
-# Wersja v2.07 - Finalna stabilizacja (Złota Wersja).
-# Zmiany: MOCE czytane i zapisywane 1:1 bez żadnych filtrów i lambd (12000W to 12000W). NAPIĘCIA przywrócone do bezpiecznych lambd C++ (odczyt x * 0.1, zapis x * 10.0), ponieważ natywny parametr multiply: 0.1 zawodzi na komponencie number w ESPHome.
+# Wersja v2.08 - Złota Wersja z Twardą Kompensacją (Brak multiply).
+# Zmiany: Usunięto wadliwy, natywny filtr multiply: 0.1. Zastosowano pewne wstawki w C++ (lambda / write_lambda) do konwersji wartości (x10) zarówno dla napięć, jak i dla mocy. Wprowadzono twardy limit max_value: 6500W dla mocy TOU, wynikający z ograniczeń 16-bitowych rejestrów U_WORD w architekturze falownika Deye (limit = 65535).
 
 substitutions:
   func_int_to_time: |-
@@ -707,6 +707,9 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
+    min_value: 38
+    max_value: 61
+    step: 0.1
     entity_category: config
     mode: box
     icon: "mdi:flash"
@@ -727,6 +730,9 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
+    min_value: 38
+    max_value: 61
+    step: 0.1
     entity_category: config
     mode: box
     icon: "mdi:flash"
@@ -747,6 +753,9 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
+    min_value: 38
+    max_value: 61
+    step: 0.1
     entity_category: config
     mode: box
     icon: "mdi:flash"
@@ -767,6 +776,9 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
+    min_value: 38
+    max_value: 61
+    step: 0.1
     entity_category: config
     mode: box
     icon: "mdi:flash"
@@ -787,6 +799,9 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
+    min_value: 38
+    max_value: 61
+    step: 0.1
     entity_category: config
     mode: box
     icon: "mdi:flash"
@@ -807,6 +822,9 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
+    min_value: 38
+    max_value: 61
+    step: 0.1
     entity_category: config
     mode: box
     icon: "mdi:flash"
@@ -917,11 +935,17 @@ number:
     device_class: power
     value_type: U_WORD
     min_value: 0
-    max_value: 12000
-    step: 100
+    max_value: 6500
+    step: 10
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
+    lambda: "return x * 0.1;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 10.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -933,11 +957,17 @@ number:
     device_class: power
     value_type: U_WORD
     min_value: 0
-    max_value: 12000
-    step: 100
+    max_value: 6500
+    step: 10
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
+    lambda: "return x * 0.1;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 10.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -949,11 +979,17 @@ number:
     device_class: power
     value_type: U_WORD
     min_value: 0
-    max_value: 12000
-    step: 100
+    max_value: 6500
+    step: 10
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
+    lambda: "return x * 0.1;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 10.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -965,11 +1001,17 @@ number:
     device_class: power
     value_type: U_WORD
     min_value: 0
-    max_value: 12000
-    step: 100
+    max_value: 6500
+    step: 10
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
+    lambda: "return x * 0.1;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 10.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -981,11 +1023,17 @@ number:
     device_class: power
     value_type: U_WORD
     min_value: 0
-    max_value: 12000
-    step: 100
+    max_value: 6500
+    step: 10
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
+    lambda: "return x * 0.1;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 10.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -997,11 +1045,17 @@ number:
     device_class: power
     value_type: U_WORD
     min_value: 0
-    max_value: 12000
-    step: 100
+    max_value: 6500
+    step: 10
     entity_category: config
     mode: box
     icon: "mdi:lightning-bolt"
+    lambda: "return x * 0.1;"
+    write_lambda: |-
+      uint16_t val = (uint16_t)(x * 10.0);
+      payload.push_back(val >> 8);
+      payload.push_back(val & 0xFF);
+      return true;
 
   - platform: template
     mode: box
@@ -1044,8 +1098,8 @@ number:
     unit_of_measurement: "W"
     device_class: power
     min_value: 0
-    max_value: 12000
-    step: 100
+    max_value: 6500
+    step: 10
     update_interval: 1s
     icon: "mdi:power-plug"
     disabled_by_default: true
