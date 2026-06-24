@@ -197,7 +197,7 @@ number:
     mode: box
     min_value: 6000
     max_value: 12000
-    step: 2000
+    step: 100
 
 # text_sensor:
 #   - platform: modbus_controller
