@@ -1,9 +1,7 @@
 # --- POCZĄTEK PLIKU TOU ---
-# Wersja v5.00 - Architektura "Ninja" dla Napięć, usunięcie limitów Mocy.
-# Zmiany: Całkowicie wycięto sekcję nastaw Mocy (Out Power) ze względu na błędy 16-bitowego limitu sprzętowego. 
-# Wprowadzono architekturę z ukrytym rejestrem (internal: true) dla napięć (adresy 260-265), które przyjmują wartości surowe (np. 490),
-# a do Home Assistanta wystawiono bezpieczne wirtualne suwaki template, pokazujące poprawne wartości w woltach (np. 49.0 V) bez psucia zapisu.
-# Encje SoC zachowano w 100% natywnie.
+# Wersja v6.00 - Napięcia "Ninja" + Moce jako Sensory (Read-Only).
+# Zmiany: Przywrócono encje Mocy (Out Power), ale przeniesiono je do sekcji 'sensor'. 
+# Teraz są tylko do odczytu - zapobiega to błędom kompilatora z brakującymi ID.
 
 substitutions:
   func_int_to_time: |-
@@ -617,6 +615,112 @@ switch:
 time:
   - platform: sntp
     id: sntp_time
+
+# === SENSORY MOCY (TYLKO ODCZYT) ZAMIAST SUWAKÓW ===
+sensor:
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 1 Out Power"
+    id: hackman_flex3l_time_of_use_1_out_power
+    register_type: holding
+    address: 254
+    unit_of_measurement: "W"
+    device_class: power
+    value_type: U_WORD
+    accuracy_decimals: 0
+    filters:
+      - multiply: 0.1
+    entity_category: diagnostic
+    icon: "mdi:lightning-bolt"
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 2 Out Power"
+    id: hackman_flex3l_time_of_use_2_out_power
+    register_type: holding
+    address: 255
+    unit_of_measurement: "W"
+    device_class: power
+    value_type: U_WORD
+    accuracy_decimals: 0
+    filters:
+      - multiply: 0.1
+    entity_category: diagnostic
+    icon: "mdi:lightning-bolt"
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 3 Out Power"
+    id: hackman_flex3l_time_of_use_3_out_power
+    register_type: holding
+    address: 256
+    unit_of_measurement: "W"
+    device_class: power
+    value_type: U_WORD
+    accuracy_decimals: 0
+    filters:
+      - multiply: 0.1
+    entity_category: diagnostic
+    icon: "mdi:lightning-bolt"
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 4 Out Power"
+    id: hackman_flex3l_time_of_use_4_out_power
+    register_type: holding
+    address: 257
+    unit_of_measurement: "W"
+    device_class: power
+    value_type: U_WORD
+    accuracy_decimals: 0
+    filters:
+      - multiply: 0.1
+    entity_category: diagnostic
+    icon: "mdi:lightning-bolt"
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 5 Out Power"
+    id: hackman_flex3l_time_of_use_5_out_power
+    register_type: holding
+    address: 258
+    unit_of_measurement: "W"
+    device_class: power
+    value_type: U_WORD
+    accuracy_decimals: 0
+    filters:
+      - multiply: 0.1
+    entity_category: diagnostic
+    icon: "mdi:lightning-bolt"
+
+  - platform: modbus_controller
+    modbus_controller_id: ${modbus_controller_id}
+    name: "Time of Use 6 Out Power"
+    id: hackman_flex3l_time_of_use_6_out_power
+    register_type: holding
+    address: 259
+    unit_of_measurement: "W"
+    device_class: power
+    value_type: U_WORD
+    accuracy_decimals: 0
+    filters:
+      - multiply: 0.1
+    entity_category: diagnostic
+    icon: "mdi:lightning-bolt"
+
+  - platform: template
+    name: "Time of Use All Out Power"
+    id: hackman_flex3l_time_of_use_all_out_power
+    unit_of_measurement: "W"
+    device_class: power
+    accuracy_decimals: 0
+    icon: "mdi:power-plug"
+    lambda: |-
+      if (id(hackman_flex3l_time_of_use_1_out_power).has_state()) {
+        return id(hackman_flex3l_time_of_use_1_out_power).state;
+      } else {
+        return {};
+      }
 
 number:
   # === UKRYTE REJESTRY CZASU I TRYBÓW ===
