@@ -1,7 +1,7 @@
 # --- POCZĄTEK PLIKU KALIBRACJI ---
-# Wersja v1.02 - Inicjalizacja kalibracji dla Hackman Flex3L.
-# Zmiany: Usunięcie przedrostków dla wszystkich encji powiązanych z baterią. 
-# Encje PV, sieci, generatora i TOU pozostawiono w oryginalnej formie.
+# Wersja v1.03 - Czyszczenie starych rozszerzeń (Fix dla błędu ESPHome).
+# Zmiany: Usunięcie przestarzałych odwołań !extend do encji mocy TOU (out_power).
+# Zmiany: Usunięcie odwołań !extend do napięć TOU (voltage), które zostały przeniesite do głównego pliku tou.yaml v6.0.
 
 sensor:
   - id: !extend battery_power
@@ -52,24 +52,6 @@ number:
     multiply: 0.1
     step: 10
   - id: !extend hackman_flex3l_zero_export_power
-    multiply: 0.1
-    step: 10
-  - id: !extend hackman_flex3l_time_of_use_1_out_power
-    multiply: 0.1
-    step: 10
-  - id: !extend hackman_flex3l_time_of_use_2_out_power
-    multiply: 0.1
-    step: 10
-  - id: !extend hackman_flex3l_time_of_use_3_out_power
-    multiply: 0.1
-    step: 10
-  - id: !extend hackman_flex3l_time_of_use_4_out_power
-    multiply: 0.1
-    step: 10
-  - id: !extend hackman_flex3l_time_of_use_5_out_power
-    multiply: 0.1
-    step: 10
-  - id: !extend hackman_flex3l_time_of_use_6_out_power
     multiply: 0.1
     step: 10
   - id: !extend battery_shutdown_voltage
@@ -124,40 +106,6 @@ number:
     max_value: 710
   - id: !extend hackman_flex3l_smartload_on_voltage
     multiply: 10
-    step: 0.1
-    min_value: 150
-    max_value: 710
-  - id: !extend hackman_flex3l_time_of_use_1_voltage
-    multiply: 10
-    step: 0.1
-    min_value: 150
-    max_value: 710
-  - id: !extend hackman_flex3l_time_of_use_2_voltage
-    multiply: 10
-    step: 0.1
-    min_value: 150
-    max_value: 710
-  - id: !extend hackman_flex3l_time_of_use_3_voltage
-    multiply: 10
-    step: 0.1
-    min_value: 150
-    max_value: 710
-  - id: !extend hackman_flex3l_time_of_use_4_voltage
-    multiply: 10
-    step: 0.1
-    min_value: 150
-    max_value: 710
-  - id: !extend hackman_flex3l_time_of_use_5_voltage
-    multiply: 10
-    step: 0.1
-    min_value: 150
-    max_value: 710
-  - id: !extend hackman_flex3l_time_of_use_6_voltage
-    multiply: 10
-    step: 0.1
-    min_value: 150
-    max_value: 710
-  - id: !extend hackman_flex3l_time_of_use_all_voltage
     step: 0.1
     min_value: 150
     max_value: 710
