@@ -182,7 +182,8 @@ binary_sensor:
     device_class: power
     icon: "mdi:toggle-switch"
 
-number:
+# --- POCZĄTEK MODYFIKACJI RATED POWER ---
+sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     name: "Rated Power"
@@ -192,12 +193,9 @@ number:
     value_type: U_WORD
     unit_of_measurement: "W"
     device_class: power
-    entity_category: config
+    entity_category: diagnostic
     icon: "mdi:lightning-bolt"
-    mode: box
-    min_value: 6000
-    max_value: 12000
-    step: 50
+# --- KONIEC MODYFIKACJI RATED POWER ---
 
 # text_sensor:
 #   - platform: modbus_controller
