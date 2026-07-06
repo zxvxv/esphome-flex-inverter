@@ -1,7 +1,6 @@
 # --- POCZĄTEK PLIKU WORK MODE ---
-# Wersja v1.04 - Weryfikacja z dokumentacją ECOBSS FLEX 3L.
-# Zmiany: Zgodność mnożników mocy (1W) potwierdzona z PDF.
-# Zmiany: Utrzymano mode: box dla stabilności interfejsu.
+# Wersja v1.06 - Powrót do 1W (Odwołanie błędnego mnożnika 10x).
+# Zmiany: Zgodnie z weryfikacją na żywym organizmie, rozdzielczość 1W jest poprawna.
 
 select:
   - platform: modbus_controller
