@@ -1,5 +1,6 @@
 # --- POCZĄTEK PLIKU GENERATOR ---
-# Wersja v1.01 - Konfiguracja generatora i portu AUX dla Hackman Flex3L.
+# Wersja v1.02 - Konfiguracja generatora i portu AUX dla Hackman Flex3L.
+# Zmiany: Poprawiono błędne wartości multiply (z 100 na 0.01 dla napięć oraz z 10 na 0.1 dla czasu) zgodnie z dokumentacją.
 # Zmiany: Usunięto przedrostki "Hackman Flex3L" z nazw wyświetlanych (name).
 
 sensor:
@@ -199,7 +200,7 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 100
+    multiply: 0.01
     min_value: 38
     max_value: 63
     step: 0.01
@@ -230,7 +231,7 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 100
+    multiply: 0.01
     min_value: 38
     max_value: 63
     step: 0.01
@@ -260,10 +261,10 @@ number:
     unit_of_measurement: "h"
     device_class: duration
     value_type: U_WORD
-    multiply: 10
+    multiply: 0.1
     min_value: 0
     max_value: 24
-    step: 1
+    step: 0.1
     entity_category: config
     mode: box
     icon: "mdi:generator-stationary"
@@ -276,10 +277,10 @@ number:
     unit_of_measurement: "h"
     device_class: duration
     value_type: U_WORD
-    multiply: 10
+    multiply: 0.1
     min_value: 0
     max_value: 24
-    step: 1
+    step: 0.1
     entity_category: config
     mode: box
     icon: "mdi:generator-stationary"
