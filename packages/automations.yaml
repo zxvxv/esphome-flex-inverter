@@ -1,5 +1,6 @@
 # --- POCZĄTEK PLIKU AUTOMATIONS ---
-# Wersja v1.03 - Automatyka przekaźnika (Web Server UI) dla ESP32-S3 Waveshare
+# Wersja v1.04 - Automatyka przekaźnika (Web Server UI) dla ESP32-S3 Waveshare
+# Zmiany: Zmiana nazwy wyświetlanej przekaźnika na "Stycznik Zewnętrzny (GPIO47)" w celu ominięcia błędu duplikatu.
 # Zmiany: Zmiana trybu wprowadzania wartości na 'box' (okienko) dla wszystkich encji number.
 # Zmiany: Usunięcie znaków specjalnych (ukośników) z nazw UI.
 # Zmiany: Dostosowanie ID do wyczyszczonego pliku battery.yaml (id: battery_soc).
@@ -8,7 +9,7 @@ switch:
   - platform: gpio
     pin: GPIO47
     id: waveshare_relay
-    name: "Przekaźnik Zewnętrzny (Stycznik)"
+    name: "Stycznik Zewnętrzny (GPIO47)"
     restore_mode: ALWAYS_OFF
     icon: "mdi:relay"
 
