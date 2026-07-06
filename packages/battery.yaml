@@ -1,6 +1,7 @@
 # --- POCZĄTEK PLIKU BATTERY ---
-# Wersja v1.12 - Twarde limity (Fix dla błędu -16777220).
-# Zmiany: Dodanie min_value i max_value do wszystkich encji number zgodnie z PDF, aby zapobiec wyświetlaniu domyślnych kosmicznych wartości przez HA.
+# Wersja v1.13 - Naprawa skalowania ESPHome dla encji konfiguracji.
+# Zmiany: Zastąpienie ignorowanego 'multiply' poprawnym parametrem 'value_factor: 0.01' we wszystkich encjach number dla Napięć i SOC.
+# Zmiany: Utrzymanie twardych limitów (min/max) zapobiegających domyślnym odchyłom interfejsu.
 
 sensor:
   - platform: modbus_controller
@@ -453,7 +454,7 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.01
+    value_factor: 0.01
     min_value: 38.00
     max_value: 63.00
     step: 0.01
@@ -468,6 +469,7 @@ number:
     address: 224
     unit_of_measurement: "%"
     value_type: U_WORD
+    value_factor: 0.01
     min_value: 0
     max_value: 100
     step: 1
@@ -499,7 +501,7 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.01
+    value_factor: 0.01
     min_value: 38.00
     max_value: 63.00
     step: 0.01
@@ -514,6 +516,7 @@ number:
     address: 227
     unit_of_measurement: "%"
     value_type: U_WORD
+    value_factor: 0.01
     min_value: 0
     max_value: 100
     step: 1
@@ -544,7 +547,6 @@ number:
     unit_of_measurement: "h"
     device_class: duration
     value_type: U_WORD
-    multiply: 0.5
     min_value: 0
     max_value: 10
     step: 0.5
@@ -587,7 +589,7 @@ number:
     address: 214
     unit_of_measurement: "%"
     value_type: U_WORD
-    multiply: 0.1
+    value_factor: 0.01
     min_value: 0
     max_value: 100
     step: 0.1
@@ -602,6 +604,7 @@ number:
     address: 215
     unit_of_measurement: "%"
     value_type: U_WORD
+    value_factor: 0.01
     min_value: 0
     max_value: 100
     step: 1
@@ -616,6 +619,7 @@ number:
     address: 216
     unit_of_measurement: "%"
     value_type: U_WORD
+    value_factor: 0.01
     min_value: 0
     max_value: 100
     step: 1
@@ -630,6 +634,7 @@ number:
     address: 217
     unit_of_measurement: "%"
     value_type: U_WORD
+    value_factor: 0.01
     min_value: 0
     max_value: 100
     step: 1
@@ -646,7 +651,7 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.01
+    value_factor: 0.01
     min_value: 38.00
     max_value: 61.00
     step: 0.01
@@ -663,7 +668,7 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.01
+    value_factor: 0.01
     min_value: 38.00
     max_value: 61.00
     step: 0.01
@@ -680,7 +685,7 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.01
+    value_factor: 0.01
     min_value: 38.00
     max_value: 61.00
     step: 0.01
@@ -697,7 +702,7 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.01
+    value_factor: 0.01
     min_value: 38.00
     max_value: 61.00
     step: 0.01
@@ -714,7 +719,7 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.01
+    value_factor: 0.01
     min_value: 38.00
     max_value: 61.00
     step: 0.01
@@ -731,7 +736,7 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.01
+    value_factor: 0.01
     min_value: 38.00
     max_value: 61.00
     step: 0.01
@@ -762,7 +767,7 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     value_type: U_WORD
-    multiply: 0.01
+    value_factor: 0.01
     min_value: 38.00
     max_value: 61.00
     step: 0.01
