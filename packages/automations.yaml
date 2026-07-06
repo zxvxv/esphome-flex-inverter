@@ -1,5 +1,6 @@
 # --- POCZĄTEK PLIKU AUTOMATIONS ---
-# Wersja v1.02 - Automatyka przekaźnika (Web Server UI) dla ESP32-S3 Waveshare
+# Wersja v1.03 - Automatyka przekaźnika (Web Server UI) dla ESP32-S3 Waveshare
+# Zmiany: Zmiana trybu wprowadzania wartości na 'box' (okienko) dla wszystkich encji number.
 # Zmiany: Usunięcie znaków specjalnych (ukośników) z nazw UI.
 # Zmiany: Dostosowanie ID do wyczyszczonego pliku battery.yaml (id: battery_soc).
 
@@ -35,6 +36,7 @@ number:
     initial_value: 251.0
     unit_of_measurement: "V"
     icon: "mdi:lightning-bolt"
+    mode: box
 
   - platform: template
     name: "Napięcie wyłączenia (Histereza)"
@@ -46,6 +48,7 @@ number:
     initial_value: 248.0
     unit_of_measurement: "V"
     icon: "mdi:lightning-bolt-outline"
+    mode: box
 
   - platform: template
     name: "Bateria SOC załączenia"
@@ -57,6 +60,7 @@ number:
     initial_value: 98
     unit_of_measurement: "%"
     icon: "mdi:battery-arrow-up"
+    mode: box
 
   - platform: template
     name: "Bateria SOC wyłączenia (Histereza)"
@@ -68,6 +72,7 @@ number:
     initial_value: 90
     unit_of_measurement: "%"
     icon: "mdi:battery-arrow-down"
+    mode: box
 
 interval:
   - interval: 5s
