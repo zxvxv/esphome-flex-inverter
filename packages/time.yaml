@@ -1,6 +1,7 @@
 # --- POCZĄTEK PLIKU TIME ---
-# Wersja v1.01 - Moduł synchronizacji czasu dla Hackman Flex3L.
-# Zmiany: Usunięto przedrostki "Hackman Flex3L" z nazw wyświetlanych (name).
+# Wersja v1.02 - Weryfikacja synchronizacji czasu.
+# Zmiany: Kod w 100% bezpieczny dla EEPROM (zapis RTC z crona 2 razy na dobę). Brak encji number.
+# Zmiany: Usunięto przedrostki "Hackman Flex3L" z nazw wyświetlanych (name) - zachowano z v1.01.
 
 substitutions:
   enable_sync_time: false
