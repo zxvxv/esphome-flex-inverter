@@ -1,5 +1,5 @@
 # --- POCZĄTEK PLIKU PV ---
-# Wersja v1.01 - Konfiguracja paneli słonecznych (PV) dla Hackman Flex3L.
+# Wersja v1.02 - Weryfikacja z dokumentacją ECOBSS FLEX 3L (Mnożniki OK).
 # Zmiany: Usunięto przedrostki "Hackman Flex3L" z nazw wyświetlanych (name).
 
 sensor:
