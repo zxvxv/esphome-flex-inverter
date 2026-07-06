@@ -1,5 +1,6 @@
 # --- POCZĄTEK PLIKU TOU ---
-# Wersja v6.00 - Napięcia "Ninja" + Moce jako Sensory (Read-Only).
+# Wersja v6.01 - Napięcia "Ninja" + Moce jako Sensory (Read-Only).
+# Zmiany: Poprawiono mnożniki mocy (na 1W) oraz napięć (na 0.01V) zgodnie z dokumentacją ECOBSS FLEX 3L.
 # Zmiany: Przywrócono encje Mocy (Out Power), ale przeniesiono je do sekcji 'sensor'. 
 # Teraz są tylko do odczytu - zapobiega to błędom kompilatora z brakującymi ID.
 
@@ -629,7 +630,7 @@ sensor:
     value_type: U_WORD
     accuracy_decimals: 0
     filters:
-      - multiply: 0.1
+      - multiply: 1
     entity_category: diagnostic
     icon: "mdi:lightning-bolt"
 
@@ -644,7 +645,7 @@ sensor:
     value_type: U_WORD
     accuracy_decimals: 0
     filters:
-      - multiply: 0.1
+      - multiply: 1
     entity_category: diagnostic
     icon: "mdi:lightning-bolt"
 
@@ -659,7 +660,7 @@ sensor:
     value_type: U_WORD
     accuracy_decimals: 0
     filters:
-      - multiply: 0.1
+      - multiply: 1
     entity_category: diagnostic
     icon: "mdi:lightning-bolt"
 
@@ -674,7 +675,7 @@ sensor:
     value_type: U_WORD
     accuracy_decimals: 0
     filters:
-      - multiply: 0.1
+      - multiply: 1
     entity_category: diagnostic
     icon: "mdi:lightning-bolt"
 
@@ -689,7 +690,7 @@ sensor:
     value_type: U_WORD
     accuracy_decimals: 0
     filters:
-      - multiply: 0.1
+      - multiply: 1
     entity_category: diagnostic
     icon: "mdi:lightning-bolt"
 
@@ -704,7 +705,7 @@ sensor:
     value_type: U_WORD
     accuracy_decimals: 0
     filters:
-      - multiply: 0.1
+      - multiply: 1
     entity_category: diagnostic
     icon: "mdi:lightning-bolt"
 
@@ -732,6 +733,7 @@ number:
     register_type: holding
     address: 246
     internal: true
+    mode: box
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -744,6 +746,7 @@ number:
     min_value: 0
     max_value: 2359
     internal: true
+    mode: box
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -756,6 +759,7 @@ number:
     min_value: 0
     max_value: 2359
     internal: true
+    mode: box
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -768,6 +772,7 @@ number:
     min_value: 0
     max_value: 2359
     internal: true
+    mode: box
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -780,6 +785,7 @@ number:
     min_value: 0
     max_value: 2359
     internal: true
+    mode: box
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -792,6 +798,7 @@ number:
     min_value: 0
     max_value: 2359
     internal: true
+    mode: box
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -804,6 +811,7 @@ number:
     min_value: 0
     max_value: 2359
     internal: true
+    mode: box
 
   # === UKRYTE REJESTRY NAPIĘĆ (NINJA) ===
   - platform: modbus_controller
@@ -815,6 +823,7 @@ number:
     address: 260
     value_type: U_WORD
     internal: true
+    mode: box
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -825,6 +834,7 @@ number:
     address: 261
     value_type: U_WORD
     internal: true
+    mode: box
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -835,6 +845,7 @@ number:
     address: 262
     value_type: U_WORD
     internal: true
+    mode: box
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -845,6 +856,7 @@ number:
     address: 263
     value_type: U_WORD
     internal: true
+    mode: box
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -855,6 +867,7 @@ number:
     address: 264
     value_type: U_WORD
     internal: true
+    mode: box
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -865,6 +878,7 @@ number:
     address: 265
     value_type: U_WORD
     internal: true
+    mode: box
 
   # === WIRTUALNE SUWAKI NAPIĘĆ DLA HOME ASSISTANT ===
   - platform: template
@@ -873,21 +887,21 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     min_value: 38.0
-    max_value: 62.0
-    step: 0.1
+    max_value: 63.0
+    step: 0.01
     entity_category: config
     mode: box
     icon: "mdi:flash"
     lambda: |-
       if (id(hackman_flex3l_time_of_use_1_voltage_raw).has_state()) {
-        return id(hackman_flex3l_time_of_use_1_voltage_raw).state * 0.1;
+        return id(hackman_flex3l_time_of_use_1_voltage_raw).state * 0.01;
       } else {
         return {};
       }
     set_action:
       - number.set:
           id: hackman_flex3l_time_of_use_1_voltage_raw
-          value: !lambda "return x * 10.0;"
+          value: !lambda "return x * 100.0;"
 
   - platform: template
     name: "Time of Use 2 Voltage"
@@ -895,21 +909,21 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     min_value: 38.0
-    max_value: 62.0
-    step: 0.1
+    max_value: 63.0
+    step: 0.01
     entity_category: config
     mode: box
     icon: "mdi:flash"
     lambda: |-
       if (id(hackman_flex3l_time_of_use_2_voltage_raw).has_state()) {
-        return id(hackman_flex3l_time_of_use_2_voltage_raw).state * 0.1;
+        return id(hackman_flex3l_time_of_use_2_voltage_raw).state * 0.01;
       } else {
         return {};
       }
     set_action:
       - number.set:
           id: hackman_flex3l_time_of_use_2_voltage_raw
-          value: !lambda "return x * 10.0;"
+          value: !lambda "return x * 100.0;"
 
   - platform: template
     name: "Time of Use 3 Voltage"
@@ -917,21 +931,21 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     min_value: 38.0
-    max_value: 62.0
-    step: 0.1
+    max_value: 63.0
+    step: 0.01
     entity_category: config
     mode: box
     icon: "mdi:flash"
     lambda: |-
       if (id(hackman_flex3l_time_of_use_3_voltage_raw).has_state()) {
-        return id(hackman_flex3l_time_of_use_3_voltage_raw).state * 0.1;
+        return id(hackman_flex3l_time_of_use_3_voltage_raw).state * 0.01;
       } else {
         return {};
       }
     set_action:
       - number.set:
           id: hackman_flex3l_time_of_use_3_voltage_raw
-          value: !lambda "return x * 10.0;"
+          value: !lambda "return x * 100.0;"
 
   - platform: template
     name: "Time of Use 4 Voltage"
@@ -939,21 +953,21 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     min_value: 38.0
-    max_value: 62.0
-    step: 0.1
+    max_value: 63.0
+    step: 0.01
     entity_category: config
     mode: box
     icon: "mdi:flash"
     lambda: |-
       if (id(hackman_flex3l_time_of_use_4_voltage_raw).has_state()) {
-        return id(hackman_flex3l_time_of_use_4_voltage_raw).state * 0.1;
+        return id(hackman_flex3l_time_of_use_4_voltage_raw).state * 0.01;
       } else {
         return {};
       }
     set_action:
       - number.set:
           id: hackman_flex3l_time_of_use_4_voltage_raw
-          value: !lambda "return x * 10.0;"
+          value: !lambda "return x * 100.0;"
 
   - platform: template
     name: "Time of Use 5 Voltage"
@@ -961,21 +975,21 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     min_value: 38.0
-    max_value: 62.0
-    step: 0.1
+    max_value: 63.0
+    step: 0.01
     entity_category: config
     mode: box
     icon: "mdi:flash"
     lambda: |-
       if (id(hackman_flex3l_time_of_use_5_voltage_raw).has_state()) {
-        return id(hackman_flex3l_time_of_use_5_voltage_raw).state * 0.1;
+        return id(hackman_flex3l_time_of_use_5_voltage_raw).state * 0.01;
       } else {
         return {};
       }
     set_action:
       - number.set:
           id: hackman_flex3l_time_of_use_5_voltage_raw
-          value: !lambda "return x * 10.0;"
+          value: !lambda "return x * 100.0;"
 
   - platform: template
     name: "Time of Use 6 Voltage"
@@ -983,21 +997,21 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     min_value: 38.0
-    max_value: 62.0
-    step: 0.1
+    max_value: 63.0
+    step: 0.01
     entity_category: config
     mode: box
     icon: "mdi:flash"
     lambda: |-
       if (id(hackman_flex3l_time_of_use_6_voltage_raw).has_state()) {
-        return id(hackman_flex3l_time_of_use_6_voltage_raw).state * 0.1;
+        return id(hackman_flex3l_time_of_use_6_voltage_raw).state * 0.01;
       } else {
         return {};
       }
     set_action:
       - number.set:
           id: hackman_flex3l_time_of_use_6_voltage_raw
-          value: !lambda "return x * 10.0;"
+          value: !lambda "return x * 100.0;"
 
   # === ENCJE SoC (ZACHOWANE JAKO NATYWNY MODBUS 1:1) ===
   - platform: modbus_controller
@@ -1136,36 +1150,36 @@ number:
     unit_of_measurement: "V"
     device_class: voltage
     min_value: 38.0
-    max_value: 62.0
-    step: 0.1
+    max_value: 63.0
+    step: 0.01
     update_interval: 1s
     icon: "mdi:sun-clock"
     disabled_by_default: true
     lambda: |-
       if (id(hackman_flex3l_time_of_use_1_voltage_raw).has_state()) {
-        return id(hackman_flex3l_time_of_use_1_voltage_raw).state * 0.1;
+        return id(hackman_flex3l_time_of_use_1_voltage_raw).state * 0.01;
       } else {
         return {};
       }
     set_action:
       - number.set:
           id: hackman_flex3l_time_of_use_1_voltage_raw
-          value: !lambda "return x * 10.0;"
+          value: !lambda "return x * 100.0;"
       - number.set:
           id: hackman_flex3l_time_of_use_2_voltage_raw
-          value: !lambda "return x * 10.0;"
+          value: !lambda "return x * 100.0;"
       - number.set:
           id: hackman_flex3l_time_of_use_3_voltage_raw
-          value: !lambda "return x * 10.0;"
+          value: !lambda "return x * 100.0;"
       - number.set:
           id: hackman_flex3l_time_of_use_4_voltage_raw
-          value: !lambda "return x * 10.0;"
+          value: !lambda "return x * 100.0;"
       - number.set:
           id: hackman_flex3l_time_of_use_5_voltage_raw
-          value: !lambda "return x * 10.0;"
+          value: !lambda "return x * 100.0;"
       - number.set:
           id: hackman_flex3l_time_of_use_6_voltage_raw
-          value: !lambda "return x * 10.0;"
+          value: !lambda "return x * 100.0;"
 
   # === UKRYTE REJESTRY TRYBÓW (TOU RAW) ===
   - platform: modbus_controller
@@ -1176,6 +1190,7 @@ number:
     register_type: holding
     address: 272
     internal: true
+    mode: box
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -1185,6 +1200,7 @@ number:
     register_type: holding
     address: 273
     internal: true
+    mode: box
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -1194,6 +1210,7 @@ number:
     register_type: holding
     address: 274
     internal: true
+    mode: box
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -1203,6 +1220,7 @@ number:
     register_type: holding
     address: 275
     internal: true
+    mode: box
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -1212,6 +1230,7 @@ number:
     register_type: holding
     address: 276
     internal: true
+    mode: box
 
   - platform: modbus_controller
     use_write_multiple: true
@@ -1221,4 +1240,5 @@ number:
     register_type: holding
     address: 277
     internal: true
+    mode: box
 # --- KONIEC PLIKU TOU ---
