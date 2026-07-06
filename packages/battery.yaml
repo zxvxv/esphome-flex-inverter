@@ -1,7 +1,6 @@
 # --- POCZĄTEK PLIKU BATTERY ---
-# Wersja v1.11 - Czysta naprawa bez ingerencji w ID.
-# Zmiany: Poprawa mnożników napięcia i prądu baterii (z 0.1 na 0.01) zgodnie z dokumentacją ECOBSS FLEX 3L.
-# Zmiany: Zmiana wszystkich encji number na mode: box. Dodanie opcji 65535 dla BMS Type. Przywrócenie ORYGINALNYCH, krótkich identyfikatorów 'id'.
+# Wersja v1.12 - Twarde limity (Fix dla błędu -16777220).
+# Zmiany: Dodanie min_value i max_value do wszystkich encji number zgodnie z PDF, aby zapobiec wyświetlaniu domyślnych kosmicznych wartości przez HA.
 
 sensor:
   - platform: modbus_controller
@@ -409,7 +408,7 @@ switch:
     name: "Battery Wake Up"
     register_type: holding
     address: 212
-    bitmask: 1 # Bit0: Battery 1 wake up (0=enabled, 1=disabled)
+    bitmask: 1
     entity_category: config
     icon: "mdi:battery-charging"
 
@@ -419,7 +418,7 @@ switch:
     name: "Battery 2 Wake Up"
     register_type: holding
     address: 212
-    bitmask: 256 # Bit8: Battery 2 wake up (0=enabled, 1=disabled)
+    bitmask: 256
     entity_category: config
     disabled_by_default: true
     icon: "mdi:battery-charging"
@@ -455,8 +454,8 @@ number:
     device_class: voltage
     value_type: U_WORD
     multiply: 0.01
-    min_value: 38
-    max_value: 61
+    min_value: 38.00
+    max_value: 63.00
     step: 0.01
     entity_category: config
     mode: box
@@ -485,7 +484,7 @@ number:
     device_class: current
     value_type: U_WORD
     min_value: 0
-    max_value: 240
+    max_value: 185
     step: 1
     entity_category: config
     mode: box
@@ -501,8 +500,8 @@ number:
     device_class: voltage
     value_type: U_WORD
     multiply: 0.01
-    min_value: 38
-    max_value: 61
+    min_value: 38.00
+    max_value: 63.00
     step: 0.01
     entity_category: config
     mode: box
@@ -648,8 +647,8 @@ number:
     device_class: voltage
     value_type: U_WORD
     multiply: 0.01
-    min_value: 38
-    max_value: 61
+    min_value: 38.00
+    max_value: 61.00
     step: 0.01
     entity_category: config
     mode: box
@@ -665,8 +664,8 @@ number:
     device_class: voltage
     value_type: U_WORD
     multiply: 0.01
-    min_value: 38
-    max_value: 61
+    min_value: 38.00
+    max_value: 61.00
     step: 0.01
     entity_category: config
     mode: box
@@ -682,8 +681,8 @@ number:
     device_class: voltage
     value_type: U_WORD
     multiply: 0.01
-    min_value: 38
-    max_value: 61
+    min_value: 38.00
+    max_value: 61.00
     step: 0.01
     entity_category: config
     mode: box
@@ -699,8 +698,8 @@ number:
     device_class: voltage
     value_type: U_WORD
     multiply: 0.01
-    min_value: 38
-    max_value: 61
+    min_value: 38.00
+    max_value: 61.00
     step: 0.01
     entity_category: config
     mode: box
@@ -716,8 +715,8 @@ number:
     device_class: voltage
     value_type: U_WORD
     multiply: 0.01
-    min_value: 38
-    max_value: 61
+    min_value: 38.00
+    max_value: 61.00
     step: 0.01
     entity_category: config
     mode: box
@@ -733,8 +732,8 @@ number:
     device_class: voltage
     value_type: U_WORD
     multiply: 0.01
-    min_value: 38
-    max_value: 61
+    min_value: 38.00
+    max_value: 61.00
     step: 0.01
     entity_category: config
     mode: box
@@ -764,8 +763,8 @@ number:
     device_class: voltage
     value_type: U_WORD
     multiply: 0.01
-    min_value: 38
-    max_value: 61
+    min_value: 38.00
+    max_value: 61.00
     step: 0.01
     entity_category: config
     mode: box
@@ -781,6 +780,9 @@ number:
     device_class: current
     entity_category: config
     value_type: U_WORD
+    min_value: 0
+    max_value: 185
+    step: 1
     mode: box
     icon: "mdi:battery-charging"
 
@@ -794,6 +796,9 @@ number:
     device_class: current
     entity_category: config
     value_type: U_WORD
+    min_value: 0
+    max_value: 185
+    step: 1
     mode: box
     icon: "mdi:battery-charging-10"
 
@@ -806,6 +811,9 @@ number:
     entity_category: config
     device_class: current
     value_type: U_WORD
+    min_value: 0
+    max_value: 185
+    step: 1
     mode: box
     icon: "mdi:battery-charging-50"
 # --- KONIEC PLIKU BATTERY ---
