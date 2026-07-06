@@ -1,114 +1,133 @@
 # --- POCZĄTEK PLIKU KALIBRACJI ---
-# Wersja v1.03 - Czyszczenie starych rozszerzeń (Fix dla błędu ESPHome).
+# Wersja v1.04 - Dostosowanie mnożników ECOBSS FLEX 3L i trybu wprowadzania.
+# Zmiany: Zmiana mnożników napięć na 0.01 (zgodnie z rozdzielczością 0.01V).
+# Zmiany: Zmiana mnożników mocy na 1 (zgodnie z rozdzielczością 1W).
+# Zmiany: Dodanie mode: box do encji number i aktualizacja zakresów (min/max).
 # Zmiany: Usunięcie przestarzałych odwołań !extend do encji mocy TOU (out_power).
 # Zmiany: Usunięcie odwołań !extend do napięć TOU (voltage), które zostały przeniesite do głównego pliku tou.yaml v6.0.
 
 sensor:
   - id: !extend battery_power
     filters:
-      - multiply: 10
+      - multiply: 1
   - id: !extend battery_2_power
     filters:
-      - multiply: 10
+      - multiply: 1
   - id: !extend hackman_flex3l_pv1_power
     filters:
-      - multiply: 10
+      - multiply: 1
   - id: !extend hackman_flex3l_pv2_power
     filters:
-      - multiply: 10
+      - multiply: 1
   - id: !extend hackman_flex3l_pv3_power
     filters:
-      - multiply: 10
+      - multiply: 1
   - id: !extend hackman_flex3l_pv4_power
     filters:
-      - multiply: 10
+      - multiply: 1
   - id: !extend battery_voltage
     filters:
-      - multiply: 0.1
+      - multiply: 0.01
   - id: !extend battery_2_voltage
     filters:
-      - multiply: 0.1
+      - multiply: 0.01
   - id: !extend battery_bms_voltage
     filters:
-      - multiply: 0.1
+      - multiply: 0.01
   - id: !extend battery_bms_charging_voltage
     filters:
-      - multiply: 0.1
+      - multiply: 0.01
   - id: !extend battery_bms_discharging_voltage
     filters:
-      - multiply: 0.1
+      - multiply: 0.01
 
 number:
   - id: !extend hackman_flex3l_generator_peak_shaving_power
-    multiply: 0.1
-    step: 10
+    multiply: 1
+    step: 1
+    mode: box
   - id: !extend hackman_flex3l_grid_peak_shaving_power
-    multiply: 0.1
-    step: 10
+    multiply: 1
+    step: 1
+    mode: box
   - id: !extend hackman_flex3l_max_sell_power
-    multiply: 0.1
-    step: 10
+    multiply: 1
+    step: 1
+    mode: box
   - id: !extend hackman_flex3l_max_solar_power
-    multiply: 0.1
-    step: 10
+    multiply: 1
+    step: 1
+    mode: box
   - id: !extend hackman_flex3l_zero_export_power
-    multiply: 0.1
-    step: 10
+    multiply: 1
+    step: 1
+    mode: box
   - id: !extend battery_shutdown_voltage
-    multiply: 10
-    step: 0.1
-    min_value: 150
-    max_value: 710
+    multiply: 0.01
+    step: 0.01
+    min_value: 38
+    max_value: 61
+    mode: box
   - id: !extend battery_restart_voltage
-    multiply: 10
-    step: 0.1
-    min_value: 150
-    max_value: 710
+    multiply: 0.01
+    step: 0.01
+    min_value: 38
+    max_value: 61
+    mode: box
   - id: !extend battery_low_voltage
-    multiply: 10
-    step: 0.1
-    min_value: 150
-    max_value: 710
+    multiply: 0.01
+    step: 0.01
+    min_value: 38
+    max_value: 61
+    mode: box
   - id: !extend battery_equalization_voltage
-    multiply: 10
-    step: 0.1
-    min_value: 150
-    max_value: 710
+    multiply: 0.01
+    step: 0.01
+    min_value: 38
+    max_value: 61
+    mode: box
   - id: !extend battery_absorption_voltage
-    multiply: 10
-    step: 0.1
-    min_value: 150
-    max_value: 710
+    multiply: 0.01
+    step: 0.01
+    min_value: 38
+    max_value: 61
+    mode: box
   - id: !extend battery_float_voltage
-    multiply: 10
-    step: 0.1
-    min_value: 150
-    max_value: 710
+    multiply: 0.01
+    step: 0.01
+    min_value: 38
+    max_value: 61
+    mode: box
   - id: !extend battery_empty_voltage
-    multiply: 10
-    step: 0.1
-    min_value: 150
-    max_value: 710
+    multiply: 0.01
+    step: 0.01
+    min_value: 38
+    max_value: 61
+    mode: box
   - id: !extend battery_grid_charging_start_voltage
-    multiply: 10
-    step: 0.1
-    min_value: 150
-    max_value: 710
+    multiply: 0.01
+    step: 0.01
+    min_value: 38
+    max_value: 63
+    mode: box
   - id: !extend battery_generator_charging_start_voltage
-    multiply: 10
-    step: 0.1
-    min_value: 150
-    max_value: 710
+    multiply: 0.01
+    step: 0.01
+    min_value: 38
+    max_value: 63
+    mode: box
   - id: !extend hackman_flex3l_smartload_off_voltage
-    multiply: 10
-    step: 0.1
-    min_value: 150
-    max_value: 710
+    multiply: 0.01
+    step: 0.01
+    min_value: 38
+    max_value: 63
+    mode: box
   - id: !extend hackman_flex3l_smartload_on_voltage
-    multiply: 10
-    step: 0.1
-    min_value: 150
-    max_value: 710
+    multiply: 0.01
+    step: 0.01
+    min_value: 38
+    max_value: 63
+    mode: box
 
 switch:
   - id: !extend hackman_flex3l_switch_time_of_use_1_sell
