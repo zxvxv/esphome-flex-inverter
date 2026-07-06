@@ -1,8 +1,6 @@
 # --- POCZĄTEK PLIKU TOU ---
-# Wersja v6.01 - Napięcia "Ninja" + Moce jako Sensory (Read-Only).
-# Zmiany: Poprawiono mnożniki mocy (na 1W) oraz napięć (na 0.01V) zgodnie z dokumentacją ECOBSS FLEX 3L.
-# Zmiany: Przywrócono encje Mocy (Out Power), ale przeniesiono je do sekcji 'sensor'. 
-# Teraz są tylko do odczytu - zapobiega to błędom kompilatora z brakującymi ID.
+# Wersja v6.02 - Powrót do edytowalnych mocy TOU (okienka mode: box).
+# Zmiany: Usunięto sensory Out Power, wprowadzając z powrotem wprowadzalne encje number dla mocy [254-259].
 
 substitutions:
   func_int_to_time: |-
@@ -617,9 +615,10 @@ time:
   - platform: sntp
     id: sntp_time
 
-# === SENSORY MOCY (TYLKO ODCZYT) ZAMIAST SUWAKÓW ===
-sensor:
+number:
+  # === MOCE TOU ===
   - platform: modbus_controller
+    use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 1 Out Power"
     id: hackman_flex3l_time_of_use_1_out_power
@@ -628,13 +627,15 @@ sensor:
     unit_of_measurement: "W"
     device_class: power
     value_type: U_WORD
-    accuracy_decimals: 0
-    filters:
-      - multiply: 1
-    entity_category: diagnostic
+    min_value: 0
+    max_value: 8000
+    step: 1
+    entity_category: config
+    mode: box
     icon: "mdi:lightning-bolt"
 
   - platform: modbus_controller
+    use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 2 Out Power"
     id: hackman_flex3l_time_of_use_2_out_power
@@ -643,13 +644,15 @@ sensor:
     unit_of_measurement: "W"
     device_class: power
     value_type: U_WORD
-    accuracy_decimals: 0
-    filters:
-      - multiply: 1
-    entity_category: diagnostic
+    min_value: 0
+    max_value: 8000
+    step: 1
+    entity_category: config
+    mode: box
     icon: "mdi:lightning-bolt"
 
   - platform: modbus_controller
+    use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 3 Out Power"
     id: hackman_flex3l_time_of_use_3_out_power
@@ -658,13 +661,15 @@ sensor:
     unit_of_measurement: "W"
     device_class: power
     value_type: U_WORD
-    accuracy_decimals: 0
-    filters:
-      - multiply: 1
-    entity_category: diagnostic
+    min_value: 0
+    max_value: 8000
+    step: 1
+    entity_category: config
+    mode: box
     icon: "mdi:lightning-bolt"
 
   - platform: modbus_controller
+    use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 4 Out Power"
     id: hackman_flex3l_time_of_use_4_out_power
@@ -673,13 +678,15 @@ sensor:
     unit_of_measurement: "W"
     device_class: power
     value_type: U_WORD
-    accuracy_decimals: 0
-    filters:
-      - multiply: 1
-    entity_category: diagnostic
+    min_value: 0
+    max_value: 8000
+    step: 1
+    entity_category: config
+    mode: box
     icon: "mdi:lightning-bolt"
 
   - platform: modbus_controller
+    use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 5 Out Power"
     id: hackman_flex3l_time_of_use_5_out_power
@@ -688,13 +695,15 @@ sensor:
     unit_of_measurement: "W"
     device_class: power
     value_type: U_WORD
-    accuracy_decimals: 0
-    filters:
-      - multiply: 1
-    entity_category: diagnostic
+    min_value: 0
+    max_value: 8000
+    step: 1
+    entity_category: config
+    mode: box
     icon: "mdi:lightning-bolt"
 
   - platform: modbus_controller
+    use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: "Time of Use 6 Out Power"
     id: hackman_flex3l_time_of_use_6_out_power
@@ -703,27 +712,51 @@ sensor:
     unit_of_measurement: "W"
     device_class: power
     value_type: U_WORD
-    accuracy_decimals: 0
-    filters:
-      - multiply: 1
-    entity_category: diagnostic
+    min_value: 0
+    max_value: 8000
+    step: 1
+    entity_category: config
+    mode: box
     icon: "mdi:lightning-bolt"
 
   - platform: template
+    mode: box
     name: "Time of Use All Out Power"
     id: hackman_flex3l_time_of_use_all_out_power
     unit_of_measurement: "W"
     device_class: power
-    accuracy_decimals: 0
+    min_value: 0
+    max_value: 8000
+    step: 1
+    update_interval: 1s
     icon: "mdi:power-plug"
+    disabled_by_default: true
     lambda: |-
       if (id(hackman_flex3l_time_of_use_1_out_power).has_state()) {
         return id(hackman_flex3l_time_of_use_1_out_power).state;
       } else {
         return {};
       }
+    set_action:
+      - number.set:
+          id: hackman_flex3l_time_of_use_1_out_power
+          value: !lambda "return x;"
+      - number.set:
+          id: hackman_flex3l_time_of_use_2_out_power
+          value: !lambda "return x;"
+      - number.set:
+          id: hackman_flex3l_time_of_use_3_out_power
+          value: !lambda "return x;"
+      - number.set:
+          id: hackman_flex3l_time_of_use_4_out_power
+          value: !lambda "return x;"
+      - number.set:
+          id: hackman_flex3l_time_of_use_5_out_power
+          value: !lambda "return x;"
+      - number.set:
+          id: hackman_flex3l_time_of_use_6_out_power
+          value: !lambda "return x;"
 
-number:
   # === UKRYTE REJESTRY CZASU I TRYBÓW ===
   - platform: modbus_controller
     use_write_multiple: true
