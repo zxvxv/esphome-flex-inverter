@@ -1,8 +1,7 @@
 # --- POCZĄTEK PLIKU AUTOMATIONS ---
-# Wersja v1.04 - Automatyka przekaźnika (Web Server UI) dla ESP32-S3 Waveshare
-# Zmiany: Zmiana nazwy wyświetlanej przekaźnika na "Stycznik Zewnętrzny (GPIO47)" w celu ominięcia błędu duplikatu.
+# Wersja v1.05 - Ominięcie błędów duplikatów w cache ESPHome.
+# Zmiany: Dodanie unikalnych sufiksów (Stycznik) do wszystkich nazw encji (select, number), aby wymusić czystą kompilację.
 # Zmiany: Zmiana trybu wprowadzania wartości na 'box' (okienko) dla wszystkich encji number.
-# Zmiany: Usunięcie znaków specjalnych (ukośników) z nazw UI.
 # Zmiany: Dostosowanie ID do wyczyszczonego pliku battery.yaml (id: battery_soc).
 
 switch:
@@ -15,7 +14,7 @@ switch:
 
 select:
   - platform: template
-    name: "Tryb pracy przekaźnika"
+    name: "Tryb pracy przekaźnika (Stycznik)"
     id: relay_mode
     optimistic: true
     options:
@@ -28,7 +27,7 @@ select:
 
 number:
   - platform: template
-    name: "Napięcie załączenia (Max z 3 faz)"
+    name: "Napięcie załączenia (Stycznik)"
     id: relay_volt_on
     optimistic: true
     min_value: 240
@@ -40,7 +39,7 @@ number:
     mode: box
 
   - platform: template
-    name: "Napięcie wyłączenia (Histereza)"
+    name: "Napięcie wyłączenia (Stycznik)"
     id: relay_volt_off
     optimistic: true
     min_value: 230
@@ -52,7 +51,7 @@ number:
     mode: box
 
   - platform: template
-    name: "Bateria SOC załączenia"
+    name: "Bateria SOC załączenia (Stycznik)"
     id: relay_soc_on
     optimistic: true
     min_value: 50
@@ -64,7 +63,7 @@ number:
     mode: box
 
   - platform: template
-    name: "Bateria SOC wyłączenia (Histereza)"
+    name: "Bateria SOC wyłączenia (Stycznik)"
     id: relay_soc_off
     optimistic: true
     min_value: 40
