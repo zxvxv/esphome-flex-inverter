@@ -1,6 +1,7 @@
 # --- POCZĄTEK PLIKU DEVICE ---
-# Wersja v1.02 - Poprawka adresacji dla Hackman Flex3L.
-# Zmiany: Usunięto przedrostki "Hackman Flex3L" z nazw wyświetlanych (name).
+# Wersja v1.03 - Weryfikacja z dokumentacją ECOBSS FLEX 3L.
+# Zmiany: Sprawdzono mnożniki i rejestry. Plik nie wymagał korekt jednostek ani trybów wyświetlania (brak encji number).
+# Zmiany: Usunięto przedrostki "Hackman Flex3L" z nazw wyświetlanych (name) - zachowano z v1.02.
 
 sensor:
   - platform: modbus_controller
