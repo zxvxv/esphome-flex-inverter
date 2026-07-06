@@ -1,6 +1,7 @@
 # --- POCZĄTEK PLIKU WORK MODE ---
-# Wersja v1.03 - Czysty odczyt 1:1 dla mocy globalnych.
-# Zmiany: Całkowicie usunięto błędne filtry multiply: 10 z Max Sell Power, Max Solar Power oraz Grid Peak Shaving Power. System czyta i zapisuje surowe wartości w Watach w proporcji 1:1. Utrzymano mode: box dla stabilności interfejsu.
+# Wersja v1.04 - Weryfikacja z dokumentacją ECOBSS FLEX 3L.
+# Zmiany: Zgodność mnożników mocy (1W) potwierdzona z PDF.
+# Zmiany: Utrzymano mode: box dla stabilności interfejsu.
 
 select:
   - platform: modbus_controller
