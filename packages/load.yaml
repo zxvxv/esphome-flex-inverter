@@ -1,5 +1,5 @@
 # --- POCZĄTEK PLIKU LOAD ---
-# Wersja v1.02 - Konfiguracja obciążenia domowego dla Hackman Flex3L.
+# Wersja v1.03 - Weryfikacja z dokumentacją ECOBSS FLEX 3L (Mnożniki OK).
 # Zmiany: Usunięcie przedrostków z lokalnych encji. Aktualizacja lambd strat (nowe ID baterii). 
 # Celowo pozostawiono przedrostki dla PV/Grid/Generator do czasu wyczyszczenia tamtych plików.
 
