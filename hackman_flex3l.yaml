@@ -12,7 +12,7 @@ substitutions:
   baud_rate: "9600"
   update_interval: "5s"
   safe_mode_delay: 5min
-  default_maximum_battery_charge_current: "140"
+  default_maximum_battery_charge_current: "100"
   default_max_sell_power: "12000"
   default_system_work_mode: "Zero Export To Load"
   default_solar_sell: "on"
