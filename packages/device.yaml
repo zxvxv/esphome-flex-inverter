@@ -1,4 +1,6 @@
 # --- POCZĄTEK PLIKU DEVICE ---
+# Wersja v1.04 - Poprawka odczytu numeru seryjnego.
+# Zmiany: Zmiana adresu bazowego dla 'Device Serial Number' z 101 na 103, aby wczytać właściwe 5 rejestrów Modbus.
 # Wersja v1.03 - Weryfikacja z dokumentacją ECOBSS FLEX 3L.
 # Zmiany: Sprawdzono mnożniki i rejestry. Plik nie wymagał korekt jednostek ani trybów wyświetlania (brak encji number).
 # Zmiany: Usunięto przedrostki "Hackman Flex3L" z nazw wyświetlanych (name) - zachowano z v1.02.
@@ -343,7 +345,7 @@ text_sensor:
     modbus_controller_id: ${modbus_controller_id}
     name: "Device Serial Number"
     register_type: holding
-    address: 101
+    address: 103
     response_size: 10
     bitmask: 0
     raw_encode: NONE
