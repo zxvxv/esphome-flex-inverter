@@ -1,4 +1,6 @@
 # --- POCZĄTEK PLIKU AUTOMATIONS ---
+# Wersja v1.08 - Zmiana odczytu dla automatyzacji chłodzenia z DC na AC Temperature.
+# Zmiany: Tryb 4 odczytuje teraz zmienną hackman_flex3l_inverter_ac_temperature.
 # Wersja v1.07 - Dodanie trybu chłodzenia inwertera z definiowalną histerezą temperatury.
 # Zmiany: Rozbudowa encji select o tryb "Chłodzenie Inwertera". Dodanie encji number do sterowania progami temperatury załączenia i wyłączenia.
 # Wersja v1.06 - Poprawka kompatybilności dla ESPHome 2026.7.4.
@@ -155,7 +157,7 @@ interval:
           // 5. Tryb: Chłodzenie Inwertera (Histereza Temperatury) - opcja nr 4
           else if (mode_idx == 4) {
             // Odczytujemy temperaturę po przypisanym ID
-            float temp = id(hackman_flex3l_inverter_dc_temperature).state;
+            float temp = id(hackman_flex3l_inverter_ac_temperature).state;
             
             if (temp >= id(relay_temp_on).state) {
               if (!id(waveshare_relay).state) id(waveshare_relay).turn_on();
