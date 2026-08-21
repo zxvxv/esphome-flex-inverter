@@ -1,4 +1,7 @@
 # --- POCZĄTEK PLIKU INVERTER ---
+# Wersja v1.06 - Odblokowanie odczytu temperatury DC i przypisanie ID dla automatyzacji chłodzenia.
+# Zmiany: Usunięcie parametru disabled_by_default dla DC Temperature.
+# Zmiany: Dodanie id: hackman_flex3l_inverter_dc_temperature, aby połączyć czujnik z plikiem automations.yaml.
 # Wersja v1.05 - Usunięcie niebezpiecznego bloku Rated Power (Zabezpieczenie przed uszkodzeniem Baterii/EEPROM).
 # Zmiany: Usunięcie konfliktu adresów - Rated Power (120) jest już poprawnie odczytywany w device.yaml.
 
@@ -6,12 +9,12 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     name: "DC Temperature"
+    id: hackman_flex3l_inverter_dc_temperature
     register_type: holding
     address: 640
     unit_of_measurement: "°C"
     device_class: temperature
     accuracy_decimals: 1
-    disabled_by_default: false
     value_type: S_WORD
     filters:
       - offset: -1000
