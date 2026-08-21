@@ -1,4 +1,6 @@
 # --- POCZĄTEK PLIKU INVERTER ---
+# Wersja v1.07 - Przypisanie ID dla temperatury AC do automatyzacji chłodzenia.
+# Zmiany: Dodanie id: hackman_flex3l_inverter_ac_temperature pod adresem 641.
 # Wersja v1.06 - Odblokowanie odczytu temperatury DC i przypisanie ID dla automatyzacji chłodzenia.
 # Zmiany: Usunięcie parametru disabled_by_default dla DC Temperature.
 # Zmiany: Dodanie id: hackman_flex3l_inverter_dc_temperature, aby połączyć czujnik z plikiem automations.yaml.
@@ -24,6 +26,7 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     name: "AC Temperature"
+    id: hackman_flex3l_inverter_ac_temperature
     register_type: holding
     address: 641
     unit_of_measurement: "°C"
