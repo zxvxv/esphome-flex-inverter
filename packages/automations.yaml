@@ -1,4 +1,6 @@
 # --- POCZĄTEK PLIKU AUTOMATIONS ---
+# Wersja v1.07 - Dodanie trybu chłodzenia inwertera z definiowalną histerezą temperatury.
+# Zmiany: Rozbudowa encji select o tryb "Chłodzenie Inwertera". Dodanie encji number do sterowania progami temperatury załączenia i wyłączenia.
 # Wersja v1.06 - Poprawka kompatybilności dla ESPHome 2026.7.4.
 # Zmiany: Usunięcie odwołań do właściwości .state w TemplateSelect na rzecz .active_index() omijając błąd kompilatora. Zabezpieczenie lambdy przed pustym odczytem.
 # Wersja v1.05 - Ominięcie błędów duplikatów w cache ESPHome.
@@ -24,6 +26,7 @@ select:
       - "Ręczny"
       - "Przepięcie Sieci"
       - "Nadmiar Baterii"
+      - "Chłodzenie Inwertera"
     initial_option: "Wyłączony"
     icon: "mdi:state-machine"
 
@@ -76,6 +79,30 @@ number:
     icon: "mdi:battery-arrow-down"
     mode: box
 
+  - platform: template
+    name: "Temperatura załączenia (Stycznik)"
+    id: relay_temp_on
+    optimistic: true
+    min_value: 20
+    max_value: 80
+    step: 1
+    initial_value: 44.0
+    unit_of_measurement: "°C"
+    icon: "mdi:thermometer-chevron-up"
+    mode: box
+
+  - platform: template
+    name: "Temperatura wyłączenia (Stycznik)"
+    id: relay_temp_off
+    optimistic: true
+    min_value: 20
+    max_value: 80
+    step: 1
+    initial_value: 41.0
+    unit_of_measurement: "°C"
+    icon: "mdi:thermometer-chevron-down"
+    mode: box
+
 interval:
   - interval: 5s
     then:
@@ -122,6 +149,17 @@ interval:
             if (soc >= id(relay_soc_on).state) {
               if (!id(waveshare_relay).state) id(waveshare_relay).turn_on();
             } else if (soc <= id(relay_soc_off).state) {
+              if (id(waveshare_relay).state) id(waveshare_relay).turn_off();
+            }
+          }
+          // 5. Tryb: Chłodzenie Inwertera (Histereza Temperatury) - opcja nr 4
+          else if (mode_idx == 4) {
+            // Odczytujemy temperaturę po przypisanym ID
+            float temp = id(hackman_flex3l_inverter_dc_temperature).state;
+            
+            if (temp >= id(relay_temp_on).state) {
+              if (!id(waveshare_relay).state) id(waveshare_relay).turn_on();
+            } else if (temp <= id(relay_temp_off).state) {
               if (id(waveshare_relay).state) id(waveshare_relay).turn_off();
             }
           }
