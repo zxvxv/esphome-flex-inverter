@@ -11,7 +11,7 @@ sensor:
     unit_of_measurement: "°C"
     device_class: temperature
     accuracy_decimals: 1
-    disabled_by_default: true
+    disabled_by_default: false
     value_type: S_WORD
     filters:
       - offset: -1000
