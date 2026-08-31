@@ -1,6 +1,6 @@
 # --- POCZĄTEK PLIKU BATTERY ---
-# Wersja v1.16 - Naprawa krytycznych błędów skalowania matematycznego.
-# Zmiany: Zmiana mnożników multiply: 100 oraz innych błędnych wartości dla prądów i napięć na poprawne multiply: 0.01.
+# Wersja v1.17 - Naprawa matematycznego skalowania napięć i prądów.
+# Zmiany: Zmiana mnożnika napięć z 0.01 na 1.0 (zgodnie z logiką 1 V/unit). Poprawa prądów na 0.01 (redukcja zawyżonych setek amperów). Korekta okienek konfiguracyjnych z katastrofalnego 100 na 0.01.
 # Wersja v1.15 - Nadpisanie encji BMS fizycznymi danymi z inwertera (klonowanie parametrów).
 # Zmiany: Przekierowanie wszystkich adresów z zakresu 310-323 na odpowiadające im fizyczne rejestry zaciskowe inwertera (687, 688, 691, 208, 209).
 
@@ -86,9 +86,9 @@ sensor:
     address: 687
     unit_of_measurement: "V"
     device_class: voltage
-    accuracy_decimals: 2
+    accuracy_decimals: 1
     filters:
-      - multiply: 0.01
+      - multiply: 1.0
     value_type: U_WORD
     icon: "mdi:flash"
 
@@ -161,9 +161,9 @@ sensor:
     address: 687
     unit_of_measurement: "V"
     device_class: voltage
-    accuracy_decimals: 2
+    accuracy_decimals: 1
     filters:
-      - multiply: 0.01
+      - multiply: 1.0
     value_type: U_WORD
     icon: "mdi:flash-triangle"
 
@@ -175,9 +175,9 @@ sensor:
     address: 687
     unit_of_measurement: "V"
     device_class: voltage
-    accuracy_decimals: 2
+    accuracy_decimals: 1
     filters:
-      - multiply: 0.01
+      - multiply: 1.0
     value_type: U_WORD
     icon: "mdi:flash-triangle-outline"
 
@@ -225,9 +225,9 @@ sensor:
     address: 687
     unit_of_measurement: "V"
     device_class: voltage
-    accuracy_decimals: 2
+    accuracy_decimals: 1
     filters:
-      - multiply: 0.01
+      - multiply: 1.0
     value_type: U_WORD
     icon: "mdi:sine-wave"
 
@@ -283,9 +283,9 @@ sensor:
     address: 693
     unit_of_measurement: "V"
     device_class: voltage
-    accuracy_decimals: 2
+    accuracy_decimals: 1
     filters:
-      - multiply: 0.01
+      - multiply: 1.0
     value_type: U_WORD
     disabled_by_default: true
     icon: "mdi:flash-outline"
