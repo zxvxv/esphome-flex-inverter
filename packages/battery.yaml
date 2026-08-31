@@ -1,6 +1,7 @@
 # --- POCZĄTEK PLIKU BATTERY ---
+# Wersja v1.21 - Przesunięcie przecinka w prawo dla odczytów napięć z zacisków (5.3 V -> 53.0 V).
+# Zmiany: Zmiana filtrów multiply z 0.1 na 1.0 dla encji Battery Voltage oraz powiązanych encji BMS (adresy 687 i 693).
 # Wersja v1.20 - Pełna i ostateczna naprawa mnożników (multiply: 0.01) dla wszystkich okienek napięć.
-# Zmiany: Zmiana błędnych mnożników na multiply: 0.01 we wszystkich 9 encjach number (Shutdown, Restart, Equalization, Float itp.), aby zlikwidować błąd 576 000 V. Sensory odczytowe zostawione z prawidłowymi filtrami.
 # Wersja v1.15 - Nadpisanie encji BMS fizycznymi danymi z inwertera (klonowanie parametrów).
 
 sensor:
@@ -87,7 +88,7 @@ sensor:
     device_class: voltage
     accuracy_decimals: 1
     filters:
-      - multiply: 0.1
+      - multiply: 1.0
     value_type: U_WORD
     icon: "mdi:flash"
 
@@ -162,7 +163,7 @@ sensor:
     device_class: voltage
     accuracy_decimals: 1
     filters:
-      - multiply: 0.1
+      - multiply: 1.0
     value_type: U_WORD
     icon: "mdi:flash-triangle"
 
@@ -176,7 +177,7 @@ sensor:
     device_class: voltage
     accuracy_decimals: 1
     filters:
-      - multiply: 0.1
+      - multiply: 1.0
     value_type: U_WORD
     icon: "mdi:flash-triangle-outline"
 
@@ -226,7 +227,7 @@ sensor:
     device_class: voltage
     accuracy_decimals: 1
     filters:
-      - multiply: 0.1
+      - multiply: 1.0
     value_type: U_WORD
     icon: "mdi:sine-wave"
 
@@ -284,7 +285,7 @@ sensor:
     device_class: voltage
     accuracy_decimals: 1
     filters:
-      - multiply: 0.1
+      - multiply: 1.0
     value_type: U_WORD
     disabled_by_default: true
     icon: "mdi:flash-outline"
