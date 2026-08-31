@@ -1,4 +1,6 @@
 # --- POCZĄTEK PLIKU GRID ---
+# Wersja v1.03 - Odwrócenie logiki dla przełącznika Force Off Grid.
+# Zmiany: Ukrycie natywnego rejestru 279 jako encji wewnętrznej (_raw) i stworzenie przełącznika template odwracającego stany (kompatybilność z logiką Deye).
 # Wersja v1.02 - Konfiguracja sieci (Grid) dla Hackman Flex3L.
 # Zmiany: Sprawdzono z dokumentacją ECOBSS FLEX 3L (prądy, częstotliwość OK).
 # Zmiany: Dodano mode: box do wewnętrznej encji number (Asymmetric Phase Feeding Raw).
@@ -472,13 +474,30 @@ switch:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "Force Off Grid"
-    id: hackman_flex3l_switch_off_grid
+    name: "Force Off Grid Raw"
+    id: hackman_flex3l_switch_off_grid_raw
     register_type: holding
     address: 279
     bitmask: 1
     entity_category: config
+    internal: true
+
+  - platform: template
+    name: "Force Off Grid"
+    id: hackman_flex3l_switch_off_grid
     icon: "mdi:transmission-tower-off"
+    entity_category: config
+    lambda: |-
+      if (id(hackman_flex3l_switch_off_grid_raw).state) {
+        return false;
+      } else {
+        return true;
+      }
+    turn_on_action:
+      - switch.turn_off: hackman_flex3l_switch_off_grid_raw
+    turn_off_action:
+      - switch.turn_on: hackman_flex3l_switch_off_grid_raw
+
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
